@@ -9,7 +9,7 @@
     <Grid>
         <Image x:Name="background" HorizontalAlignment="Left" Height="689" Source="Resources/Misc/blueBoardGradient.png" VerticalAlignment="Top" Width="712" Stretch="Fill"/>
 
-        <Image x:Name="origin" HorizontalAlignment="Left" Height="55" Margin="265,400,0,0" VerticalAlignment="Top" Source="Resources/OriginTile/blue.png" Width="55"/>
+        <Image x:Name="Origin" HorizontalAlignment="Left" Height="55" Margin="265,400,0,0" VerticalAlignment="Top" Source="Resources/OriginTile/blue.png" Width="55"/>
         <Image x:Name="Castle" HorizontalAlignment="Left" Height="40" Margin="272.5,407.5,0,0" VerticalAlignment="Top" Source="Resources/Castle/blue.png" Width="40"/>
         <ScrollViewer HorizontalAlignment="Left" Height="645" Margin="612,0,0,0" VerticalAlignment="Top" Width="100"/>
         <RichTextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="44" Margin="634,645,0,0" VerticalAlignment="Top" Width="78" TextChanged="RichTextBox_TextChanged">
@@ -34,10 +34,17 @@
         <Image x:Name="Tile6" HorizontalAlignment="Left" Height="55" Margin="355,85,0,0" Source="Resources/Terrain/0Field06.png" VerticalAlignment="Top" Width="55"/>
         <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" Source="Resources/Terrain/0Field07.png" VerticalAlignment="Top" Width="55"/>
         <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" Source="Resources/Terrain/0Field08.png" VerticalAlignment="Top" Width="55"/>
-        <Button x:Name="YourBoard" Content="Your Board" HorizontalAlignment="Left" Margin="24,25,0,0" VerticalAlignment="Top" Width="83" Height="22"/>
-        <Button x:Name="Player2Board" Content="Player 2 Board" HorizontalAlignment="Left" Margin="165,25,0,0" VerticalAlignment="Top" Width="89" Height="22"/>
-        <Button x:Name="Player3Board" Content="Player 3 Board" HorizontalAlignment="Left" Margin="309,25,0,0" VerticalAlignment="Top" Width="92" Height="22"/>
-        <Button x:Name="Player4Board" Content="Player 4 Board" HorizontalAlignment="Left" Margin="458,25,0,0" VerticalAlignment="Top" Width="85" Height="22"/>
+        <Button x:Name="YourBoard" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Player2Board" BorderThickness="3" Content="Player 2 Board" HorizontalAlignment="Left" Margin="155,25,0,0" VerticalAlignment="Top" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Player3Board" BorderThickness="3" Content="Player 3 Board" HorizontalAlignment="Left" Margin="300,25,0,0" VerticalAlignment="Top" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Player4Board" BorderThickness="3" Content="Player 4 Board" HorizontalAlignment="Left" Margin="445,25,0,0" VerticalAlignment="Top" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Choose1" Content="Button" HorizontalAlignment="Left" Margin="28,104,0,0" VerticalAlignment="Top" Click ="Choose1_Click" Width="75"/>
+        <Button x:Name="Choose2" Content="Button" HorizontalAlignment="Left" Margin="173,104,0,0" VerticalAlignment="Top" Click ="Choose2_Click" Width="75"/>
+        <Button x:Name="Choose3" Content="Button" HorizontalAlignment="Left" Margin="313,104,0,0" VerticalAlignment="Top" Click ="Choose3_Click" Width="75"/>
+        <Button x:Name="Choose4" Content="Button" HorizontalAlignment="Left" Margin="465,104,0,0" VerticalAlignment="Top" Click ="Choose4_Click" Width="75"/>
+        <Image x:Name= "SelectedTile1" HorizontalAlignment="Left" Height="55" Margin="265,260,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name= "SelectedTile2" HorizontalAlignment="Left" Height="55" Margin="320,260,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name= "SelectedDomino" HorizontalAlignment="Left" Height="55" Margin="265,315,0,0" VerticalAlignment="Top" Width="110"/>
 
     </Grid>
 </Window>
