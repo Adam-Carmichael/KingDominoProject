@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingdominoGUI", "KingdominoGUI\KingdominoGUI.csproj", "{5C8475EB-AC97-49F9-9DAF-A8F3FCF8D71F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingDomino", "KingDomino\KingDomino.csproj", "{A874E55F-C41F-41CB-A6AE-AD5353509D74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C8475EB-AC97-49F9-9DAF-A8F3FCF8D71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C8475EB-AC97-49F9-9DAF-A8F3FCF8D71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C8475EB-AC97-49F9-9DAF-A8F3FCF8D71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C8475EB-AC97-49F9-9DAF-A8F3FCF8D71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A874E55F-C41F-41CB-A6AE-AD5353509D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A874E55F-C41F-41CB-A6AE-AD5353509D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A874E55F-C41F-41CB-A6AE-AD5353509D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A874E55F-C41F-41CB-A6AE-AD5353509D74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {52DEB414-D95A-4598-B323-0129A2456A33}
+		SolutionGuid = {2A305EE0-C0EB-4964-828E-27A664762E00}
 	EndGlobalSection
 EndGlobal
