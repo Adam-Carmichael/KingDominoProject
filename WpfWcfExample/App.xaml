@@ -1,0 +1,9 @@
+﻿<Application x:Class="WpfWcfExample.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfWcfExample"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <local:ExampleViewModel x:Key="ExampleViewModel" />
+    </Application.Resources>
+</Application>
