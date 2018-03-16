@@ -92,9 +92,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WcfMsgSvc\WcfMsgSvc.csproj">
+    <ProjectReference Include="..\PeerManager\PeerManager.csproj">
       <Project>{f4c967b1-0764-406e-bb9e-f443badc0c34}</Project>
-      <Name>WcfMsgSvc</Name>
+      <Name>PeerManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

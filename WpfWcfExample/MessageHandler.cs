@@ -1,5 +1,5 @@
 ﻿using System;
-using WcfMsgSvc;
+using PeerManager;
 
 namespace WpfWcfExample
 {
@@ -11,14 +11,17 @@ namespace WpfWcfExample
 
     public class MessageHandler : IMessageHandler
     {
-        private readonly MsgService _chatSvc;
+        private readonly MsgService _messenger;
         private readonly ExampleViewModel _model;
+        private readonly int _thisPlayer;
 
         public MessageHandler(ExampleViewModel model)
         {
             _model = model;
-            _chatSvc = new MsgService(MessageRouter);
-            _chatSvc.StartSvc("pass");
+            _model.Init();
+            _messenger = new MsgService(MessageRouter);
+            _thisPlayer = _messenger.StartSvc("pass");
+            _model.ThisPlayer = _model.Players[_thisPlayer];
         }
 
         // delegate method to handle incoming messages from p2p clients
@@ -27,7 +30,6 @@ namespace WpfWcfExample
             switch (message.Purpose)
             {
                 case Purpose.Chat:
-                    // ChatMessage chatMessage = (ChatMessage)message;
                     _model.DisplayChatMessage(message.Player, message.Text);
                     break;
                 case Purpose.Deal:
@@ -37,23 +39,21 @@ namespace WpfWcfExample
                 case Purpose.Tile:
                     break;
                 case Purpose.Color:
-                    // PlayerUpdateMessage colorMessage = (PlayerUpdateMessage)message;
                     _model.UpdatePlayerColor(message.Player, message.Color);
                     break;
                 default:
-                    _model.DisplayChatMessage("System", "Error: Network message not recognized");
+                    _model.DisplayChatMessage(9, "Error: Network message not recognized");
                     break;
             }
         }
 
-        public void SendChatMessage(string player, string text)
+        public void SendChatMessage(string text)
         {
-            SerializedMessage data = new SerializedMessage(Purpose.Chat)
+            SerializedMessage data = new SerializedMessage(Purpose.Chat, _thisPlayer)
             {
-                Player = player,
                 Text = text
             };
-            _chatSvc.SendMessage(data);
+            _messenger.SendMessage(data);
         }
 
         public void SendPlaceTile(string player, int x, int y, Tile tile)
@@ -71,14 +71,13 @@ namespace WpfWcfExample
 
         }
 
-        public void SendPlayerColor(string player, string color)
+        public void SendPlayerColor(string color)
         {
-            SerializedMessage data = new SerializedMessage(Purpose.Color)
+            SerializedMessage data = new SerializedMessage(Purpose.Color, _thisPlayer)
             {
-                Player = player,
                 Color = color
             };
-            _chatSvc.SendMessage(data);
+            _messenger.SendMessage(data);
         }
     }
 }

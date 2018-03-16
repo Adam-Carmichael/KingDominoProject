@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ServiceModel;
 
-namespace WcfMsgSvc
+namespace PeerManager
 {
     [ServiceContract]
     public interface IMsgService
     {
-        void StartSvc(string password);
+        int StartSvc(string password);
         void StopSvc();
 
         [OperationContract(IsOneWay = true)]

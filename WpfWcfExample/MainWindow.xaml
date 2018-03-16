@@ -10,14 +10,24 @@
     <Grid>
         <TextBox x:Name="InputBox" HorizontalAlignment="Left" Height="60" Margin="434,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" KeyDown="InputBox_KeyDown"/>
         <TextBox x:Name="OutputBox" HorizontalAlignment="Left" Height="335" Margin="434,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsTabStop="False" Focusable="False" VerticalScrollBarVisibility="Visible" Text="{Binding ChatHistory}"/>
-        <TextBox x:Name="PlayerNameBox" HorizontalAlignment="Left" Height="23" Margin="38,43,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
+
         <Label x:Name="LblUserName" Content="Your Name:" HorizontalAlignment="Left" Margin="38,17,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="Pink" Content="Pink" HorizontalAlignment="Left" Margin="38,237,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Changed" IsChecked="True"/>
-        <RadioButton x:Name="Blue" Content="Blue" HorizontalAlignment="Left" Margin="38,257,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Changed" />
-        <RadioButton x:Name="Green" Content="Green" HorizontalAlignment="Left" Margin="38,277,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Changed" />
-        <Label x:Name="LblP1Color" Content="{Binding Player1Color}" HorizontalAlignment="Left" Margin="301,31,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LblP2Color" Content="{Binding Player2Color}" HorizontalAlignment="Left" Margin="301,62,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LblP3Color" Content="{Binding Player3Color}" HorizontalAlignment="Left" Margin="301,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="PlayerNameBox" HorizontalAlignment="Left" Height="23" Margin="38,43,0,0" TextWrapping="Wrap" Text="{Binding ThisPlayer.Name}" VerticalAlignment="Top" Width="120"/>
+
+        <Label x:Name="LblUserColor" Content="Your Color:" HorizontalAlignment="Left" Margin="38,84,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="Pink" Content="Pink" HorizontalAlignment="Left" Margin="38,110,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Changed" IsChecked="True"/>
+        <RadioButton x:Name="Blue" Content="Blue" HorizontalAlignment="Left" Margin="38,130,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Changed" />
+        <RadioButton x:Name="Green" Content="Green" HorizontalAlignment="Left" Margin="38,150,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Changed" />
+
+        <Label x:Name="LblP1ColorName" Content="Player1" HorizontalAlignment="Left" Margin="232,288,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP2ColorName" Content="Player2" HorizontalAlignment="Left" Margin="232,319,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP3ColorName" Content="Player3" HorizontalAlignment="Left" Margin="232,350,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP1Color" Content="{Binding Player1.Color}" HorizontalAlignment="Left" Margin="288,288,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP2Color" Content="{Binding Player2.Color}" HorizontalAlignment="Left" Margin="288,319,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP3Color" Content="{Binding Player3.Color}" HorizontalAlignment="Left" Margin="288,350,0,0" VerticalAlignment="Top"/>
+
+        <Button x:Name="BtnNewSession" Content="Start New" HorizontalAlignment="Left" Margin="288,38,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="NewSession_Clicked"/>
+        <Button x:Name="BtnConnect" Content="Connect" HorizontalAlignment="Left" Margin="288,86,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="Connect_Clicked"/>
 
     </Grid>
 

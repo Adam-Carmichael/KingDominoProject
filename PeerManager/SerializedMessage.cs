@@ -13,7 +13,7 @@ using System.Runtime.Serialization;
  * then reconstruct the object on the receiving end
  */
 
-namespace WcfMsgSvc
+namespace PeerManager
 {
     [DataContract]
     public enum Purpose
@@ -37,14 +37,15 @@ namespace WcfMsgSvc
         {
         }
 
-        public SerializedMessage(Purpose purpose)
+        public SerializedMessage(Purpose purpose, int player)
         {
             Purpose = purpose;
+            Player = player;
         }
-        
+
         [DataMember] public Purpose Purpose { get; set; }
 
-        [DataMember] public string Player { get; set; }
+        [DataMember] public int Player { get; set; }
 
         [DataMember] public string Text { get; set; }
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Net.PeerToPeer;
 
-namespace WcfMsgSvc
+namespace PeerManager
 {
     // context mode ensures only one instance of the service is created per process
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
@@ -19,9 +20,10 @@ namespace WcfMsgSvc
             _msgDelegate = del;
             _host = new ServiceHost(this);
             _channelFactory = new ChannelFactory<IMsgService>("KDPeerEndpoint");
+            
         }
 
-        public void StartSvc(string password)
+        public int StartSvc(string password)
         {
             if (password == null)
                 password = "";
@@ -33,6 +35,14 @@ namespace WcfMsgSvc
             // open communication channel
             _channelFactory.Credentials.Peer.MeshPassword = password;
             _channel = _channelFactory.CreateChannel();
+
+            // discover peers
+            PeerName thisPeer = new PeerName("NewPeer", PeerNameType.Unsecured);
+            PeerNameRegistration peerReg = new PeerNameRegistration(thisPeer, 0);
+            peerReg.Start();
+            PeerNameResolver peerResolver = new PeerNameResolver();
+            PeerNameRecordCollection peers = peerResolver.Resolve(thisPeer);
+            return peers.Count;
         }
 
         public void StopSvc()
@@ -45,6 +55,15 @@ namespace WcfMsgSvc
                     _host.Close();
                 }
             }
+        }
+
+        public SerializedMessage Identify(string id)
+        {
+            SerializedMessage data = new SerializedMessage()
+            {
+
+            };
+            return data;
         }
 
         public void SendMessage(SerializedMessage message)

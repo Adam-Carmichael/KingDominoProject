@@ -6,7 +6,7 @@ namespace WpfWcfExample
 
     public interface IMessageHandler
     {
-        void SendChatMessage(string player, string text);
+        void SendChatMessage(string text);
 
         void SendPlaceTile(string player, int x, int y, Tile tile);
 
@@ -14,6 +14,6 @@ namespace WpfWcfExample
 
         void SendDealDominos(int[] dominos);
 
-        void SendPlayerColor(string player, string color);
+        void SendPlayerColor(string color);
     }
 }
