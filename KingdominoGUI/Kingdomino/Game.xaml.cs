@@ -81,7 +81,32 @@ namespace KingDomino
         // This method generates a players board. Can be used when switching between player boards
         private void RefreshBoard(Board board)
         {
-            for(int i = 0; i < 4; i++)
+            OneOne.Source = null;
+            OneTwo.Source = null;
+            OneThree.Source = null;
+            OneFour.Source = null;
+            OneFive.Source = null;
+            TwoOne.Source = null;
+            TwoTwo.Source = null;
+            TwoThree.Source = null;
+            TwoFour.Source = null;
+            TwoFive.Source = null;
+            ThreeOne.Source = null;
+            ThreeTwo.Source = null;
+            ThreeThree.Source = null;
+            ThreeFour.Source = null;
+            ThreeFive.Source = null;
+            FourOne.Source = null;
+            FourTwo.Source = null;
+            FourThree.Source = null;
+            FourFour.Source = null;
+            FourFive.Source = null;
+            FiveOne.Source = null;
+            FiveTwo.Source = null;
+            FiveThree.Source = null;
+            FiveFour.Source = null;
+            FiveFive.Source = null;
+            for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -215,19 +240,19 @@ namespace KingDomino
             if (roundNumber <= 10)
             {
                 roundNumber++;
-                domino5 = domino1;
+                domino8 = domino1;
                 Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
                 Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
-                domino6 = domino2;
+                domino7 = domino2;
                 Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
                 Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
-                domino7 = domino3;
+                domino6 = domino3;
                 Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
                 Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
-                domino8 = domino4;
+                domino5 = domino4;
                 Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
                 Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
 
@@ -249,19 +274,19 @@ namespace KingDomino
             else if (roundNumber == 11)
             {
                 roundNumber++;
-                domino5 = domino1;
+                domino8 = domino1;
                 Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
                 Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
-                domino6 = domino2;
+                domino7 = domino2;
                 Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
                 Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
-                domino7 = domino3;
+                domino6 = domino3;
                 Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
                 Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
-                domino8 = domino4;
+                domino5 = domino4;
                 Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
                 Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
 
@@ -616,6 +641,7 @@ namespace KingDomino
         //Shows the options where to place their tile
         private void ShowOptions()
         {
+            RefreshBoard(player1Board);
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 1; j < 3; j++)
@@ -1061,6 +1087,26 @@ namespace KingDomino
             this.player2Score = 0;
             this.player3Score = 0;
             this.player4Score = 0;
+        }
+
+        private void Board1_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshBoard(player1Board);
+        }
+
+        private void Board2_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshBoard(player2Board);
+        }
+
+        private void Board3_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshBoard(player3Board);
+        }
+
+        private void Board4_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshBoard(player4Board);
         }
 
         private void ChatSend_TextChanged(object sender, TextChangedEventArgs e)
