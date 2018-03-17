@@ -240,21 +240,21 @@ namespace KingDomino
             if (roundNumber <= 10)
             {
                 roundNumber++;
-                domino8 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+                domino5 = domino1;
+                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
+                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
-                domino7 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+                domino6 = domino2;
+                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
+                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
-                domino6 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+                domino7 = domino3;
+                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
+                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
-                domino5 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
+                domino8 = domino4;
+                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
+                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
 
 
                 domino1 = dominoHolder.RandomDomino();
@@ -274,21 +274,21 @@ namespace KingDomino
             else if (roundNumber == 11)
             {
                 roundNumber++;
-                domino8 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+                domino5 = domino1;
+                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
+                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
-                domino7 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+                domino6 = domino2;
+                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
+                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
-                domino6 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+                domino7 = domino3;
+                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
+                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
-                domino5 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
+                domino8 = domino4;
+                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
+                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
 
 
                 Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
@@ -326,9 +326,9 @@ namespace KingDomino
         private void MakeInitialDominos()
         {
             ThreeThree.Source = new BitmapImage(new Uri(player1Origin.TileImage, UriKind.Relative));
-            //ThreeThree.Source = new BitmapImage(new Uri(player1Origin.Tile1.TileImage, UriKind.Relative));
 
             HideOptions();
+            HideTileSelectionButtons();
 
             //Set up the first backfacing dominos
             domino1 = dominoHolder.RandomDomino();
@@ -349,16 +349,16 @@ namespace KingDomino
             Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
             domino6 = dominoHolder.RandomDomino();
-            Tile1.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-            Tile2.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+            Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
+            Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
             domino7 = dominoHolder.RandomDomino();
-            Tile1.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-            Tile2.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+            Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
+            Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
             domino8 = dominoHolder.RandomDomino();
-            Tile1.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-            Tile2.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+            Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
+            Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
         }
 
         // Sets the image where the button where the user clicked as one of their tiles of their selected domino.
@@ -642,16 +642,19 @@ namespace KingDomino
         //Shows the options where to place their tile
         private void ShowOptions()
         {
+            HideOptions();
             RefreshBoard(player1Board);
             HideBoardButtons();
-            for (int i = 0; i < 4; i++)
+            if(pick == 0)
             {
-                for (int j = 1; j < 3; j++)
+                for (int i = 0; i < 4; i++)
                 {
-                    if (player1Board.PlayBoard[i, j] != null && (player1Board.PlayBoard[i, j].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, j].TileType.Equals("Origin")))
+                    for (int j = 1; j < 3; j++)
                     {
-                        if (player1Board.PlayBoard[i, j + 1] == null)
+                        if (player1Board.PlayBoard[i, j] != null && (player1Board.PlayBoard[i, j].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, j].TileType.Equals("Origin")))
                         {
+                            if (player1Board.PlayBoard[i, j + 1] == null)
+                            {
                                 if (i == 0)
                                 {
                                     if (j + 1 == 2)
@@ -712,97 +715,98 @@ namespace KingDomino
                                         FourFiveButton.Visibility = Visibility.Visible;
                                     }
                                 }
-                            if (i == 4)
-                            {
-                                if (j + 1 == 2)
+                                if (i == 4)
                                 {
-                                    FiveThreeButton.Visibility = Visibility.Visible;
-                                }
-                                if (j + 1 == 3)
-                                {
-                                    FiveFourButton.Visibility = Visibility.Visible;
-                                }
-                                if (j + 1 == 4)
-                                {
-                                    FiveFiveButton.Visibility = Visibility.Visible;
-                                }
-                            }
-                        }
-                        if (player1Board.PlayBoard[i, j - 1] == null)
-                        {
-                            if (i == 0)
-                            {
-                                if (j - 1 == 0)
-                                {
-                                    OneOneButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 1)
-                                {
-                                    OneTwoButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 2)
-                                {
-                                    OneThreeButton.Visibility = Visibility.Visible;
+                                    if (j + 1 == 2)
+                                    {
+                                        FiveThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 3)
+                                    {
+                                        FiveFourButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 4)
+                                    {
+                                        FiveFiveButton.Visibility = Visibility.Visible;
+                                    }
                                 }
                             }
-                            if (i == 1)
+                            if (player1Board.PlayBoard[i, j - 1] == null)
                             {
-                                if (j - 1 == 0)
+                                if (i == 0)
                                 {
-                                    TwoOneButton.Visibility = Visibility.Visible;
+                                    if (j - 1 == 0)
+                                    {
+                                        OneOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        OneTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        OneThreeButton.Visibility = Visibility.Visible;
+                                    }
                                 }
-                                if (j - 1 == 1)
+                                if (i == 1)
                                 {
-                                    TwoTwoButton.Visibility = Visibility.Visible;
+                                    if (j - 1 == 0)
+                                    {
+                                        TwoOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        TwoTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        TwoThreeButton.Visibility = Visibility.Visible;
+                                    }
                                 }
-                                if (j - 1 == 2)
+                                if (i == 2)
                                 {
-                                    TwoThreeButton.Visibility = Visibility.Visible;
+                                    if (j - 1 == 0)
+                                    {
+                                        ThreeOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        ThreeTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        ThreeThreeButton.Visibility = Visibility.Visible;
+                                    }
                                 }
-                            }
-                            if (i == 2)
-                            {
-                                if (j - 1 == 0)
+                                if (i == 3)
                                 {
-                                    ThreeOneButton.Visibility = Visibility.Visible;
+                                    if (j - 1 == 0)
+                                    {
+                                        FourOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        FourTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        FourThreeButton.Visibility = Visibility.Visible;
+                                    }
                                 }
-                                if (j - 1 == 1)
+                                if (i == 4)
                                 {
-                                    ThreeTwoButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 2)
-                                {
-                                    ThreeThreeButton.Visibility = Visibility.Visible;
-                                }
-                            }
-                            if (i == 3)
-                            {
-                                if (j - 1 == 0)
-                                {
-                                    FourOneButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 1)
-                                {
-                                    FourTwoButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 2)
-                                {
-                                    FourThreeButton.Visibility = Visibility.Visible;
-                                }
-                            }
-                            if (i == 4)
-                            {
-                                if (j - 1 == 0)
-                                {
-                                    FiveOneButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 1)
-                                {
-                                    FiveTwoButton.Visibility = Visibility.Visible;
-                                }
-                                if (j - 1 == 2)
-                                {
-                                    FiveThreeButton.Visibility = Visibility.Visible;
+                                    if (j - 1 == 0)
+                                    {
+                                        FiveOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        FiveTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        FiveThreeButton.Visibility = Visibility.Visible;
+                                    }
                                 }
                             }
                         }
@@ -985,6 +989,350 @@ namespace KingDomino
                     }
                 }
             }
+            if (pick == 1)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 1; j < 3; j++)
+                    {
+                        if (player1Board.PlayBoard[i, j] != null && (player1Board.PlayBoard[i, j].TileType.Equals(player1Chosen.Tile2.TileType) || player1Board.PlayBoard[i, j].TileType.Equals("Origin")))
+                        {
+                            if (player1Board.PlayBoard[i, j + 1] == null)
+                            {
+                                if (i == 0)
+                                {
+                                    if (j + 1 == 2)
+                                    {
+                                        OneThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 3)
+                                    {
+                                        OneFourButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 4)
+                                    {
+                                        OneFiveButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 1)
+                                {
+                                    if (j + 1 == 2)
+                                    {
+                                        TwoThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 3)
+                                    {
+                                        TwoFourButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 4)
+                                    {
+                                        TwoFiveButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 2)
+                                {
+                                    if (j + 1 == 2)
+                                    {
+                                        ThreeThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 3)
+                                    {
+                                        ThreeFourButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 4)
+                                    {
+                                        ThreeFiveButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 3)
+                                {
+                                    if (j + 1 == 2)
+                                    {
+                                        FourThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 3)
+                                    {
+                                        FourFourButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 4)
+                                    {
+                                        FourFiveButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 4)
+                                {
+                                    if (j + 1 == 2)
+                                    {
+                                        FiveThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 3)
+                                    {
+                                        FiveFourButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j + 1 == 4)
+                                    {
+                                        FiveFiveButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                            }
+                            if (player1Board.PlayBoard[i, j - 1] == null)
+                            {
+                                if (i == 0)
+                                {
+                                    if (j - 1 == 0)
+                                    {
+                                        OneOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        OneTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        OneThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 1)
+                                {
+                                    if (j - 1 == 0)
+                                    {
+                                        TwoOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        TwoTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        TwoThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 2)
+                                {
+                                    if (j - 1 == 0)
+                                    {
+                                        ThreeOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        ThreeTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        ThreeThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 3)
+                                {
+                                    if (j - 1 == 0)
+                                    {
+                                        FourOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        FourTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        FourThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                                if (i == 4)
+                                {
+                                    if (j - 1 == 0)
+                                    {
+                                        FiveOneButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 1)
+                                    {
+                                        FiveTwoButton.Visibility = Visibility.Visible;
+                                    }
+                                    if (j - 1 == 2)
+                                    {
+                                        FiveThreeButton.Visibility = Visibility.Visible;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (int i = 1; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (player1Board.PlayBoard[i, j] != null && (player1Board.PlayBoard[i, j].TileType.Equals(player1Chosen.Tile2.TileType) || player1Board.PlayBoard[i, j].TileType.Equals("Origin")))
+                    {
+                        if (player1Board.PlayBoard[i + 1, j] == null)
+                        {
+                            if (i + 1 == 2)
+                            {
+                                if (j == 0)
+                                {
+                                    ThreeOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    ThreeTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    ThreeThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    ThreeFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    ThreeFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            if (i + 1 == 3)
+                            {
+                                if (j == 0)
+                                {
+                                    FourOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    FourTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    FourThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    FourFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    FourFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            if (i + 1 == 4)
+                            {
+                                if (j == 0)
+                                {
+                                    FiveOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    FiveTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    FiveThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    FiveFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    FiveFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                        }
+                        if (player1Board.PlayBoard[i - 1, j] == null)
+                        {
+                            if (i - 1 == 0)
+                            {
+                                if (j == 0)
+                                {
+                                    OneOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    OneTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    OneThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    OneFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    OneFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            if (i - 1 == 1)
+                            {
+                                if (j == 0)
+                                {
+                                    TwoOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    TwoTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    TwoThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    TwoFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    TwoFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            if (i - 1 == 2)
+                            {
+                                if (j == 0)
+                                {
+                                    ThreeOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    ThreeTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    ThreeThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    ThreeFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    ThreeFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                            if (i - 1 == 3)
+                            {
+                                if (j == 0)
+                                {
+                                    FourOneButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 1)
+                                {
+                                    FourTwoButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 2)
+                                {
+                                    FourThreeButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 3)
+                                {
+                                    FourFourButton.Visibility = Visibility.Visible;
+                                }
+                                if (j == 4)
+                                {
+                                    FourFiveButton.Visibility = Visibility.Visible;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         private void HideOptions()
         {
@@ -1020,48 +1368,48 @@ namespace KingDomino
         // It sets the first domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose1_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino8;
+            player1Chosen = domino5;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
             SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowOptions();
+            ShowTileSelectionButtons();
         }
         
         // Second domino selection button method
         // It sets the second domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose2_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino7;
+            player1Chosen = domino6;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
             SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowOptions();
+            ShowTileSelectionButtons();
         }
         
         // Third domino selection button method
         // It sets the third domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose3_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino6;
+            player1Chosen = domino7;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
             SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowOptions();
+            ShowTileSelectionButtons();
         }
         
         // Fourth domino selection button method
         // It sets the fourth domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose4_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino5;
+            player1Chosen = domino8;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
             SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowOptions();
+            ShowTileSelectionButtons();
         }
 
         // Hides the domino selection buttons
@@ -1130,6 +1478,34 @@ namespace KingDomino
         private void ChatSend_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void SelectTile1Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShowOptions();
+            HideTileSelectionButtons();
+        }
+
+        private void ShowTileSelectionButtons()
+        {
+            SelectTile1Button.Visibility = Visibility.Visible;
+            SelectTile2Button.Visibility = Visibility.Visible;
+        }
+
+        private void HideTileSelectionButtons()
+        {
+            SelectTile1Button.Visibility = Visibility.Hidden;
+            SelectTile2Button.Visibility = Visibility.Hidden;
+        }
+
+        private void SelectTile2Button_Click(object sender, RoutedEventArgs e)
+        {
+            Tile tile1 = player1Chosen.Tile2;
+            Tile tile2 = player1Chosen.Tile1;
+            player1Chosen.Tile1 = tile1;
+            player1Chosen.Tile2 = tile2;
+            ShowOptions();
+            HideTileSelectionButtons();
         }
     }
 }
