@@ -992,7 +992,7 @@ namespace KingDomino
         // It sets the first domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose1_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino5;
+            player1Chosen = domino8;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
@@ -1004,7 +1004,7 @@ namespace KingDomino
         // It sets the second domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose2_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino6;
+            player1Chosen = domino7;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
@@ -1016,7 +1016,7 @@ namespace KingDomino
         // It sets the third domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose3_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino7;
+            player1Chosen = domino6;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
@@ -1028,7 +1028,7 @@ namespace KingDomino
         // It sets the fourth domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose4_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino8;
+            player1Chosen = domino5;
             HideSelectDominoButtons();
             SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
             SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
