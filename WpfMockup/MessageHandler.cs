@@ -54,15 +54,18 @@ namespace WpfMockup
             switch (message.Text)
             {
                 case "rollcall":
+                    if (_thisPlayer != 1) break;
                     for (int i = 1; i <= 4; i++)        // TODO eliminate Magic Numbers
                     {
                         PlayerData source = _viewModel.PlayerList[i];
                         SerializedMessage data = new SerializedMessage(Purpose.Player, i)
                         {
+                            IsOccupied = source.IsOccupied,
                             Name = source.Name,
                             Color = source.Color
                         };
                         _peerService.SendMessage(data);
+                        _viewModel.DisplayChatMessage(0, "Sending data for Player" + i);
                     }
                     break;
             }
@@ -115,15 +118,14 @@ namespace WpfMockup
 
         public void JoinGame(string name, string color)
         {
+            _viewModel.DisplayChatMessage(0, "Connecting...\n");
+
             _peerService.StartSvc("pass");
             SerializedMessage data = new SerializedMessage(Purpose.System, SYSTEM)
             {
                 Text = "rollcall"
             };
             _peerService.SendMessage(data);
-
-            _viewModel.ChatHistory += "Connecting...\n";
-            System.Threading.Thread.Sleep(2000);
 
             foreach (PlayerData player in _viewModel.PlayerList)
             {
@@ -135,7 +137,7 @@ namespace WpfMockup
             }
 
             if (_thisPlayer == 0)
-                _viewModel.ChatHistory += "Sorry, there are no available player slots\n";
+                _viewModel.DisplayChatMessage(0, "Sorry, there are no available player slots\n");
             else
                 _viewModel.InitThisPlayer(_thisPlayer, name, color);
         }

@@ -44,6 +44,7 @@ namespace WpfMockup
         public void UpdatePlayerData(int index, bool isFull, string name, string color)
         {
             PlayerList[index] = new PlayerData(isFull, name, color);
+            DisplayChatMessage(0, "Updated Player" + index);
         }
 
         // OnPropertyChanged must be called to tell a view bound to this implementation to get updated property

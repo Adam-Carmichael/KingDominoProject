@@ -35,6 +35,7 @@ namespace PeerManager
             _channelFactory.Credentials.Peer.MeshPassword = password;
             _channel = _channelFactory.CreateChannel();
             
+            
         }
 
         public void StopSvc()
