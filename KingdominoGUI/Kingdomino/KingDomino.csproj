@@ -273,5 +273,11 @@
   <ItemGroup>
     <Resource Include="Resources\Misc\blueBoardGradient.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\OriginCastle\blue.png" />
+    <Resource Include="Resources\OriginCastle\green.png" />
+    <Resource Include="Resources\OriginCastle\pink.png" />
+    <Resource Include="Resources\OriginCastle\yellow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

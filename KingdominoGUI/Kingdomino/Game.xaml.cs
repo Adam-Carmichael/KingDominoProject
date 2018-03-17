@@ -20,14 +20,27 @@ namespace KingDomino
     public partial class Game : Window
     {
         private Board player1Board;
-        private Domino player1Origin;
+        private Tile player1Origin;
+        private int player1Score;
+        private Domino player1Chosen;
+
         private Board player2Board;
-        private Domino player2Origin;
+        private Tile player2Origin;
+        private int player2Score;
+        private Domino player2Chosen;
+
         private Board player3Board;
-        private Domino player3Origin;
+        private Tile player3Origin;
+        private int player3Score;
+        private Domino player3Chosen;
+
         private Board player4Board;
-        private Domino player4Origin;
+        private Tile player4Origin;
+        private int player4Score;
+        private Domino player4Chosen;
+
         private DominoHolder dominoHolder = new DominoHolder();
+
         private Domino domino1;
         private Domino domino2;
         private Domino domino3;
@@ -37,8 +50,7 @@ namespace KingDomino
         private Domino domino7;
         private Domino domino8;
 
-        private Domino chosen;
-
+        private int pick = 0;
         private int roundNumber = 1;
         public Game()
         {
@@ -46,10 +58,254 @@ namespace KingDomino
 
             MakeBoards();
 
-            Origin.Source = new BitmapImage(new Uri(player1Origin.DominoBack, UriKind.Relative));
-            Castle.Source = new BitmapImage(new Uri(player1Origin.Tile1.TileImage, UriKind.Relative));
+            MakeInitialDominos();
+        }
+
+        private void MakeBoards()
+        {
+            player1Board = new Board("blue");
+            player1Origin = player1Board.GetOrigin();
+            player1Score = 0;
+            Score.Text += player1Score;
+            player2Board = new Board("green");
+            player2Origin = player2Board.GetOrigin();
+            player2Score = 0;
+            player3Board = new Board("pink");
+            player3Origin = player3Board.GetOrigin();
+            player3Score = 0;
+            player4Board = new Board("yellow");
+            player4Origin = player4Board.GetOrigin();
+            player4Score = 0;
+        }
+
+        // This method generates a players board. Can be used when switching between player boards
+        private void RefreshBoard(Board board)
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (board.PlayBoard[i,j] != null)
+                    {
+                        if(i == 0)
+                        {
+                            if(j == 0)
+                            {
+                                OneOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if(j == 1)
+                            {
+                                OneTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if(j == 2)
+                            {
+                                OneThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if(j == 3)
+                            {
+                                OneFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 4)
+                            {
+                                OneFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                        }
+                        if(i == 1)
+                        {
+                            if (j == 0)
+                            {
+                                TwoOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 1)
+                            {
+                                TwoTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 2)
+                            {
+                                TwoThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 3)
+                            {
+                                TwoFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 4)
+                            {
+                                TwoFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                        }
+                        if(i == 2)
+                        {
+                            if (j == 0)
+                            {
+                                ThreeOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 1)
+                            {
+                                ThreeTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 2)
+                            {
+                                ThreeThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 3)
+                            {
+                                ThreeFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 4)
+                            {
+                                ThreeFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                        }
+                        if(i == 3)
+                        {
+                            if (j == 0)
+                            {
+                                FourOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 1)
+                            {
+                                FourTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 2)
+                            {
+                                FourThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 3)
+                            {
+                                FourFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 4)
+                            {
+                                FourFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                        }
+                        if(i == 4)
+                        {
+                            if (j == 0)
+                            {
+                                FiveOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 1)
+                            {
+                                FiveTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 2)
+                            {
+                                FiveThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 3)
+                            {
+                                FiveFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                            if (j == 4)
+                            {
+                                FiveFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Refreshs the four starting dominos and flips the next ones
+        private void RefreshSelectionDomionos()
+        {
+
+            //Create new backfacing dominos and set the old ones as the new tiles
+            if (roundNumber <= 10)
+            {
+                roundNumber++;
+                domino5 = domino1;
+                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
+                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
+
+                domino6 = domino2;
+                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
+                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+
+                domino7 = domino3;
+                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
+                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+
+                domino8 = domino4;
+                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
+                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
 
 
+                domino1 = dominoHolder.RandomDomino();
+                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
+
+                domino2 = dominoHolder.RandomDomino();
+                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
+
+                domino3 = dominoHolder.RandomDomino();
+                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
+
+                domino4 = dominoHolder.RandomDomino();
+                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
+            }
+
+            //Removes the backfacing dominos once there is no more dominos left in the DominoHolder and then sets the last dominos as the new tiles
+            else if (roundNumber == 11)
+            {
+                roundNumber++;
+                domino5 = domino1;
+                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
+                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
+
+                domino6 = domino2;
+                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
+                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+
+                domino7 = domino3;
+                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
+                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+
+                domino8 = domino4;
+                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
+                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+
+
+                Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
+
+                Domino2.Source = new BitmapImage(new Uri("", UriKind.Relative));
+
+                Domino3.Source = new BitmapImage(new Uri("", UriKind.Relative));
+
+                Domino4.Source = new BitmapImage(new Uri("", UriKind.Relative));
+            }
+
+            //Removes the tiles now that there is no more tiles or dominos
+            else if (roundNumber == 13)
+            {
+                roundNumber++;
+                Tile1.Source = new BitmapImage(new Uri("", UriKind.Relative));
+                Tile2.Source = new BitmapImage(new Uri("", UriKind.Relative));
+
+                Tile3.Source = new BitmapImage(new Uri("", UriKind.Relative));
+                Tile4.Source = new BitmapImage(new Uri("", UriKind.Relative));
+
+                Tile5.Source = new BitmapImage(new Uri("", UriKind.Relative));
+                Tile6.Source = new BitmapImage(new Uri("", UriKind.Relative));
+
+                Tile7.Source = new BitmapImage(new Uri("", UriKind.Relative));
+                Tile8.Source = new BitmapImage(new Uri("", UriKind.Relative));
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        //Sets up the inital setup
+        private void MakeInitialDominos()
+        {
+            ThreeThree.Source = new BitmapImage(new Uri(player1Origin.TileImage, UriKind.Relative));
+            //ThreeThree.Source = new BitmapImage(new Uri(player1Origin.Tile1.TileImage, UriKind.Relative));
+
+            HideOptions();
+
+            //Set up the first backfacing dominos
             domino1 = dominoHolder.RandomDomino();
             Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
 
@@ -62,416 +318,422 @@ namespace KingDomino
             domino4 = dominoHolder.RandomDomino();
             Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
 
-
+            //Set up the first tiles
             domino5 = dominoHolder.RandomDomino();
             Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
             Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
-            domino6= dominoHolder.RandomDomino();
+            domino6 = dominoHolder.RandomDomino();
             Tile1.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
             Tile2.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
-            domino7= dominoHolder.RandomDomino();
+            domino7 = dominoHolder.RandomDomino();
             Tile1.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
             Tile2.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
-            domino8= dominoHolder.RandomDomino();
+            domino8 = dominoHolder.RandomDomino();
             Tile1.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
             Tile2.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
         }
 
-        private void MakeBoards()
+        // Sets the image where the button where the user clicked as one of their tiles of their selected domino.
+        // It will set the first tile if it is their first pick and their second tile if it is their second pick.
+        private void ChooseSpot_Click(object sender, RoutedEventArgs e)
         {
-            player1Board = new Board("blue");
-            player1Origin = player1Board.GetOrigin();
-            player2Board = new Board("green");
-            player2Origin = player2Board.GetOrigin();
-            player3Board = new Board("pink");
-            player3Origin = player3Board.GetOrigin();
-            player4Board = new Board("yellow");
-            player4Origin = player4Board.GetOrigin();
+            if(sender.GetType().IsVisible)
+            {
+                if (pick == 0)
+                {
+                    if (sender.Equals(OneOneButton))
+                    {
+                        OneOne.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneTwoButton))
+                    {
+                        OneTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneThreeButton))
+                    {
+                        OneThree.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneFourButton))
+                    {
+                        OneFour.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneFiveButton))
+                    {
+                        OneFive.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoOneButton))
+                    {
+                        TwoOne.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoTwoButton))
+                    {
+                        TwoTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoThreeButton))
+                    {
+                        TwoThree.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoFourButton))
+                    {
+                        TwoFour.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoFiveButton))
+                    {
+                        TwoFive.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeOneButton))
+                    {
+                        ThreeOne.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeTwoButton))
+                    {
+                        ThreeTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeThreeButton))
+                    {
+                        ThreeThree.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeFourButton))
+                    {
+                        ThreeFour.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeFiveButton))
+                    {
+                        ThreeFive.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourOneButton))
+                    {
+                        FourOne.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourTwoButton))
+                    {
+                        FourTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourThreeButton))
+                    {
+                        FourThree.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourFourButton))
+                    {
+                        FourFour.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourFiveButton))
+                    {
+                        FourFive.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveOneButton))
+                    {
+                        FiveOne.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveTwoButton))
+                    {
+                        FiveTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveThreeButton))
+                    {
+                        FiveThree.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveFourButton))
+                    {
+                        FiveFour.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveFiveButton))
+                    {
+                        FiveFive.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                    }
+                    pick++;
+                    HideOptions();
+                    ShowOptions();
+                }
+                else if (pick == 1)
+                {
+                    if (sender.Equals(OneOneButton))
+                    {
+                        OneOne.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneTwoButton))
+                    {
+                        OneTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneThreeButton))
+                    {
+                        OneThree.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneFourButton))
+                    {
+                        OneFour.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(OneFiveButton))
+                    {
+                        OneFive.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoOneButton))
+                    {
+                        TwoOne.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoTwoButton))
+                    {
+                        TwoTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoThreeButton))
+                    {
+                        TwoThree.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoFourButton))
+                    {
+                        TwoFour.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(TwoFiveButton))
+                    {
+                        TwoFive.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeOneButton))
+                    {
+                        ThreeOne.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeTwoButton))
+                    {
+                        ThreeTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeThreeButton))
+                    {
+                        ThreeThree.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeFourButton))
+                    {
+                        ThreeFour.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(ThreeFiveButton))
+                    {
+                        ThreeFive.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourOneButton))
+                    {
+                        FourOne.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourTwoButton))
+                    {
+                        FourTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourThreeButton))
+                    {
+                        FourThree.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourFourButton))
+                    {
+                        FourFour.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FourFiveButton))
+                    {
+                        FourFive.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveOneButton))
+                    {
+                        FiveOne.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveTwoButton))
+                    {
+                        FiveTwo.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveThreeButton))
+                    {
+                        FiveThree.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveFourButton))
+                    {
+                        FiveFour.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    else if (sender.Equals(FiveFiveButton))
+                    {
+                        FiveFive.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                    }
+                    pick++;
+                }
+                if (pick == 2)
+                {
+                    HideOptions();
+                    ShowSelectDominoButtons();
+                    RefreshSelectionDomionos();
+                    pick = 0;
+                }
+            }
         }
 
-        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //Shows the options where to place their tile
+        private void ShowOptions()
         {
+            for (int i = 1; i < 3; i++)
+            {
+                for (int j = 1; j < 3; j++)
+                {
+                    if (player1Board.PlayBoard[i, j] != null)
+                    {
+                        if (player1Board.PlayBoard[i + 1, j] == null)
+                        {
+                            if(i+1 == 1)
+                            {
 
+                            }
+                            if(i+1 == 2)
+                            {
+
+                            }
+                            if(i+1 == 3)
+                            {
+
+                            }
+                            if(i+1 == 4)
+                            {
+
+                            }
+                        }
+                        if (player1Board.PlayBoard[i - 1, j] == null)
+                        {
+                            if(i-1 == 0)
+                            {
+
+                            }
+                            if(i-1 == 1)
+                            {
+
+                            }
+                            if(i-1 == 2)
+                            {
+
+                            }
+                            if(i-1 == 3)
+                            {
+
+                            }
+                        }
+                        if (player1Board.PlayBoard[i, j + 1] == null)
+                        {
+                            if(i == 1)
+                            {
+
+                            }
+                        }
+                        if (player1Board.PlayBoard[i, j - 1] == null)
+                        {
+
+                        }
+                    }
+                }
+            }
+            OneOneButton.Visibility = Visibility.Visible;
+            OneTwoButton.Visibility = Visibility.Visible;
+        }
+        private void HideOptions()
+        {
+            //Hide Buttons
+            OneOneButton.Visibility = Visibility.Hidden;
+            OneTwoButton.Visibility = Visibility.Hidden;
+            OneThreeButton.Visibility = Visibility.Hidden;
+            OneFourButton.Visibility = Visibility.Hidden;
+            OneFiveButton.Visibility = Visibility.Hidden;
+            TwoOneButton.Visibility = Visibility.Hidden;
+            TwoTwoButton.Visibility = Visibility.Hidden;
+            TwoThreeButton.Visibility = Visibility.Hidden;
+            TwoFourButton.Visibility = Visibility.Hidden;
+            TwoFiveButton.Visibility = Visibility.Hidden;
+            ThreeOneButton.Visibility = Visibility.Hidden;
+            ThreeTwoButton.Visibility = Visibility.Hidden;
+            ThreeThreeButton.Visibility = Visibility.Hidden;
+            ThreeFourButton.Visibility = Visibility.Hidden;
+            ThreeFiveButton.Visibility = Visibility.Hidden;
+            FourOneButton.Visibility = Visibility.Hidden;
+            FourTwoButton.Visibility = Visibility.Hidden;
+            FourThreeButton.Visibility = Visibility.Hidden;
+            FourFourButton.Visibility = Visibility.Hidden;
+            FourFiveButton.Visibility = Visibility.Hidden;
+            FiveOneButton.Visibility = Visibility.Hidden;
+            FiveTwoButton.Visibility = Visibility.Hidden;
+            FiveThreeButton.Visibility = Visibility.Hidden;
+            FiveFourButton.Visibility = Visibility.Hidden;
+            FiveFiveButton.Visibility = Visibility.Hidden;
         }
 
+        // First domino selection button method
+        // It sets the first domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose1_Click(object sender, RoutedEventArgs e)
         {
-            chosen = domino5;
-            SelectedTile1.Source = new BitmapImage(new Uri(chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(chosen.DominoBack, UriKind.Relative));
-            if (roundNumber < 11)
-            {
-                roundNumber++;
-
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                domino1 = dominoHolder.RandomDomino();
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                domino2 = dominoHolder.RandomDomino();
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                domino3 = dominoHolder.RandomDomino();
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                domino4 = dominoHolder.RandomDomino();
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if(roundNumber == 11)
-            {
-                roundNumber++;
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-                
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-                
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-                
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if(roundNumber == 12)
-            {
-                roundNumber++;
-                Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                
-                Domino2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                
-                Domino3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                
-                Domino4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
-            else
-            {
-
-                Tile1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                
-                Tile3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                
-                Tile5.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                
-                Tile7.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
+            player1Chosen = domino5;
+            HideSelectDominoButtons();
+            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            ShowOptions();
         }
+        
+        // Second domino selection button method
+        // It sets the second domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose2_Click(object sender, RoutedEventArgs e)
         {
-            chosen = domino6;
-            SelectedTile1.Source = new BitmapImage(new Uri(chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(chosen.DominoBack, UriKind.Relative));
-            if (roundNumber < 11)
-            {
-                roundNumber++;
-
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                domino1 = dominoHolder.RandomDomino();
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                domino2 = dominoHolder.RandomDomino();
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                domino3 = dominoHolder.RandomDomino();
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                domino4 = dominoHolder.RandomDomino();
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if (roundNumber == 11)
-            {
-                roundNumber++;
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if (roundNumber == 12)
-            {
-                roundNumber++;
-                Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
-            else
-            {
-
-                Tile1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile5.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile7.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
+            player1Chosen = domino6;
+            HideSelectDominoButtons();
+            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            ShowOptions();
         }
+        
+        // Third domino selection button method
+        // It sets the third domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose3_Click(object sender, RoutedEventArgs e)
         {
-            chosen = domino7;
-            SelectedTile1.Source = new BitmapImage(new Uri(chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(chosen.DominoBack, UriKind.Relative));
-            if (roundNumber < 11)
-            {
-                roundNumber++;
-
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                domino1 = dominoHolder.RandomDomino();
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                domino2 = dominoHolder.RandomDomino();
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                domino3 = dominoHolder.RandomDomino();
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                domino4 = dominoHolder.RandomDomino();
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if (roundNumber == 11)
-            {
-                roundNumber++;
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if (roundNumber == 12)
-            {
-                roundNumber++;
-                Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
-            else
-            {
-
-                Tile1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile5.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile7.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
+            player1Chosen = domino7;
+            HideSelectDominoButtons();
+            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            ShowOptions();
         }
+        
+        // Fourth domino selection button method
+        // It sets the fourth domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
         private void Choose4_Click(object sender, RoutedEventArgs e)
         {
-            chosen = domino8;
-            SelectedTile1.Source = new BitmapImage(new Uri(chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(chosen.DominoBack, UriKind.Relative));
-            if (roundNumber < 11)
-            {
-                roundNumber++;
+            player1Chosen = domino8;
+            HideSelectDominoButtons();
+            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            ShowOptions();
+        }
 
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
+        // Hides the domino selection buttons
+        private void HideSelectDominoButtons()
+        {
+            Choose1.Visibility = Visibility.Hidden;
+            Choose2.Visibility = Visibility.Hidden;
+            Choose3.Visibility = Visibility.Hidden;
+            Choose4.Visibility = Visibility.Hidden;
+        }
 
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+        // Shows the domino selection buttons
+        private void ShowSelectDominoButtons()
+        {
+            Choose1.Visibility = Visibility.Visible;
+            Choose2.Visibility = Visibility.Visible;
+            Choose3.Visibility = Visibility.Visible;
+            Choose4.Visibility = Visibility.Visible;
+        }
 
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+        // Calculate score method
+        private void CalculateScores()
+        {
+            this.player1Score = 0;
+            this.player2Score = 0;
+            this.player3Score = 0;
+            this.player4Score = 0;
+        }
 
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+        private void ChatSend_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-
-                domino1 = dominoHolder.RandomDomino();
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                domino2 = dominoHolder.RandomDomino();
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                domino3 = dominoHolder.RandomDomino();
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                domino4 = dominoHolder.RandomDomino();
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if (roundNumber == 11)
-            {
-                roundNumber++;
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-            else if (roundNumber == 12)
-            {
-                roundNumber++;
-                Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
-            else
-            {
-                
-                Tile1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile5.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile7.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
         }
     }
 }

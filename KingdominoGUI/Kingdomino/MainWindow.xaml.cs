@@ -27,7 +27,7 @@ namespace KingDomino
 
         private void Quit_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Join_Click(object sender, RoutedEventArgs e)
@@ -37,7 +37,7 @@ namespace KingDomino
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            Hide();
             Game game = new Game();
             game.Show();
         }

@@ -9,28 +9,42 @@ namespace KingDomino
 {
     class Board
     {
-
-        private ArrayList board;
-        private String terrainPath = "Resources/Terrain/";
-        private String dominoPath = "Resources/Domino/";
-        private String originPath = "Resources/OriginTile/";
-        private String castlePath = "Resources/Castle/";
+        private Tile[,] playBoard;
+        public Tile[,] PlayBoard
+        {
+            get { return playBoard; }
+            set { playBoard = value; }
+        }
+        private String originCastlePath = "Resources/OriginCastle/";
         public Board(String color)
         {
-            board = new ArrayList();
-            board.Add(new Domino(new Tile(castlePath + color + ".png", "Origin", 0), new Tile(castlePath + color + ".png", "Origin", 0), originPath + color + ".png"));
+            this.playBoard = new Tile[4, 4];
+            this.playBoard[2,2] = new Tile(originCastlePath + color + ".png", "Origin", 0);
         }
 
-        public Domino GetOrigin()
+        
+
+        public Tile GetOrigin()
         {
-            foreach(Domino origin in board)
+            for(int i = 0; i < 4; i++)
             {
-                if(origin.Tile1.TileType.Equals("Origin"))
+                for(int j = 0; j < 4; j++)
                 {
-                    return (Domino)board[board.IndexOf(origin)];
+                    if (this.playBoard[i, j] != null)
+                    {
+                        if (this.playBoard[i, j].TileType.Equals("Origin"))
+                        {
+                            return this.playBoard[i, j];
+                        }
+                    }
                 }
             }
             return null;
+        }
+
+        public void Add(Tile tile, int i, int j)
+        {
+            this.playBoard[i,j] = tile;
         }
     }
 }
