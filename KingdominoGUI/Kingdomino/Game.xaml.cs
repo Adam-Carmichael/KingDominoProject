@@ -275,20 +275,20 @@ namespace KingDomino
             {
                 roundNumber++;
                 domino8 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
+                Tile1.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
+                Tile2.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
 
                 domino7 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
+                Tile3.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
+                Tile4.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
 
                 domino6 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
+                Tile5.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
+                Tile6.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
 
                 domino5 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+                Tile7.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
+                Tile8.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
 
 
                 Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
