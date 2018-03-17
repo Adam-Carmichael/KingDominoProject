@@ -4,9 +4,9 @@ using System.ServiceModel;
 namespace PeerManager
 {
     [ServiceContract]
-    public interface IMsgService
+    public interface IPeerService
     {
-        int StartSvc(string password);
+        void StartSvc(string password);
         void StopSvc();
 
         [OperationContract(IsOneWay = true)]

@@ -3,14 +3,14 @@ using System.Runtime.Serialization;
 /*
  * DataContract defines an object to be serialized
  * DataMember marks the fields that are to be serialized
- * Other fields will be omitted
+ *   Other fields will be omitted
  *
- * DataMembers that are objects will not be serialized properly
- * see: PlaceTileMessage for example
- * Tile object as a member would not serialize, as it does not have a contract
- * Tile is not in this namespace, and referencing it would cause circular dependency
- * Instead, create DataMembers for each field of the object
- * then reconstruct the object on the receiving end
+ * DataMembers that are objects will not be serialized properly. Ex:
+ *   Tile object as a DataMember will not serialize, as Tile's class does not have a DataContract
+ *     Tile is not in this namespace, and referencing it would cause circular dependency
+ *     this blocks using Tile as a DataMember
+ *   Instead, create DataMembers for each field of the object
+ *     then reconstruct the object on the receiving end
  */
 
 namespace PeerManager
@@ -18,18 +18,20 @@ namespace PeerManager
     [DataContract]
     public enum Purpose
     {
+        [EnumMember(Value = "system")]
+        System,
         [EnumMember(Value = "chat")]
         Chat,
         [EnumMember(Value = "deal")]
         Deal,
-        [EnumMember(Value = "sel")]
+        [EnumMember(Value = "select")]
         Select,
         [EnumMember(Value = "tile")]
         Tile,
-        [EnumMember(Value = "color")]
-        Color
+        [EnumMember(Value = "player")]
+        Player
     }
-
+    
     [DataContract]
     public class SerializedMessage
     {
@@ -37,15 +39,21 @@ namespace PeerManager
         {
         }
 
-        public SerializedMessage(Purpose purpose, int player)
+        public SerializedMessage(Purpose purpose, int index)
         {
             Purpose = purpose;
-            Player = player;
+            PeerId = index;
         }
 
         [DataMember] public Purpose Purpose { get; set; }
 
-        [DataMember] public int Player { get; set; }
+        [DataMember] public int PeerId { get; set; }
+
+        [DataMember] public bool IsOccupied { get; set; }
+
+        [DataMember] public string Name { get; set; }
+
+        [DataMember] public string Color { get; set; }
 
         [DataMember] public string Text { get; set; }
 
@@ -60,7 +68,5 @@ namespace PeerManager
         [DataMember] public int Xcoord { get; set; }
 
         [DataMember] public int Ycoord { get; set; }
-
-        [DataMember] public string Color { get; set; }
     }
 }

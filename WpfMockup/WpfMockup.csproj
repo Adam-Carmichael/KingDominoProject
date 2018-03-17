@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B9DBD9EE-051D-45DA-9DBB-9C9A111C1F3E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WpfWcfExample</RootNamespace>
-    <AssemblyName>WpfWcfExample</AssemblyName>
+    <RootNamespace>WpfMockup</RootNamespace>
+    <AssemblyName>WpfMockup</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,6 +48,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PlayerData.cs" />
     <Compile Include="Tile.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfWcfExample
+namespace WpfMockup
 {
     public class Tile
     {

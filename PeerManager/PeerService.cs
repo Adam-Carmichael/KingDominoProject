@@ -6,28 +6,27 @@ namespace PeerManager
 {
     // context mode ensures only one instance of the service is created per process
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class MsgService : IMsgService
+    public class PeerService : IPeerService
     {
         private readonly MessageDelegate _msgDelegate;
         private readonly ServiceHost _host = null;
-        private readonly ChannelFactory<IMsgService> _channelFactory = null;
-        private IMsgService _channel;
+        private readonly ChannelFactory<IPeerService> _channelFactory = null;
+        private IPeerService _channel;
 
-        public MsgService() { }
+        public PeerService() { }
 
-        public MsgService(MessageDelegate del)
+        public PeerService(MessageDelegate del)
         {
             _msgDelegate = del;
             _host = new ServiceHost(this);
-            _channelFactory = new ChannelFactory<IMsgService>("KDPeerEndpoint");
-            
+            _channelFactory = new ChannelFactory<IPeerService>("KDPeerEndpoint");
         }
 
-        public int StartSvc(string password)
+        public void StartSvc(string password)
         {
             if (password == null)
                 password = "";
-
+            
             // start the service
             _host.Credentials.Peer.MeshPassword = password;
             _host.Open();
@@ -35,14 +34,7 @@ namespace PeerManager
             // open communication channel
             _channelFactory.Credentials.Peer.MeshPassword = password;
             _channel = _channelFactory.CreateChannel();
-
-            // discover peers
-            PeerName thisPeer = new PeerName("NewPeer", PeerNameType.Unsecured);
-            PeerNameRegistration peerReg = new PeerNameRegistration(thisPeer, 0);
-            peerReg.Start();
-            PeerNameResolver peerResolver = new PeerNameResolver();
-            PeerNameRecordCollection peers = peerResolver.Resolve(thisPeer);
-            return peers.Count;
+            
         }
 
         public void StopSvc()
@@ -55,15 +47,6 @@ namespace PeerManager
                     _host.Close();
                 }
             }
-        }
-
-        public SerializedMessage Identify(string id)
-        {
-            SerializedMessage data = new SerializedMessage()
-            {
-
-            };
-            return data;
         }
 
         public void SendMessage(SerializedMessage message)

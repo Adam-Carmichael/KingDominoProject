@@ -2,36 +2,39 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.ComponentModel;
 
-namespace WpfWcfExample
+namespace WpfMockup
 {
     // Main should only contain listeners and initializer, no data implementation
 
     public partial class MainWindow : Window
     {
         private readonly IMessageHandler _msgHandler;
+        private string InitName { get; set; } = "PlayerNameHere";
+        private string InitColor { get; set; }= "Color";
 
         public MainWindow()
         {
             // set up MVVC
-            DataContext = new ExampleViewModel();
+            ExampleViewModel model = new ExampleViewModel();
+            DataContext = model;
             InitializeComponent();
 
             // pass viewmodel to the p2p message handler so it can update the view
-            ExampleViewModel model = (ExampleViewModel) DataContext;
             _msgHandler = new MessageHandler(model);
-
-            this.InvalidateVisual();
         }
 
         // establish new session
         private void NewSession_Clicked(object sender, RoutedEventArgs e)
         {
+            _msgHandler.NewGame(InitName, InitColor);
         }
 
         // join existing session
         private void Connect_Clicked(object sender, RoutedEventArgs e)
         {
+            _msgHandler.JoinGame(InitName, InitColor);
         }
 
         // send chat message
@@ -44,11 +47,17 @@ namespace WpfWcfExample
             }
         }
 
-        // change player color
-        private void RadioColor_Changed(object sender, RoutedEventArgs e)
+        private void RadioColor_Clicked(object sender, RoutedEventArgs e)
         {
             RadioButton source = (RadioButton)e.Source;
-            _msgHandler.SendPlayerColor(source.Name);
+            InitColor = source.Content.ToString();
+        }
+
+        // change player name
+        private void PlayerName_Changed(object sender, TextChangedEventArgs e)
+        {
+            TextBox source = (TextBox) e.Source;
+            InitName = source.Text;
         }
     }
 }
