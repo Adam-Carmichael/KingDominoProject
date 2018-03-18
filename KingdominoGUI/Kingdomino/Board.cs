@@ -18,7 +18,7 @@ namespace KingDomino
         private String originCastlePath = "Resources/OriginCastle/";
         public Board(String color)
         {
-            this.playBoard = new Tile[4, 4];
+            this.playBoard = new Tile[5, 5];
             this.playBoard[2,2] = new Tile(originCastlePath + color + ".png", "Origin", 0);
         }
 
