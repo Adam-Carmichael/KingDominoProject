@@ -702,6 +702,7 @@ namespace KingDomino
             HideBoardButtons();
             if (pick == 0)
             {
+                // Up or Down button visibility
                 for (int i = 0; i < 4; i++)
                 {
                     for (int j = 1; j < 4; j++)
@@ -867,12 +868,14 @@ namespace KingDomino
                         }
                     }
                 }
+                // Left or Right button visibility
                 for (int i = 1; i < 4; i++)
                 {
                     for (int j = 0; j < 4; j++)
                     {
                         if (player1Board.PlayBoard[i, j] != null)
                         {
+                            //Right button visibility
                             if (player1Board.PlayBoard[i + 1, j] == null && (player1Board.PlayBoard[i, j].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, j].TileType.Equals("Origin")))
                             {
                                 if (i + 1 == 2)
@@ -945,6 +948,7 @@ namespace KingDomino
                                     }
                                 }
                             }
+                            //Left button visibility
                             if (player1Board.PlayBoard[i - 1, j] == null && (player1Board.PlayBoard[i, j].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, j].TileType.Equals("Origin")))
                             {
                                 if (i - 1 == 0)
@@ -1041,6 +1045,122 @@ namespace KingDomino
                                 }
                             }
                         }
+                    }
+                }
+                for(int i = 0; i < 4; i++)
+                {
+                    if (player1Board.PlayBoard[4, i] != null)
+                    {
+                        if (player1Board.PlayBoard[4, i + 1] == null && (player1Board.PlayBoard[4, i].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[4, i].TileType.Equals("Origin")))
+                        {
+                            if(i == 0)
+                            {
+                                FiveTwoButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 1)
+                            {
+                                FiveThreeButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 2)
+                            {
+                                FiveFourButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 3)
+                            {
+                                FiveFiveButton.Visibility = Visibility.Visible;
+                            }
+                        }
+                    }
+                    if (player1Board.PlayBoard[i, 4] != null)
+                    {
+                        if (player1Board.PlayBoard[i + 1, 4] == null && (player1Board.PlayBoard[i, 4].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, 4].TileType.Equals("Origin")))
+                        {
+                            if (i == 0)
+                            {
+                                TwoFiveButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 1)
+                            {
+                                ThreeFiveButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 2)
+                            {
+                                FourFiveButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 3)
+                            {
+                                FiveFiveButton.Visibility = Visibility.Visible;
+                            }
+                        }
+                    }
+                }
+                for (int i = 1; i < 4; i++)
+                {
+                    if (player1Board.PlayBoard[4, i] != null)
+                    {
+                        if (player1Board.PlayBoard[4, i - 1] == null && (player1Board.PlayBoard[4, i].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[4, i].TileType.Equals("Origin")))
+                        {
+                            if (i == 1)
+                            {
+                                FiveOneButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 2)
+                            {
+                                FiveTwoButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 3)
+                            {
+                                FiveThreeButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 4)
+                            {
+                                FiveFourButton.Visibility = Visibility.Visible;
+                            }
+                        }
+                    }
+                    if (player1Board.PlayBoard[i, 4] != null)
+                    {
+                        if (player1Board.PlayBoard[i - 1, 4] == null && (player1Board.PlayBoard[i, 4].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, 4].TileType.Equals("Origin")))
+                        {
+                            if (i == 1)
+                            {
+                                OneFiveButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 2)
+                            {
+                                TwoFiveButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 3)
+                            {
+                                ThreeFiveButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 4)
+                            {
+                                FourFiveButton.Visibility = Visibility.Visible;
+                            }
+                        }
+                    }
+                }
+                if (player1Board.PlayBoard[4, 4] != null)
+                {
+                    if (player1Board.PlayBoard[4, 3] == null && (player1Board.PlayBoard[4, 4].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[4, 4].TileType.Equals("Origin")))
+                    {
+                        FiveFourButton.Visibility = Visibility.Visible;
+                    }
+                    if (player1Board.PlayBoard[3, 4] == null && (player1Board.PlayBoard[4, 4].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[4, 4].TileType.Equals("Origin")))
+                    {
+                        FourFiveButton.Visibility = Visibility.Visible;
+                    }
+                }
+                if (player1Board.PlayBoard[0, 0] != null)
+                {
+                    if (player1Board.PlayBoard[1, 0] == null && (player1Board.PlayBoard[0, 0].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[0, 0].TileType.Equals("Origin")))
+                    {
+                        TwoOneButton.Visibility = Visibility.Visible;
+                    }
+                    if (player1Board.PlayBoard[0, 1] == null && (player1Board.PlayBoard[0, 0].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[0, 0].TileType.Equals("Origin")))
+                    {
+                        OneTwoButton.Visibility = Visibility.Visible;
                     }
                 }
             }
