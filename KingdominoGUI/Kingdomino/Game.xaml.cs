@@ -1070,6 +1070,25 @@ namespace KingDomino
                                 FiveFiveButton.Visibility = Visibility.Visible;
                             }
                         }
+                        if (player1Board.PlayBoard[3, i] == null && (player1Board.PlayBoard[4, i].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[4, i].TileType.Equals("Origin")))
+                        {
+                            if (i == 0)
+                            {
+                                FourOneButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 1)
+                            {
+                                FourTwoButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 2)
+                            {
+                                FourThreeButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 3)
+                            {
+                                FourFourButton.Visibility = Visibility.Visible;
+                            }
+                        }
                     }
                     if (player1Board.PlayBoard[i, 4] != null)
                     {
@@ -1090,6 +1109,25 @@ namespace KingDomino
                             if (i == 3)
                             {
                                 FiveFiveButton.Visibility = Visibility.Visible;
+                            }
+                        }
+                        if (player1Board.PlayBoard[i, 3] == null && (player1Board.PlayBoard[i, 4].TileType.Equals(player1Chosen.Tile1.TileType) || player1Board.PlayBoard[i, 4].TileType.Equals("Origin")))
+                        {
+                            if (i == 0)
+                            {
+                                OneFourButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 1)
+                            {
+                                TwoFourButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 2)
+                            {
+                                ThreeFourButton.Visibility = Visibility.Visible;
+                            }
+                            if (i == 3)
+                            {
+                                FourFourButton.Visibility = Visibility.Visible;
                             }
                         }
                     }
@@ -1698,51 +1736,42 @@ namespace KingDomino
             FiveFiveButton.Visibility = Visibility.Hidden;
         }
 
-        // First domino selection button method
+        // Domino selection button method
         // It sets the first domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
-        private void Choose1_Click(object sender, RoutedEventArgs e)
+        private void Choose_Click(object sender, RoutedEventArgs e)
         {
-            player1Chosen = domino5;
-            HideSelectDominoButtons();
-            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowTileSelectionButtons();
-        }
-        
-        // Second domino selection button method
-        // It sets the second domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
-        private void Choose2_Click(object sender, RoutedEventArgs e)
-        {
-            player1Chosen = domino6;
-            HideSelectDominoButtons();
-            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowTileSelectionButtons();
-        }
-        
-        // Third domino selection button method
-        // It sets the third domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
-        private void Choose3_Click(object sender, RoutedEventArgs e)
-        {
-            player1Chosen = domino7;
-            HideSelectDominoButtons();
-            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
-            ShowTileSelectionButtons();
-        }
-        
-        // Fourth domino selection button method
-        // It sets the fourth domino as their 'selected' domino and puts it into their selected place and then calls the ShowOptions method to show their placement options
-        private void Choose4_Click(object sender, RoutedEventArgs e)
-        {
-            player1Chosen = domino8;
-            HideSelectDominoButtons();
-            SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-            SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-            SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            if (sender.Equals(Choose1))
+            {
+                player1Chosen = domino5;
+                HideSelectDominoButtons();
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            }
+            if(sender.Equals(Choose2))
+            {
+                player1Chosen = domino6;
+                HideSelectDominoButtons();
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            }
+            if (sender.Equals(Choose3))
+            {
+                player1Chosen = domino7;
+                HideSelectDominoButtons();
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            }
+            if (sender.Equals(Choose4))
+            {
+                player1Chosen = domino8;
+                HideSelectDominoButtons();
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+            }
             ShowTileSelectionButtons();
         }
 
@@ -1773,24 +1802,24 @@ namespace KingDomino
             this.player4Score = 0;
         }
 
-        private void Board1_Click(object sender, RoutedEventArgs e)
+        private void Board_Click(object sender, RoutedEventArgs e)
         {
-            RefreshBoard(player1Board);
-        }
-
-        private void Board2_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshBoard(player2Board);
-        }
-
-        private void Board3_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshBoard(player3Board);
-        }
-
-        private void Board4_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshBoard(player4Board);
+            if(sender.Equals(YourBoard))
+            {
+                RefreshBoard(player1Board);
+            }
+            if (sender.Equals(Player2Board))
+            {
+                RefreshBoard(player2Board);
+            }
+            if (sender.Equals(Player3Board))
+            {
+                RefreshBoard(player3Board);
+            }
+            if (sender.Equals(Player4Board))
+            {
+                RefreshBoard(player4Board);
+            }
         }
 
         private void HideBoardButtons()
@@ -1814,10 +1843,22 @@ namespace KingDomino
 
         }
 
-        private void SelectTile1Button_Click(object sender, RoutedEventArgs e)
+        private void SelectTileButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowOptions();
-            HideTileSelectionButtons();
+            if(sender.Equals(SelectTile1Button))
+            {
+                ShowOptions();
+                HideTileSelectionButtons();
+            }
+            if(sender.Equals(SelectTile2Button))
+            {
+                Tile tile1 = player1Chosen.Tile2;
+                Tile tile2 = player1Chosen.Tile1;
+                player1Chosen.Tile1 = tile1;
+                player1Chosen.Tile2 = tile2;
+                ShowOptions();
+                HideTileSelectionButtons();
+            }
         }
 
         private void ShowTileSelectionButtons()
@@ -1830,16 +1871,6 @@ namespace KingDomino
         {
             SelectTile1Button.Visibility = Visibility.Hidden;
             SelectTile2Button.Visibility = Visibility.Hidden;
-        }
-
-        private void SelectTile2Button_Click(object sender, RoutedEventArgs e)
-        {
-            Tile tile1 = player1Chosen.Tile2;
-            Tile tile2 = player1Chosen.Tile1;
-            player1Chosen.Tile1 = tile1;
-            player1Chosen.Tile2 = tile2;
-            ShowOptions();
-            HideTileSelectionButtons();
         }
     }
 }

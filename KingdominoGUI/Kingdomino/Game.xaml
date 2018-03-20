@@ -31,19 +31,19 @@
         <Image x:Name="Tile6" HorizontalAlignment="Left" Height="55" Margin="355,85,0,0" Source="Resources/Terrain/0Field06.png" VerticalAlignment="Top" Width="55"/>
         <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" Source="Resources/Terrain/0Field07.png" VerticalAlignment="Top" Width="55"/>
         <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" Source="Resources/Terrain/0Field08.png" VerticalAlignment="Top" Width="55"/>
-        <Button x:Name="YourBoard" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Board1_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Player2Board" BorderThickness="3" Content="Player 2 Board" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Click="Board2_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Player3Board" BorderThickness="3" Content="Player 3 Board" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Click="Board3_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Player4Board" BorderThickness="3" Content="Player 4 Board" HorizontalAlignment="Left" Margin="445,10,0,0" VerticalAlignment="Top" Click="Board4_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Choose1" Content="Choose Domino 1" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Click ="Choose1_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Choose2" Content="Choose Domino 2" HorizontalAlignment="Left" Margin="155,52,0,0" VerticalAlignment="Top" Click ="Choose2_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Choose3" Content="Choose Domino 3" HorizontalAlignment="Left" Margin="300,52,0,0" VerticalAlignment="Top" Click ="Choose3_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Choose4" Content="Choose Domino 4" HorizontalAlignment="Left" Margin="445,52,0,0" VerticalAlignment="Top" Click ="Choose4_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
+        <Button x:Name="YourBoard" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Player2Board" BorderThickness="3" Content="Player 2 Board" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Player3Board" BorderThickness="3" Content="Player 3 Board" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Player4Board" BorderThickness="3" Content="Player 4 Board" HorizontalAlignment="Left" Margin="445,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Choose1" Content="Choose Domino 1" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Choose2" Content="Choose Domino 2" HorizontalAlignment="Left" Margin="155,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Choose3" Content="Choose Domino 3" HorizontalAlignment="Left" Margin="300,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Choose4" Content="Choose Domino 4" HorizontalAlignment="Left" Margin="445,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic"/>
         <Image x:Name= "SelectedTile1" HorizontalAlignment="Left" Height="55" Margin="265,260,0,0" VerticalAlignment="Top" Width="55"/>
         <Image x:Name= "SelectedTile2" HorizontalAlignment="Left" Height="55" Margin="320,260,0,0" VerticalAlignment="Top" Width="55"/>
         <Image x:Name= "SelectedDomino" HorizontalAlignment="Left" Height="55" Margin="265,315,0,0" VerticalAlignment="Top" Width="110"/>
-        <Button x:Name="SelectTile1Button" Content="Tile1" HorizontalAlignment="Left" Margin="265,315,0,0" VerticalAlignment="Top" Click ="SelectTile1Button_Click" Width="55" Height="55"/>
-        <Button x:Name="SelectTile2Button" Content="Tile2" HorizontalAlignment="Left" Margin="320,315,0,0" VerticalAlignment="Top" Click ="SelectTile2Button_Click" Width="55" Height="55"/>
+        <Button x:Name="SelectTile1Button" Content="Tile1" HorizontalAlignment="Left" Margin="265,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
+        <Button x:Name="SelectTile2Button" Content="Tile2" HorizontalAlignment="Left" Margin="320,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
 
         <Image x:Name= "OneOne" HorizontalAlignment="Left" Height="55" Margin="140,610,0,0" VerticalAlignment="Top" Width="55"/>
         <Image x:Name= "OneTwo" HorizontalAlignment="Left" Height="55" Margin="140,555,0,0" VerticalAlignment="Top" Width="55"/>
