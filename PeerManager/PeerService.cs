@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceModel;
-using System.Net.PeerToPeer;
 
 namespace PeerManager
 {
@@ -34,8 +33,6 @@ namespace PeerManager
             // open communication channel
             _channelFactory.Credentials.Peer.MeshPassword = password;
             _channel = _channelFactory.CreateChannel();
-            
-            
         }
 
         public void StopSvc()

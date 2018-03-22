@@ -48,8 +48,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PlayerData.cs" />
-    <Compile Include="Tile.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -59,14 +57,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExampleViewModel.cs" />
-    <Compile Include="IMessageHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageHandler.cs" />
+    <Compile Include="PeerMessenger.cs" />
+    <Compile Include="HostMessenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +91,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
+      <Project>{094daf84-22f4-4a0d-bfaf-4831e3d2eb52}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PeerManager\PeerManager.csproj">
       <Project>{f4c967b1-0764-406e-bb9e-f443badc0c34}</Project>
       <Name>PeerManager</Name>

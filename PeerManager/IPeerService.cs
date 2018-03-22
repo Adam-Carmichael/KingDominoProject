@@ -14,7 +14,6 @@ namespace PeerManager
 
         [OperationContract(IsOneWay = true)]
         void ReceiveMessage(SerializedMessage message);
-        
     }
 
     // delegate declaration ensures delegated method matches signature required by IPeerService methods

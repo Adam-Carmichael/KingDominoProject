@@ -1,20 +1,18 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
-namespace WpfMockup
+
+namespace DataModel
 {
     public class PlayerData : INotifyPropertyChanged
     {
-        public PlayerData(bool isFull, string name, string color)
+        public PlayerData(bool isFull, string name, string color, Tile tile)
         {
             IsOccupied = isFull;
             Name = name;
             Color = color;
+            Tile = tile;
         }
 
         private bool _isOccupied;
@@ -47,6 +45,17 @@ namespace WpfMockup
             {
                 _color = value;
                 OnPropertyChanged("Color");
+            }
+        }
+
+        private Tile _tile;
+        public Tile Tile
+        {
+            get { return _tile; }
+            set
+            {
+                _tile = value;
+                OnPropertyChanged("Tile");
             }
         }
 

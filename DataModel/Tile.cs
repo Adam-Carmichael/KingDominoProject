@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfMockup
+namespace DataModel
 {
     public class Tile
     {

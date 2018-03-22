@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using DataModel;
 /*
  * DataContract defines an object to be serialized
  * DataMember marks the fields that are to be serialized
@@ -35,6 +36,8 @@ namespace PeerManager
     [DataContract]
     public class SerializedMessage
     {
+        // TODO break this up and use a decorator? factory?
+
         public SerializedMessage()
         {
         }
@@ -49,11 +52,7 @@ namespace PeerManager
 
         [DataMember] public int PeerId { get; set; }
 
-        [DataMember] public bool IsOccupied { get; set; }
-
-        [DataMember] public string Name { get; set; }
-
-        [DataMember] public string Color { get; set; }
+        [DataMember] public PlayerData Player { get; set; }
 
         [DataMember] public string Text { get; set; }
 

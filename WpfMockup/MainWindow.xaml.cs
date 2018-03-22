@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.ComponentModel;
+using PeerManager;
 
 namespace WpfMockup
 {
@@ -10,7 +11,7 @@ namespace WpfMockup
 
     public partial class MainWindow : Window
     {
-        private readonly IMessageHandler _msgHandler;
+        private IMessenger _msgHandler;
         private string InitName { get; set; } = "PlayerNameHere";
         private string InitColor { get; set; }= "Color";
 
@@ -20,25 +21,30 @@ namespace WpfMockup
             ExampleViewModel model = new ExampleViewModel();
             DataContext = model;
             InitializeComponent();
-
-            // pass viewmodel to the p2p message handler so it can update the view
-            _msgHandler = new MessageHandler(model);
         }
 
         // establish new session
         private void NewSession_Clicked(object sender, RoutedEventArgs e)
         {
-            _msgHandler.NewGame(InitName, InitColor);
+            ExampleViewModel model = (ExampleViewModel)DataContext;
+            Connection connection = Connection.CreateConnection(true);
+
+            IPeerService peerService = connection.Start(model.ReceiveMessage);
+            _msgHandler = new HostMessenger(model, peerService);
         }
 
         // join existing session
         private void Connect_Clicked(object sender, RoutedEventArgs e)
         {
-            _msgHandler.JoinGame(InitName, InitColor);
+            ExampleViewModel model = (ExampleViewModel)DataContext;
+            Connection connection = Connection.CreateConnection(false);
+
+            IPeerService peerService = connection.Start(model.ReceiveMessage);
+            _msgHandler = new PeerMessenger(model, peerService);
         }
 
         // send chat message
-        private void InputBox_KeyDown(object sender, KeyEventArgs e)
+        private void InputBox_KeyDown(object sender, KeyEventArgs e) 
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {

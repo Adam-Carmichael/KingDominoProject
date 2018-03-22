@@ -1,10 +1,13 @@
 ﻿using System;
+using DataModel;
 
-namespace WpfMockup
+namespace PeerManager
 {
-    // this interface is all that should be accessed by the main application
-
-    public interface IMessageHandler
+    // TODO factory method = check connection;
+    /*
+     * this interface formats messeges for the application to send accross the connection
+     */
+    public interface IMessenger
     {
         void SendChatMessage(string text);
 
@@ -15,9 +18,5 @@ namespace WpfMockup
         void SendDealDominos(int[] dominos);
 
         void SendPlayerUpdate(int index);
-
-        void NewGame(string name, string color);
-
-        void JoinGame(string name, string color);
     }
 }
