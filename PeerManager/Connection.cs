@@ -9,7 +9,11 @@ namespace PeerManager
      */
     public abstract class Connection
     {
+        public int PeerID;
+
         public abstract IPeerService Start(MessageDelegate del);
+
+        protected abstract void SystemMessageHandler(PeerSysMessage message);
 
         public abstract void Stop();
 

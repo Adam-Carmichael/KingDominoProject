@@ -49,6 +49,8 @@
     <Compile Include="Connection.cs" />
     <Compile Include="IMessenger.cs" />
     <Compile Include="IPeerService.cs" />
+    <Compile Include="Messenger.cs" />
+    <Compile Include="PeerSysMessage.cs" />
     <Compile Include="PeerConnection.cs" />
     <Compile Include="SerializedMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

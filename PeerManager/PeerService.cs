@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace PeerManager
 {
@@ -8,15 +9,19 @@ namespace PeerManager
     public class PeerService : IPeerService
     {
         private readonly MessageDelegate _msgDelegate;
+        private readonly PeerSysDelegate _sysDelegate;
         private readonly ServiceHost _host = null;
         private readonly ChannelFactory<IPeerService> _channelFactory = null;
         private IPeerService _channel;
 
+        public Task ChannelOpen { get; private set; }
+
         public PeerService() { }
 
-        public PeerService(MessageDelegate del)
+        public PeerService(MessageDelegate del, PeerSysDelegate sysDel)
         {
             _msgDelegate = del;
+            _sysDelegate = sysDel;
             _host = new ServiceHost(this);
             _channelFactory = new ChannelFactory<IPeerService>("KDPeerEndpoint");
         }
@@ -33,6 +38,9 @@ namespace PeerManager
             // open communication channel
             _channelFactory.Credentials.Peer.MeshPassword = password;
             _channel = _channelFactory.CreateChannel();
+
+            ChannelOpen = Task.Factory.FromAsync(((ICommunicationObject) _channel).BeginOpen,
+                ((ICommunicationObject) _channel).EndOpen, null);
         }
 
         public void StopSvc()
@@ -57,6 +65,20 @@ namespace PeerManager
         {
             // receive passes the message to the service caller
             _msgDelegate(message);
+        }
+
+        public void SendSysMessage(PeerSysMessage message)
+        {
+            // send calls the receive method on each peer in the channel
+            _channel.ReceiveSysMessage(message);
+            _channel.ReceiveMessage(new SerializedMessage(Purpose.Chat, 0) {Text = "Message sent"});
+        }
+
+        public void ReceiveSysMessage(PeerSysMessage message)
+        {
+            // receive passes the message to the service caller
+            _channel.ReceiveMessage(new SerializedMessage(Purpose.Chat, 0) { Text = "Receiving Message" });
+            _sysDelegate(message);
         }
     }
 }

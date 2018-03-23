@@ -12,19 +12,16 @@
         <TextBox x:Name="OutputBox" HorizontalAlignment="Left" Height="335" Margin="434,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsTabStop="False" Focusable="False" VerticalScrollBarVisibility="Visible" Text="{Binding ChatHistory}"/>
 
         <Label x:Name="LblUserName" Content="Your Name:" HorizontalAlignment="Left" Margin="38,17,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="PlayerNameBox" HorizontalAlignment="Left" Height="23" Margin="38,43,0,0" TextWrapping="Wrap" Text="Player1" VerticalAlignment="Top" Width="120" TextChanged="PlayerName_Changed"/>
+        <TextBox x:Name="PlayerNameBox" HorizontalAlignment="Left" Height="23" Margin="38,43,0,0" TextWrapping="Wrap" Text="{Binding InitName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" />
 
         <Label x:Name="LblUserColor" Content="Your Color:" HorizontalAlignment="Left" Margin="38,84,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RadioPink" Content="Pink" HorizontalAlignment="Left" Margin="38,110,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Clicked" IsChecked="True"/>
-        <RadioButton x:Name="RadioBlue" Content="Blue" HorizontalAlignment="Left" Margin="38,130,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Clicked" />
-        <RadioButton x:Name="RadioGreen" Content="Green" HorizontalAlignment="Left" Margin="38,150,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Clicked" />
-        <RadioButton x:Name="RadioYellow" Content="Yellow" HorizontalAlignment="Left" Margin="38,170,0,0" VerticalAlignment="Top" GroupName="RadioGroup" Click="RadioColor_Clicked" />
+        <TextBox x:Name="PlayerColorBox" HorizontalAlignment="Left" Height="23" Margin="38,115,0,0" TextWrapping="Wrap" Text="{Binding InitColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" />
 
-        <Label x:Name="LblP1ColorName" Content="{Binding PlayerList[1].Name, NotifyOnSourceUpdated=True}" HorizontalAlignment="Left" Margin="232,288,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP1ColorName" Content="{Binding PlayerList[1].Name}" HorizontalAlignment="Left" Margin="232,288,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP2ColorName" Content="{Binding PlayerList[2].Name}" HorizontalAlignment="Left" Margin="232,319,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP3ColorName" Content="{Binding PlayerList[3].Name}" HorizontalAlignment="Left" Margin="232,350,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP4ColorName" Content="{Binding PlayerList[4].Name}" HorizontalAlignment="Left" Margin="232,381,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LblP1Color" Content="{Binding PlayerList[1].Color, NotifyOnSourceUpdated=True}" HorizontalAlignment="Left" Margin="288,288,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="LblP1Color" Content="{Binding PlayerList[1].Color}" HorizontalAlignment="Left" Margin="288,288,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP2Color" Content="{Binding PlayerList[2].Color}" HorizontalAlignment="Left" Margin="288,319,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP3Color" Content="{Binding PlayerList[3].Color}" HorizontalAlignment="Left" Margin="288,350,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP4Color" Content="{Binding PlayerList[4].Color}" HorizontalAlignment="Left" Margin="288,381,0,0" VerticalAlignment="Top"/>

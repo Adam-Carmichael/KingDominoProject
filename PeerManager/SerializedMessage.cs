@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using DataModel;
 /*
  * DataContract defines an object to be serialized
  * DataMember marks the fields that are to be serialized
@@ -10,7 +9,7 @@ using DataModel;
  *   Tile object as a DataMember will not serialize, as Tile's class does not have a DataContract
  *     Tile is not in this namespace, and referencing it would cause circular dependency
  *     this blocks using Tile as a DataMember
- *   Instead, create DataMembers for each field of the object
+ *   Instead, create DataMembers here for each field of the object
  *     then reconstruct the object on the receiving end
  */
 
@@ -19,8 +18,10 @@ namespace PeerManager
     [DataContract]
     public enum Purpose
     {
-        [EnumMember(Value = "system")]
-        System,
+        [EnumMember(Value = "init")]
+        Init,
+        [EnumMember(Value = "player")]
+        Player,
         [EnumMember(Value = "chat")]
         Chat,
         [EnumMember(Value = "deal")]
@@ -28,9 +29,7 @@ namespace PeerManager
         [EnumMember(Value = "select")]
         Select,
         [EnumMember(Value = "tile")]
-        Tile,
-        [EnumMember(Value = "player")]
-        Player
+        Tile
     }
     
     [DataContract]
@@ -52,7 +51,9 @@ namespace PeerManager
 
         [DataMember] public int PeerId { get; set; }
 
-        [DataMember] public PlayerData Player { get; set; }
+        [DataMember] public string PlayerName { get; set; }
+
+        [DataMember] public string Color { get; set; }
 
         [DataMember] public string Text { get; set; }
 

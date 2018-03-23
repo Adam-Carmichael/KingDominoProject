@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,36 +10,34 @@ namespace WpfMockup
 
     public partial class MainWindow : Window
     {
+        private readonly ExampleViewModel _model;
+        private Connection _connection;
+        private IPeerService _peerSvc;
         private IMessenger _msgHandler;
-        private string InitName { get; set; } = "PlayerNameHere";
-        private string InitColor { get; set; }= "Color";
 
+        // Entry Point
         public MainWindow()
         {
             // set up MVVC
-            ExampleViewModel model = new ExampleViewModel();
-            DataContext = model;
+            _model = new ExampleViewModel();
+            DataContext = _model;
             InitializeComponent();
         }
 
         // establish new session
         private void NewSession_Clicked(object sender, RoutedEventArgs e)
         {
-            ExampleViewModel model = (ExampleViewModel)DataContext;
-            Connection connection = Connection.CreateConnection(true);
-
-            IPeerService peerService = connection.Start(model.ReceiveMessage);
-            _msgHandler = new HostMessenger(model, peerService);
+            _connection = Connection.CreateConnection(true);            // only difference true/false
+            _peerSvc = _connection.Start(_model.ReceiveMessage);
+            _msgHandler = new Messenger(_peerSvc);
         }
 
         // join existing session
         private void Connect_Clicked(object sender, RoutedEventArgs e)
         {
-            ExampleViewModel model = (ExampleViewModel)DataContext;
-            Connection connection = Connection.CreateConnection(false);
-
-            IPeerService peerService = connection.Start(model.ReceiveMessage);
-            _msgHandler = new PeerMessenger(model, peerService);
+            _connection = Connection.CreateConnection(false);            // only difference true/false
+            _peerSvc = _connection.Start(_model.ReceiveMessage);
+            _msgHandler = new Messenger(_peerSvc);
         }
 
         // send chat message
@@ -48,22 +45,9 @@ namespace WpfMockup
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                _msgHandler.SendChatMessage(InputBox.Text);
+                _msgHandler.SendChatMessage(_model.ThisPlayer, InputBox.Text);
                 InputBox.Clear();
             }
-        }
-
-        private void RadioColor_Clicked(object sender, RoutedEventArgs e)
-        {
-            RadioButton source = (RadioButton)e.Source;
-            InitColor = source.Content.ToString();
-        }
-
-        // change player name
-        private void PlayerName_Changed(object sender, TextChangedEventArgs e)
-        {
-            TextBox source = (TextBox) e.Source;
-            InitName = source.Text;
         }
     }
 }

@@ -10,11 +10,12 @@ namespace WpfMockup
     public class ExampleViewModel : INotifyPropertyChanged
     {
         // Elements from the view are bound to these properties
+        public string InitName { get; set; } = "PlayerNameHere";
+        public string InitColor { get; set; } = "Color";
         public string ChatHistory { get; set; } = "Welcome!\n";                     // textbox
         public ObservableCollection<PlayerData> PlayerList { get; set; }            // Collection of connected players
-
-        private int _thisPlayer;
-
+        public int ThisPlayer { get; set; }
+        
         public ExampleViewModel()
         {
             PlayerList = new ObservableCollection<PlayerData>() {null, null, null, null, null};
@@ -27,25 +28,20 @@ namespace WpfMockup
             OnPropertyChanged(null);                    // null indicates OnPropertyChanged should update all properties
         }
 
-        public void InitThisPlayer(int playerNum, string name, string color)
-        {
-            ChatHistory += String.Format("Hi, {0} You have joined as Player {1}\n", name, playerNum);
-            OnPropertyChanged("ChatHistory");
-            UpdatePlayerData(playerNum, true, name, color);
-        }
-
         
+
+
         public void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
             OnPropertyChanged("ChatHistory");
         }
 
-        public void UpdatePlayerData(int index, PlayerData player)
+        public void UpdatePlayerData(int index, string name, string color)
         {
-            PlayerList[index] = player;
+            PlayerList[index].Name = name;
+            PlayerList[index].Color = color;
             DisplayChatMessage(0, "Updated Player" + index);
-            DisplayChatMessage(0, "Player's Tile was " + player.Tile.Terrain + "with " + player.Tile.Crowns + " crowns.");
         }
 
         public void UpdatePlayerData(int index, bool isFull, string name, string color)
@@ -54,10 +50,28 @@ namespace WpfMockup
             DisplayChatMessage(0, "Updated Player" + index);
         }
 
+
+
+
+
+
+        public void InitThisPlayer(int playerNum, string name, string color)
+        {
+            ThisPlayer = playerNum;
+            PlayerList[ThisPlayer].IsOccupied = true;
+            UpdatePlayerData(playerNum, true, name, color);
+            ChatHistory += String.Format("Hi, {0}! You have joined as Player {1}\n", name, playerNum);
+            OnPropertyChanged("ChatHistory");
+        }
+
         public void ReceiveMessage(SerializedMessage message)
         {
             switch (message.Purpose)
             {
+                case Purpose.Init:
+                    ThisPlayer = message.PeerId;
+                    InitThisPlayer(ThisPlayer, InitName, InitColor);
+                    break;
                 case Purpose.Chat:
                     DisplayChatMessage(message.PeerId, message.Text);
                     break;
@@ -68,33 +82,10 @@ namespace WpfMockup
                 case Purpose.Tile:
                     break;
                 case Purpose.Player:
-                    UpdatePlayerData(message.PeerId, message.Player);
-                    break;
-                case Purpose.System:
-                    SystemMessageHandler(message);
+                    UpdatePlayerData(message.PeerId, message.PlayerName, message.Color);
                     break;
                 default:
                     DisplayChatMessage(0, "Error: Network message not recognized");
-                    break;
-            }
-        }
-
-        private void SystemMessageHandler(SerializedMessage message)
-        {
-            switch (message.Text)
-            {
-                case "rollcall":
-                    if (_thisPlayer != 1) break;
-                    for (int i = 1; i <= 4; i++)        // TODO eliminate Magic Numbers
-                    {
-                        PlayerData source = PlayerList[i];
-                        SerializedMessage data = new SerializedMessage(Purpose.Player, i)
-                        {
-                            Player = source
-                        };
-                        _peerService.SendMessage(data);
-                        _viewModel.DisplayChatMessage(0, "Sending data for Player" + i);
-                    }
                     break;
             }
         }
