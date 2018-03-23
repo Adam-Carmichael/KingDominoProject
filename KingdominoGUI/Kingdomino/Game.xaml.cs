@@ -690,6 +690,8 @@ namespace KingDomino
                     RefreshBoard(player1Board);
                     ShowBoardButtons();
                     pick = 0;
+
+                    Score.Text = "Score: " + player1Board.CalculateScore().ToString();
                 }
             }
         }
