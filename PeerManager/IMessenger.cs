@@ -4,7 +4,7 @@ using DataModel;
 namespace PeerManager
 {
     /*
-     * this interface formats messeges for the application to send accross the connection
+     * this interface formats messeges for the application to send accross the network connection
      */
     public interface IMessenger
     {

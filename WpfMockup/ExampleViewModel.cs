@@ -6,19 +6,23 @@ using PeerManager;
 
 namespace WpfMockup
 {
-    // Methods in this class are called by the message handler, updating the actions of p2p clients
+    // Methods in this class are called by the message handler, updating the actions of remote clients
     public class ExampleViewModel : INotifyPropertyChanged
     {
-        // Elements from the view are bound to these properties
-        public string InitName { get; set; } = "PlayerNameHere";
-        public string InitColor { get; set; } = "Color";
-        public string ChatHistory { get; set; } = "Welcome!\n";                     // textbox
+        /*
+         *
+         * Elements from the view are bound to these properties
+         *
+         */
+        public string InitName { get; set; } = "PlayerNameHere";                    // used for inital name setting
+        public string InitColor { get; set; } = "Color";                            // used for initial color setting
+        public string ChatHistory { get; set; } = "Welcome!\n";                     // chat textbox
         public ObservableCollection<PlayerData> PlayerList { get; set; }            // Collection of connected players
-        public int ThisPlayer { get; set; }
+        public int ThisPlayer { get; set; }                                         // index in PlayerList of this client
         
         public ExampleViewModel()
         {
-            PlayerList = new ObservableCollection<PlayerData>() {null, null, null, null, null};
+            PlayerList = new ObservableCollection<PlayerData> {null, null, null, null, null};
             UpdatePlayerData(0, true, "System", "");
             UpdatePlayerData(1, false, "Player1", "Pink");
             UpdatePlayerData(2, false, "Player2", "Blue");
@@ -28,8 +32,11 @@ namespace WpfMockup
             OnPropertyChanged(null);                    // null indicates OnPropertyChanged should update all properties
         }
 
-        
-
+        /*
+         *
+         *  The following methods update Properties for the gui
+         *
+         */
 
         public void DisplayChatMessage(int index, string text)
         {
@@ -41,20 +48,25 @@ namespace WpfMockup
         {
             PlayerList[index].Name = name;
             PlayerList[index].Color = color;
-            DisplayChatMessage(0, "Updated Player" + index);
+            OnPropertyChanged("PlayerList[" + index + "].Name");
+            OnPropertyChanged("PlayerList[" + index + "].Color");
         }
 
+        // 
         public void UpdatePlayerData(int index, bool isFull, string name, string color)
         {
             PlayerList[index] = new PlayerData(isFull, name, color, new Tile("grass", 0));
-            DisplayChatMessage(0, "Updated Player" + index);
+            OnPropertyChanged("PlayerList[" + index + "].Name");
+            OnPropertyChanged("PlayerList[" + index + "].Color");
         }
 
+        /*
+         *
+         *  The following methods enable remote client updates to be reflected locally
+         *
+         */
 
-
-
-
-
+        // establishes the identity of this client
         public void InitThisPlayer(int playerNum, string name, string color)
         {
             ThisPlayer = playerNum;
@@ -64,6 +76,7 @@ namespace WpfMockup
             OnPropertyChanged("ChatHistory");
         }
 
+        // message delegate determines what to do with inbound information
         public void ReceiveMessage(SerializedMessage message)
         {
             switch (message.Purpose)
@@ -90,7 +103,8 @@ namespace WpfMockup
             }
         }
 
-        // OnPropertyChanged must be called to tell a view bound to this implementation to get updated property
+        // INotifyPropertyChanged: 
+        // OnPropertyChanged must be called to tell a view bound to this implementation to get specified updated property
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {

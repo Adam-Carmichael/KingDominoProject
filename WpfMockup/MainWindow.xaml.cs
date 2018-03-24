@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using PeerManager;
 
 namespace WpfMockup
 {
-    // Main should only contain listeners and initializer, no data implementation
+    /*
+     * Main should only contain listeners and initializer, no data implementation
+     *
+     * This is still poor MVVC implementation!
+     * Listeners should activate ICommand instances, which would handle the implementation
+     * ICommands would then interact with the Messenger and ViewModel
+     */
 
     public partial class MainWindow : Window
     {
@@ -24,7 +29,7 @@ namespace WpfMockup
             InitializeComponent();
         }
 
-        // establish new session
+        // establish new session: create cnnection, start connection, and pass connection to handler
         private void NewSession_Clicked(object sender, RoutedEventArgs e)
         {
             _connection = Connection.CreateConnection(true);            // only difference true/false

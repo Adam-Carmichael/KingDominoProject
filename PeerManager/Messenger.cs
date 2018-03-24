@@ -3,9 +3,14 @@ using DataModel;
 
 namespace PeerManager
 {
+    /*
+     * see IMessenger
+     * implementation here works with WcfMockup
+     * implementation for Kingdomino will need to be created
+     */
     public class Messenger : IMessenger
     {
-        private readonly IPeerService _peerService;
+        private readonly IPeerService _peerService;     // network service
 
         public Messenger(IPeerService peerSvc)
         {

@@ -1,28 +1,35 @@
 ﻿using System;
 using System.ServiceModel;
-using System.Threading.Tasks;
 
 namespace PeerManager
 {
-    // context mode ensures only one instance of the service is created per process
+    /*
+     * ServiceBehavior defines the implementation of the ServiceContract
+     * Context mode ensures only one instance of the service is created per process
+     */
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class PeerService : IPeerService
     {
-        private readonly MessageDelegate _msgDelegate;
-        private readonly PeerSysDelegate _sysDelegate;
-        private readonly ServiceHost _host = null;
-        private readonly ChannelFactory<IPeerService> _channelFactory = null;
-        private IPeerService _channel;
+        private readonly MessageDelegate _msgDelegate;              // where to send messeges received for the game
+        private readonly PeerSysDelegate _sysDelegate;              // where to send messeges received while setting up the connection
+        private readonly ServiceHost _host = null;                  // this process
+        private readonly ChannelFactory<IPeerService> _channelFactory = null;       // creates channels that match the same interface as this
+        private IPeerService _channel;                              // where to send remote procedure calls
 
-        public Task ChannelOpen { get; private set; }
+        public PeerService() { }                                    // default constructor req'd for ServiceContract
 
-        public PeerService() { }
 
+        /*
+         * Construtor accepts two different delegates, one for game messages, one for connection setup
+         */
         public PeerService(MessageDelegate del, PeerSysDelegate sysDel)
         {
             _msgDelegate = del;
             _sysDelegate = sysDel;
+
+            // init the windows service host
             _host = new ServiceHost(this);
+            // init factory telling it to use a binding defined in app.config
             _channelFactory = new ChannelFactory<IPeerService>("KDPeerEndpoint");
         }
 
@@ -37,10 +44,8 @@ namespace PeerManager
 
             // open communication channel
             _channelFactory.Credentials.Peer.MeshPassword = password;
+            _channelFactory.Open();
             _channel = _channelFactory.CreateChannel();
-
-            ChannelOpen = Task.Factory.FromAsync(((ICommunicationObject) _channel).BeginOpen,
-                ((ICommunicationObject) _channel).EndOpen, null);
         }
 
         public void StopSvc()
@@ -63,7 +68,7 @@ namespace PeerManager
 
         public void ReceiveMessage(SerializedMessage message)
         {
-            // receive passes the message to the service caller
+            // receive passes the message from the network to its implementation
             _msgDelegate(message);
         }
 
@@ -71,13 +76,11 @@ namespace PeerManager
         {
             // send calls the receive method on each peer in the channel
             _channel.ReceiveSysMessage(message);
-            _channel.ReceiveMessage(new SerializedMessage(Purpose.Chat, 0) {Text = "Message sent"});
         }
 
         public void ReceiveSysMessage(PeerSysMessage message)
         {
-            // receive passes the message to the service caller
-            _channel.ReceiveMessage(new SerializedMessage(Purpose.Chat, 0) { Text = "Receiving Message" });
+            // receive passes the message from the network to its implementation
             _sysDelegate(message);
         }
     }
