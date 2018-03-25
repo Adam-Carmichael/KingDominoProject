@@ -35,8 +35,8 @@ namespace KingDomino
 
                     if (tempTile != null && tempTile.TileCrown > 0 && checkedTilePositions[i, j] == false)
                     {
-                        score += CheckConnectedLandscape(i, j, tempTile, checkedTilePositions);
-                        score *= tempTile.TileCrown;
+                        score += CheckConnectedLandscape(i, j, tempTile, checkedTilePositions) + tempTile.TileCrown;
+
                     }
 
                 }
@@ -96,8 +96,6 @@ namespace KingDomino
                     score += CheckConnectedLandscape(row, col + 1, eastTile, checkedTilePositions);
                 }
             }
-
-            //if ()
 
             return score;
         }
