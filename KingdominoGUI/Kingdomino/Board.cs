@@ -64,10 +64,7 @@ namespace KingDomino
                 {
                     score++;
                     checkedTilePositions[row - 1, col] = true;
-                    if (northTile.TileCrown == 0)
-                    {
-                        score += CheckConnectedLandscape(row - 1, col, northTile, checkedTilePositions);
-                    }
+                    score += CheckConnectedLandscape(row - 1, col, northTile, checkedTilePositions);
                 }
             }
 
@@ -79,10 +76,7 @@ namespace KingDomino
                 {
                     score++;
                     checkedTilePositions[row, col - 1] = true;
-                    if (westTile.TileCrown == 0)
-                    {
-                        score += CheckConnectedLandscape(row, col - 1, westTile, checkedTilePositions);
-                    }
+                    score += CheckConnectedLandscape(row, col - 1, westTile, checkedTilePositions);
                 }
             }
 
@@ -94,10 +88,8 @@ namespace KingDomino
                 {
                     score++;
                     checkedTilePositions[row + 1, col] = true;
-                    if (southTile.TileCrown == 0)
-                    {
-                        score += CheckConnectedLandscape(row + 1, col, southTile, checkedTilePositions);
-                    }
+                    score += CheckConnectedLandscape(row + 1, col, southTile, checkedTilePositions);
+
                 }
 
             }
@@ -110,10 +102,7 @@ namespace KingDomino
                 {
                     score++;
                     checkedTilePositions[row, col + 1] = true;
-                    if (eastTile.TileCrown == 0)
-                    {
-                        score += CheckConnectedLandscape(row, col + 1, eastTile, checkedTilePositions);
-                    }
+                    score += CheckConnectedLandscape(row, col + 1, eastTile, checkedTilePositions);
                 }
             }
 

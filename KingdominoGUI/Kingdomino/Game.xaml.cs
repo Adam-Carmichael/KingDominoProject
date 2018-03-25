@@ -691,7 +691,8 @@ namespace KingDomino
                     ShowBoardButtons();
                     pick = 0;
 
-                    Score.Text = "Score: " + player1Board.CalculateScore().ToString();
+                    CalculateScores();
+                    Score.Text = "Score: " + player1Score.ToString();
                 }
             }
         }
@@ -1798,12 +1799,11 @@ namespace KingDomino
         // Calculate score method
         private void CalculateScores()
         {
-            this.player1Score = player1Board.CalculateScore();
-            Score.Text = "Score: " + player1Score.ToString();
 
-            this.player2Score = 0;
-            this.player3Score = 0;
-            this.player4Score = 0;
+            this.player1Score = player1Board.CalculateScore();
+            this.player2Score = player2Board.CalculateScore();
+            this.player3Score = player3Board.CalculateScore();
+            this.player4Score = player4Board.CalculateScore();
         }
 
         private void Board_Click(object sender, RoutedEventArgs e)
