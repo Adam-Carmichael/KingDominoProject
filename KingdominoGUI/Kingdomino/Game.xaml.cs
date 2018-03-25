@@ -1798,7 +1798,9 @@ namespace KingDomino
         // Calculate score method
         private void CalculateScores()
         {
-            this.player1Score = 0;
+            this.player1Score = player1Board.CalculateScore();
+            Score.Text = "Score: " + player1Score.ToString();
+
             this.player2Score = 0;
             this.player3Score = 0;
             this.player4Score = 0;
