@@ -19,23 +19,24 @@ namespace KingDomino
         public Board(String color)
         {
             this.playBoard = new Tile[5, 5];
-            this.playBoard[2,2] = new Tile(originCastlePath + color + ".png", "Origin", 0);
+            this.playBoard[2, 2] = new Tile(originCastlePath + color + ".png", "Origin", 0);
         }
 
         public int CalculateScore()
         {
             int score = 0;
-            Boolean[,] checkedTilePositions = new Boolean[5,5];
+            Boolean[,] checkedTilePositions = new Boolean[5, 5];
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
                     Tile tempTile = PlayBoard[i, j];
+
                     if (tempTile != null && tempTile.TileCrown > 0 && checkedTilePositions[i, j] == false)
                     {
                         score += CheckConnectedLandscape(i, j, tempTile, checkedTilePositions);
                     }
-                    
+
                 }
             }
 
@@ -44,14 +45,17 @@ namespace KingDomino
 
         private int CheckConnectedLandscape(int row, int col, Tile tile, Boolean[,] checkedTilePositions)
         {
-
+            int crowns = 0;
             int score = 0;
 
             if (row >= 1)
             {
-                if (PlayBoard[row - 1, col] != null && PlayBoard[row - 1, col].TileType == tile.TileType)
+                if (PlayBoard[row - 1, col] != null && PlayBoard[row - 1, col].TileType.Equals(tile.TileType))
                 {
+                    crowns += CheckIfTileHasCrowns(row - 1, col);
+
                     score++;
+
                     checkedTilePositions[row - 1, col] = true;
                     score += CheckConnectedLandscape(row - 1, col, PlayBoard[row - 1, col], checkedTilePositions);
                 }
@@ -59,23 +63,55 @@ namespace KingDomino
 
             if (col >= 1)
             {
-                if (PlayBoard[row, col - 1] != null && PlayBoard[row, col-1].TileType == tile.TileType)
+                if (PlayBoard[row, col - 1] != null && PlayBoard[row, col - 1].TileType.Equals(tile.TileType))
                 {
+                    crowns += CheckIfTileHasCrowns(row, col - 1);
+
                     score++;
+
                     score += CheckConnectedLandscape(row, col - 1, PlayBoard[row, col - 1], checkedTilePositions);
                 }
             }
 
-            if ()
+            if (row <= 4)
+            {
+                if (PlayBoard[row + 1, col] != null && PlayBoard[row + 1, col].TileType.Equals(tile.TileType))
+                {
+                    crowns += CheckIfTileHasCrowns(row + 1, col);
 
-            return score;
+                    score++;
+
+                    score += CheckConnectedLandscape(row + 1, col, PlayBoard[row + 1, col], checkedTilePositions);
+                }
+
+            }
+
+            if (col <= 4)
+            {
+                if (PlayBoard[row, col - 1] != null && PlayBoard[row, col + 1].TileType.Equals(tile.TileType))
+                {
+                    crowns += CheckIfTileHasCrowns(row, col + 1);
+
+                    score++;
+
+                    score += CheckConnectedLandscape(row, col - 1, PlayBoard[row, col - 1], checkedTilePositions);
+                }
+            }
+
+            return score * crowns;
+        }
+
+        public int CheckIfTileHasCrowns(int row, int col)
+        {
+
+            return playBoard[row, col].TileCrown;
         }
 
         public Tile GetOrigin()
         {
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for(int j = 0; j < 5; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     if (this.playBoard[i, j] != null)
                     {
@@ -91,7 +127,7 @@ namespace KingDomino
 
         public void Add(Tile tile, int i, int j)
         {
-            this.playBoard[i,j] = tile;
+            this.playBoard[i, j] = tile;
         }
     }
 }
