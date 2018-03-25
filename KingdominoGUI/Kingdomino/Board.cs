@@ -24,25 +24,32 @@ namespace KingDomino
 
         public int CalculateScore()
         {
-            int score = 0;
-            Boolean[,] checkedTilePositions = new Boolean[5, 5];
+            int totalScore = 0;
 
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
                     Tile tempTile = PlayBoard[i, j];
+                    Boolean[,] checkedTilePositions = new Boolean[5, 5];
 
                     if (tempTile != null && tempTile.TileCrown > 0 && checkedTilePositions[i, j] == false)
                     {
-                        score += CheckConnectedLandscape(i, j, tempTile, checkedTilePositions) + tempTile.TileCrown;
+                        checkedTilePositions[i, j] = true;
+
+                        int tempLandscapeScore = 1;
+
+                        tempLandscapeScore += CheckConnectedLandscape(i, j, tempTile, checkedTilePositions);
+                        tempLandscapeScore *= tempTile.TileCrown;
+
+                        totalScore += tempLandscapeScore;
 
                     }
 
                 }
             }
 
-            return score;
+            return totalScore;
         }
 
         private int CheckConnectedLandscape(int row, int col, Tile tile, Boolean[,] checkedTilePositions)
@@ -52,35 +59,45 @@ namespace KingDomino
             if (row >= 1)
             {
                 Tile northTile = PlayBoard[row - 1, col];
+
                 if (northTile != null && northTile.TileType.Equals(tile.TileType) && checkedTilePositions[row - 1, col] == false)
                 {
-
                     score++;
-
                     checkedTilePositions[row - 1, col] = true;
-                    score += CheckConnectedLandscape(row - 1, col, northTile, checkedTilePositions);
+                    if (northTile.TileCrown == 0)
+                    {
+                        score += CheckConnectedLandscape(row - 1, col, northTile, checkedTilePositions);
+                    }
                 }
             }
 
             if (col >= 1)
             {
                 Tile westTile = PlayBoard[row, col - 1];
+
                 if (westTile != null && westTile.TileType.Equals(tile.TileType) && checkedTilePositions[row, col - 1] == false)
                 {
                     score++;
-
-                    score += CheckConnectedLandscape(row, col - 1, westTile, checkedTilePositions);
+                    checkedTilePositions[row, col - 1] = true;
+                    if (westTile.TileCrown == 0)
+                    {
+                        score += CheckConnectedLandscape(row, col - 1, westTile, checkedTilePositions);
+                    }
                 }
             }
 
             if (row < 4)
             {
                 Tile southTile = PlayBoard[row + 1, col];
+
                 if (southTile != null && southTile.TileType.Equals(tile.TileType) && checkedTilePositions[row + 1, col] == false)
                 {
                     score++;
-
-                    score += CheckConnectedLandscape(row + 1, col, southTile, checkedTilePositions);
+                    checkedTilePositions[row + 1, col] = true;
+                    if (southTile.TileCrown == 0)
+                    {
+                        score += CheckConnectedLandscape(row + 1, col, southTile, checkedTilePositions);
+                    }
                 }
 
             }
@@ -88,22 +105,19 @@ namespace KingDomino
             if (col < 4)
             {
                 Tile eastTile = PlayBoard[row, col + 1];
+
                 if (eastTile != null && eastTile.TileType.Equals(tile.TileType) && checkedTilePositions[row, col + 1] == false)
                 {
-
                     score++;
-
-                    score += CheckConnectedLandscape(row, col + 1, eastTile, checkedTilePositions);
+                    checkedTilePositions[row, col + 1] = true;
+                    if (eastTile.TileCrown == 0)
+                    {
+                        score += CheckConnectedLandscape(row, col + 1, eastTile, checkedTilePositions);
+                    }
                 }
             }
 
             return score;
-        }
-
-        public int CheckIfTileHasCrowns(int row, int col, Tile tile)
-        {
-
-            return playBoard[row, col].TileCrown;
         }
 
         public Tile GetOrigin()
