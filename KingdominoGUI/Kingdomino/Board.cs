@@ -33,7 +33,7 @@ namespace KingDomino
                     Tile tempTile = PlayBoard[i, j];
                     Boolean[,] checkedTilePositions = new Boolean[5, 5];
 
-                    if (tempTile != null && tempTile.TileCrown > 0 && checkedTilePositions[i, j] == false)
+                    if (tempTile != null && tempTile.TileCrown > 0)
                     {
                         checkedTilePositions[i, j] = true;
 
