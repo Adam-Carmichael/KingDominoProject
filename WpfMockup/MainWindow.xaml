@@ -11,11 +11,11 @@
         <TextBox x:Name="InputBox" HorizontalAlignment="Left" Height="60" Margin="434,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" KeyDown="InputBox_KeyDown"/>
         <TextBox x:Name="OutputBox" HorizontalAlignment="Left" Height="290" Margin="434,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" IsTabStop="False" Focusable="False" VerticalScrollBarVisibility="Visible" Text="{Binding ChatHistory}"/>
 
-        <Label x:Name="LblUserName" Content="Your Name:" HorizontalAlignment="Left" Margin="96,2,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="PlayerNameBox" HorizontalAlignment="Left" Height="23" Margin="97,34,0,0" TextWrapping="Wrap" Text="{Binding InitName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" />
+        <Label x:Name="LblUserName" Content="Your Name:" HorizontalAlignment="Left" Margin="96,2,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="PlayerNameBox" HorizontalAlignment="Left" Height="23" Margin="97,34,0,0" TextWrapping="Wrap" Text="{Binding InitName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Visibility="Hidden" />
 
-        <Label x:Name="LblUserColor" Content="Your Color:" HorizontalAlignment="Left" Margin="221,3,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="PlayerColorBox" HorizontalAlignment="Left" Height="23" Margin="221,33,0,0" TextWrapping="Wrap" Text="{Binding InitColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" TextChanged="PlayerColorBox_TextChanged" />
+        <Label x:Name="LblUserColor" Content="Your Color:" HorizontalAlignment="Left" Margin="221,3,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="PlayerColorBox" HorizontalAlignment="Left" Height="23" Margin="221,33,0,0" TextWrapping="Wrap" Text="{Binding InitColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Visibility="Hidden" />
 
         <Label x:Name="LblP1ColorName" Content="{Binding PlayerList[1].Name}" HorizontalAlignment="Left" Margin="80,352,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblP2ColorName" Content="{Binding PlayerList[2].Name}" HorizontalAlignment="Left" Margin="80,383,0,0" VerticalAlignment="Top"/>
@@ -28,15 +28,17 @@
 
         <Button x:Name="BtnNewSession" Content="Start New" HorizontalAlignment="Left" Margin="337,117,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="NewSession_Clicked"/>
         <Button x:Name="BtnConnect" Content="Connect" HorizontalAlignment="Left" Margin="337,226,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="Connect_Clicked"/>
+        <Button x:Name="BtnJoin" Content="Join" HorizontalAlignment="Left" Margin="337,226,0,0" VerticalAlignment="Top" Width="75" Height="38" Click="Join_Clicked" Visibility="Hidden"/>
+
         <Label Content="First Instance instructions:" HorizontalAlignment="Left" Margin="4,60,0,0" VerticalAlignment="Top"/>
-        <Label Content="1: Enter a name and color above" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
-        <Label Content="2: Click Start New to the right" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
+        <Label Content="1: Click Start New to the right" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
+        <Label Content="2: Enter a name and color above, then click Join" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
         <Label Content="3: Information below will update with your entries" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top"/>
         <Label Content="4: Start a second instance of the application" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top"/>
         <Label Content="Note: complete First Instance instructions" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"/>
         <Label Content="Second Instance instructions:" HorizontalAlignment="Left" Margin="6,194,0,0" VerticalAlignment="Top"/>
-        <Label Content="1: Enter a name and color above" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
-        <Label Content="2: Click Connect to the right" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top"/>
+        <Label Content="1: Click Connect to the right" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
+        <Label Content="2: Enter a name and color above, then click Join" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top"/>
         <Label Content="3: Information below will update with all player's info on both Instances" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top"/>
         <Label Content="4: Chat messages will be sent between Instances" HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top"/>
         <Label Content="Chat History:" HorizontalAlignment="Left" Margin="434,10,0,0" VerticalAlignment="Top"/>

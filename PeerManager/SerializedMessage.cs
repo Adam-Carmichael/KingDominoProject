@@ -21,6 +21,10 @@ namespace PeerManager
     [DataContract]
     public enum Purpose
     {
+        [EnumMember(Value = "sys")]
+        System,
+        [EnumMember(Value = "query")]
+        Query,
         [EnumMember(Value = "init")]
         Init,
         [EnumMember(Value = "player")]
@@ -34,7 +38,7 @@ namespace PeerManager
         [EnumMember(Value = "tile")]
         Tile
     }
-    
+
     [DataContract]
     public class SerializedMessage
     {
@@ -46,7 +50,7 @@ namespace PeerManager
         // the constructor properties are the only fields required for every message
         public SerializedMessage(Purpose purpose, int index)
         {
-            Purpose = purpose;      // what this message says
+            Purpose = purpose;      // what this message is for
             PeerId = index;         // who it is from
         }
 

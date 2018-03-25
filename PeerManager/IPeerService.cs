@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceModel;
-using System.Threading.Tasks;
 
 namespace PeerManager
 {
@@ -20,7 +19,7 @@ namespace PeerManager
 
         [OperationContract(IsOneWay = true)]
         void ReceiveMessage(SerializedMessage message);
-
+        
         void SendSysMessage(PeerSysMessage message);
 
         [OperationContract(IsOneWay = true)]

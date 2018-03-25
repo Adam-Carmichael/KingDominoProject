@@ -12,11 +12,17 @@ namespace PeerManager
         // the player number, 1-4.
         // 1 is the "host" or first player to run the application
         // 0 is "System"
-        public int PeerID;
+        protected int PeerId;
+        protected IPeerService PeerService;
 
-        // start establishes then returns the peer service implementation
-        // TODO possibly move start implementations to constructors
-        public abstract IPeerService Start(MessageDelegate del);
+        // start establishes communication with other peers
+        public abstract void Start();
+
+        // pass-through: from messenger to peer service
+        public void Send(SerializedMessage message)
+        {
+            PeerService.SendMessage(message);
+        }
 
         // delegate method for messages assisting the connection process
         protected abstract void SystemMessageHandler(PeerSysMessage message);
@@ -25,12 +31,12 @@ namespace PeerManager
 
         // factory
         // TODO expand factory to decide which connection type to return based on presence on the network
-        public static Connection CreateConnection(bool host)
+        public static Connection CreateConnection(bool host, MessageDelegate del)
         {
             if (host)
-                return new HostConnection();
+                return new HostConnection(del);
             else
-                return new PeerConnection();
+                return new ClientConnection(del);
         }
     }
 }

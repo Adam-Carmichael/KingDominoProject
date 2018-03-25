@@ -17,8 +17,7 @@ namespace PeerManager
         private IPeerService _channel;                              // where to send remote procedure calls
 
         public PeerService() { }                                    // default constructor req'd for ServiceContract
-
-
+        
         /*
          * Construtor accepts two different delegates, one for game messages, one for connection setup
          */
@@ -71,7 +70,7 @@ namespace PeerManager
             // receive passes the message from the network to its implementation
             _msgDelegate(message);
         }
-
+        
         public void SendSysMessage(PeerSysMessage message)
         {
             // send calls the receive method on each peer in the channel

@@ -10,11 +10,16 @@ namespace PeerManager
      */
     public class Messenger : IMessenger
     {
-        private readonly IPeerService _peerService;     // network service
+        private readonly Connection _connection;     // network service
 
-        public Messenger(IPeerService peerSvc)
+        public Messenger(bool host, MessageDelegate del)
         {
-            _peerService = peerSvc;
+            _connection = Connection.CreateConnection(host, del);
+        }
+
+        public void Start()
+        {
+            _connection.Start();
         }
 
         public void SendChatMessage(int id, string text)
@@ -23,7 +28,7 @@ namespace PeerManager
             {
                 Text = text
             };
-            _peerService.SendMessage(data);
+            _connection.Send(data);
         }
 
         public void SendPlaceTile(int id, int x, int y, Tile tile)
@@ -48,7 +53,7 @@ namespace PeerManager
                 PlayerName = update.Name,
                 Color = update.Color
             };
-            _peerService.SendMessage(data);
+            _connection.Send(data);
         }
     }
 }

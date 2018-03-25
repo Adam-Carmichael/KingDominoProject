@@ -9,6 +9,7 @@ namespace WpfMockup
     // Methods in this class are called by the message handler, updating the actions of remote clients
     public class ExampleViewModel : INotifyPropertyChanged
     {
+        private IMessenger _msgHandler;
         /*
          *
          * Elements from the view are bound to these properties
@@ -28,8 +29,12 @@ namespace WpfMockup
             UpdatePlayerData(2, false, "Player2", "Blue");
             UpdatePlayerData(3, false, "Player3", "Green");
             UpdatePlayerData(4, false, "Player4", "Yellow");
+        }
 
-            OnPropertyChanged(null);                    // null indicates OnPropertyChanged should update all properties
+        public IMessenger InitComm(bool host)
+        {
+            _msgHandler = new Messenger(host, ReceiveMessage);
+            return _msgHandler;
         }
 
         /*
@@ -72,6 +77,7 @@ namespace WpfMockup
             ThisPlayer = playerNum;
             PlayerList[ThisPlayer].IsOccupied = true;
             UpdatePlayerData(playerNum, true, name, color);
+            _msgHandler.SendPlayerUpdate(ThisPlayer, PlayerList[ThisPlayer]);
             ChatHistory += String.Format("Hi, {0}! You have joined as Player {1}\n", name, playerNum);
             OnPropertyChanged("ChatHistory");
         }
@@ -81,6 +87,9 @@ namespace WpfMockup
         {
             switch (message.Purpose)
             {
+                case Purpose.Query:
+                    _msgHandler.SendPlayerUpdate(message.PeerId, PlayerList[message.PeerId]);
+                    break;
                 case Purpose.Init:
                     ThisPlayer = message.PeerId;
                     InitThisPlayer(ThisPlayer, InitName, InitColor);

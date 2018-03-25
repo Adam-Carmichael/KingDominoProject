@@ -8,6 +8,8 @@ namespace PeerManager
      */
     public interface IMessenger
     {
+        void Start();
+
         void SendChatMessage(int id, string text);
 
         void SendPlaceTile(int id, int x, int y, Tile tile);
