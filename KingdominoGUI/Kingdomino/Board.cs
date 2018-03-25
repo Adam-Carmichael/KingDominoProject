@@ -56,57 +56,37 @@ namespace KingDomino
         {
             int score = 0;
 
-            if (row >= 1)
-            {
-                Tile northTile = PlayBoard[row - 1, col];
+            Boolean north = row > 0;
+            Boolean west = col > 0;
+            Boolean south = row < 4;
+            Boolean east = col < 4;
 
-                if (northTile != null && northTile.TileType.Equals(tile.TileType) && checkedTilePositions[row - 1, col] == false)
+            score += CheckDirection(north, row - 1, col, tile, checkedTilePositions);
+            score += CheckDirection(west, row, col - 1, tile, checkedTilePositions);
+            score += CheckDirection(south, row + 1, col, tile, checkedTilePositions);
+            score += CheckDirection(east, row, col + 1, tile, checkedTilePositions);
+
+            return score;
+        }
+
+        public int CheckDirection(Boolean direction, int row, int col, Tile tile, Boolean[,] checkedTilePositions)
+        {
+            int score = 0;
+
+            if (direction)
+            {
+                Tile tempTile = PlayBoard[row, col];
+
+                if (tempTile != null && tempTile.TileType.Equals(tile.TileType) && !checkedTilePositions[row, col])
                 {
                     score++;
-                    checkedTilePositions[row - 1, col] = true;
-                    score += CheckConnectedLandscape(row - 1, col, northTile, checkedTilePositions);
-                }
-            }
-
-            if (col >= 1)
-            {
-                Tile westTile = PlayBoard[row, col - 1];
-
-                if (westTile != null && westTile.TileType.Equals(tile.TileType) && checkedTilePositions[row, col - 1] == false)
-                {
-                    score++;
-                    checkedTilePositions[row, col - 1] = true;
-                    score += CheckConnectedLandscape(row, col - 1, westTile, checkedTilePositions);
-                }
-            }
-
-            if (row < 4)
-            {
-                Tile southTile = PlayBoard[row + 1, col];
-
-                if (southTile != null && southTile.TileType.Equals(tile.TileType) && checkedTilePositions[row + 1, col] == false)
-                {
-                    score++;
-                    checkedTilePositions[row + 1, col] = true;
-                    score += CheckConnectedLandscape(row + 1, col, southTile, checkedTilePositions);
-
-                }
-
-            }
-
-            if (col < 4)
-            {
-                Tile eastTile = PlayBoard[row, col + 1];
-
-                if (eastTile != null && eastTile.TileType.Equals(tile.TileType) && checkedTilePositions[row, col + 1] == false)
-                {
-                    score++;
-                    checkedTilePositions[row, col + 1] = true;
-                    score += CheckConnectedLandscape(row, col + 1, eastTile, checkedTilePositions);
+                    checkedTilePositions[row, col] = true;
+                    score += CheckConnectedLandscape(row, col, tempTile, checkedTilePositions);
                 }
             }
 
             return score;
+
         }
 
         public Tile GetOrigin()
