@@ -84,7 +84,7 @@ namespace KingDomino
             return score;
         }
 
-        public int CheckDirection(int row, int col, Tile tile, Boolean[,] checkedTilePositions)
+        private int CheckDirection(int row, int col, Tile tile, Boolean[,] checkedTilePositions)
         {
             int score = 0;
 
