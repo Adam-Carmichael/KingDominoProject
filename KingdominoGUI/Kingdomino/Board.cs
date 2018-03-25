@@ -61,32 +61,43 @@ namespace KingDomino
             Boolean south = row < 4;
             Boolean east = col < 4;
 
-            score += CheckDirection(north, row - 1, col, tile, checkedTilePositions);
-            score += CheckDirection(west, row, col - 1, tile, checkedTilePositions);
-            score += CheckDirection(south, row + 1, col, tile, checkedTilePositions);
-            score += CheckDirection(east, row, col + 1, tile, checkedTilePositions);
+            if (north)
+            {
+                score += CheckDirection(row - 1, col, tile, checkedTilePositions);
+            }
+
+            if (west)
+            {
+                score += CheckDirection(row, col - 1, tile, checkedTilePositions);
+            }
+
+            if (south)
+            {
+                score += CheckDirection(row + 1, col, tile, checkedTilePositions);
+            }
+
+            if (east)
+            {
+                score += CheckDirection(row, col + 1, tile, checkedTilePositions);
+            }
 
             return score;
         }
 
-        public int CheckDirection(Boolean direction, int row, int col, Tile tile, Boolean[,] checkedTilePositions)
+        public int CheckDirection(int row, int col, Tile tile, Boolean[,] checkedTilePositions)
         {
             int score = 0;
 
-            if (direction)
-            {
-                Tile tempTile = PlayBoard[row, col];
+            Tile tempTile = PlayBoard[row, col];
 
-                if (tempTile != null && tempTile.TileType.Equals(tile.TileType) && !checkedTilePositions[row, col])
-                {
-                    score++;
-                    checkedTilePositions[row, col] = true;
-                    score += CheckConnectedLandscape(row, col, tempTile, checkedTilePositions);
-                }
+            if (tempTile != null && tempTile.TileType.Equals(tile.TileType) && !checkedTilePositions[row, col])
+            {
+                score++;
+                checkedTilePositions[row, col] = true;
+                score += CheckConnectedLandscape(row, col, tempTile, checkedTilePositions);
             }
 
             return score;
-
         }
 
         public Tile GetOrigin()
