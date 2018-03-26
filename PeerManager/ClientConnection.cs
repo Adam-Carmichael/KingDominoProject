@@ -42,6 +42,7 @@ namespace PeerManager
                     // there are already 4 players:
                     // TODO implement notification of full game and gracefully exit
                     // maybe throw custom 'FullGameException' to be caught by application?
+                    PeerService.ReceiveMessage(new SerializedMessage(Purpose.Chat, 0) {Text = "Connection Request Denied"});
                     break;
             }
         }

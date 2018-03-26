@@ -56,7 +56,7 @@ namespace PeerManager
                      * Another way would be preferred to get commands up a level or tier
                      *            ^ without circular dependency
                      */
-                    for (int i = 1; i < PeerId; i++)
+                    for (int i = 1; i < PeerCount; i++)
                         PeerService.ReceiveMessage(new SerializedMessage(Purpose.Query, i));
                 }
             }
