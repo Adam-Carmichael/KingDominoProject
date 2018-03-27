@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PeerManager" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PeerManager" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="SerializedMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Crowns" type="xs:int" />
+      <xs:element minOccurs="0" name="Domino" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Dominos" nillable="true" type="q1:ArrayOfint" />
+      <xs:element minOccurs="0" name="PeerId" type="xs:int" />
+      <xs:element minOccurs="0" name="PlayerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Purpose" type="tns:Purpose" />
+      <xs:element minOccurs="0" name="Terrain" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Xcoord" type="xs:int" />
+      <xs:element minOccurs="0" name="Ycoord" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SerializedMessage" nillable="true" type="tns:SerializedMessage" />
+  <xs:simpleType name="Purpose">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="sys" />
+      <xs:enumeration value="query" />
+      <xs:enumeration value="init" />
+      <xs:enumeration value="player" />
+      <xs:enumeration value="chat" />
+      <xs:enumeration value="deal" />
+      <xs:enumeration value="select" />
+      <xs:enumeration value="tile" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Purpose" nillable="true" type="tns:Purpose" />
+  <xs:complexType name="PeerSysMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PeerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Purpose" type="tns:SysMsg" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PeerSysMessage" nillable="true" type="tns:PeerSysMessage" />
+  <xs:simpleType name="SysMsg">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hi" />
+      <xs:enumeration value="assn" />
+      <xs:enumeration value="deny" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SysMsg" nillable="true" type="tns:SysMsg" />
+</xs:schema>

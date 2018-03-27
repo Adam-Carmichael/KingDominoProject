@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2e34c3b3-c865-4538-9ea5-458a1a1245fa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/PeerManager/PeerService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="73486c6b-5926-4e18-9c54-8f164a7b3cf4" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PeerManager/PeerService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9f14d302-d4eb-45ad-a4fc-78a1b627a91d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PeerManager/PeerService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="1cc9bbbf-decc-4f70-a6a1-c63a921fb70e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PeerManager/PeerService/mex" />
+    <MetadataFile FileName="PeerManager.xsd" MetadataType="Schema" ID="f038e29f-12f3-4216-aefb-1e7deb150520" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PeerManager/PeerService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="c807d90c-72e3-46ca-a33c-7b9d1e8fa90f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PeerManager/PeerService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
