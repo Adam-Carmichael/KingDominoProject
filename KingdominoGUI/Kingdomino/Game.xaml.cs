@@ -21,22 +21,18 @@ namespace KingDomino
     {
         private Board player1Board;
         private Tile player1Origin;
-        private int player1Score;
         private Domino player1Chosen;
 
         private Board player2Board;
         private Tile player2Origin;
-        private int player2Score;
         private Domino player2Chosen;
 
         private Board player3Board;
         private Tile player3Origin;
-        private int player3Score;
         private Domino player3Chosen;
 
         private Board player4Board;
         private Tile player4Origin;
-        private int player4Score;
         private Domino player4Chosen;
 
         private DominoHolder dominoHolder = new DominoHolder();
@@ -67,22 +63,20 @@ namespace KingDomino
         {
             player1Board = new Board("blue");
             player1Origin = player1Board.GetOrigin();
-            player1Score = 0;
-            Score.Text += player1Score;
             player2Board = new Board("green");
             player2Origin = player2Board.GetOrigin();
-            player2Score = 0;
             player3Board = new Board("pink");
             player3Origin = player3Board.GetOrigin();
-            player3Score = 0;
             player4Board = new Board("yellow");
             player4Origin = player4Board.GetOrigin();
-            player4Score = 0;
+            RefreshBoard(player1Board);
         }
 
         // This method generates a players board. Can be used when switching between player boards
         private void RefreshBoard(Board board)
         {
+            CalculateScores();
+            Score.Text = "Score: " + board.Score;
             OneOne.Source = null;
             OneTwo.Source = null;
             OneThree.Source = null;
@@ -690,9 +684,6 @@ namespace KingDomino
                     RefreshBoard(player1Board);
                     ShowBoardButtons();
                     pick = 0;
-
-                    CalculateScores();
-                    Score.Text = "Score: " + player1Score.ToString();
                 }
             }
         }
@@ -1799,11 +1790,10 @@ namespace KingDomino
         // Calculate score method
         private void CalculateScores()
         {
-
-            this.player1Score = player1Board.CalculateScore();
-            this.player2Score = player2Board.CalculateScore();
-            this.player3Score = player3Board.CalculateScore();
-            this.player4Score = player4Board.CalculateScore();
+            player1Board.CalculateScore();
+            player2Board.CalculateScore();
+            player3Board.CalculateScore();
+            player4Board.CalculateScore();
         }
 
         private void Board_Click(object sender, RoutedEventArgs e)

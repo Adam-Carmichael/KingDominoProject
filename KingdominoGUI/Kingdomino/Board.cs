@@ -9,6 +9,12 @@ namespace KingDomino
 {
     class Board
     {
+
+        private int score;
+        public int Score
+        {
+            get { return score; }
+        }
         private Tile[,] playBoard;
         public Tile[,] PlayBoard
         {
@@ -20,9 +26,10 @@ namespace KingDomino
         {
             this.playBoard = new Tile[5, 5];
             this.playBoard[2, 2] = new Tile(originCastlePath + color + ".png", "Origin", 0);
+            this.score = 0;
         }
 
-        public int CalculateScore()
+        public void CalculateScore()
         {
             int totalScore = 0;
 
@@ -49,7 +56,7 @@ namespace KingDomino
                 }
             }
 
-            return totalScore;
+            this.score = totalScore;
         }
 
         private int CheckConnectedLandscape(int row, int col, Tile tile, Boolean[,] checkedTilePositions)
