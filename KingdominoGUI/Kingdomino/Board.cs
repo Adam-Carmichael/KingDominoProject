@@ -15,13 +15,22 @@ namespace KingDomino
         {
             get { return score; }
         }
+        public Domino chosen;
+        public Domino Chosen
+        {
+            get { return chosen; }
+            set { chosen = value; }
+        }
+
         private Tile[,] playBoard;
         public Tile[,] PlayBoard
         {
             get { return playBoard; }
             set { playBoard = value; }
         }
+
         private String originCastlePath = "Resources/OriginCastle/";
+
         public Board(String color)
         {
             this.playBoard = new Tile[5, 5];
