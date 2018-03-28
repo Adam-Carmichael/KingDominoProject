@@ -44,11 +44,6 @@
         <Image x:Name= "SelectedDomino" HorizontalAlignment="Left" Height="55" Margin="265,315,0,0" VerticalAlignment="Top" Width="110"/>
         <Button x:Name="SelectTile1Button" Content="Tile1" HorizontalAlignment="Left" Margin="265,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
         <Button x:Name="SelectTile2Button" Content="Tile2" HorizontalAlignment="Left" Margin="320,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
-      
-        <Image x:Name="Meeple1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55"/>
-        <Image x:Name="Meeple2" HorizontalAlignment="Left" Height="55" Margin="177,85,0,0" VerticalAlignment="Top" Width="55"/>
-        <Image x:Name="Meeple3" HorizontalAlignment="Left" Height="55" Margin="320,85,0,0" VerticalAlignment="Top" Width="55"/>
-        <Image x:Name="Meeple4" HorizontalAlignment="Left" Height="55" Margin="467,85,0,0" VerticalAlignment="Top" Width="55"/>
         
         <Image x:Name= "OneOne" HorizontalAlignment="Left" Height="55" Margin="140,610,0,0" VerticalAlignment="Top" Width="55"/>
         <Image x:Name= "OneTwo" HorizontalAlignment="Left" Height="55" Margin="140,555,0,0" VerticalAlignment="Top" Width="55"/>
@@ -110,6 +105,11 @@
         <Button x:Name="FiveFourButton" Content="5/4" HorizontalAlignment="Left" Margin="360,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
         <Button x:Name="FiveFiveButton" Content="5/5" HorizontalAlignment="Left" Margin="360,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
         <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="23,303,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="33" Width="83"/>
+      
+        <Image x:Name="MeepleChoice1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
+        <Image x:Name="MeepleChoice2" HorizontalAlignment="Left" Height="55" Margin="177,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
+        <Image x:Name="MeepleChoice3" HorizontalAlignment="Left" Height="55" Margin="320,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
+        <Image x:Name="MeepleChoice4" HorizontalAlignment="Left" Height="55" Margin="471,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
 
     </Grid>
 </Window>
