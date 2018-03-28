@@ -44,7 +44,12 @@
         <Image x:Name= "SelectedDomino" HorizontalAlignment="Left" Height="55" Margin="265,315,0,0" VerticalAlignment="Top" Width="110"/>
         <Button x:Name="SelectTile1Button" Content="Tile1" HorizontalAlignment="Left" Margin="265,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
         <Button x:Name="SelectTile2Button" Content="Tile2" HorizontalAlignment="Left" Margin="320,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
-
+      
+        <Image x:Name="Meeple1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name="Meeple2" HorizontalAlignment="Left" Height="55" Margin="177,85,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name="Meeple3" HorizontalAlignment="Left" Height="55" Margin="320,85,0,0" VerticalAlignment="Top" Width="55"/>
+        <Image x:Name="Meeple4" HorizontalAlignment="Left" Height="55" Margin="467,85,0,0" VerticalAlignment="Top" Width="55"/>
+        
         <Image x:Name= "OneOne" HorizontalAlignment="Left" Height="55" Margin="140,610,0,0" VerticalAlignment="Top" Width="55"/>
         <Image x:Name= "OneTwo" HorizontalAlignment="Left" Height="55" Margin="140,555,0,0" VerticalAlignment="Top" Width="55"/>
         <Image x:Name= "OneThree" HorizontalAlignment="Left" Height="55" Margin="140,500,0,0" VerticalAlignment="Top" Width="55"/>

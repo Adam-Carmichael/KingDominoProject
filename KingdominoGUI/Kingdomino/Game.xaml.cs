@@ -1745,35 +1745,43 @@ namespace KingDomino
         {
             if (sender.Equals(Choose1))
             {
-                player1Chosen = domino5;
+                player1Board.chosen = domino5;
                 HideSelectDominoButtons();
-                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Board.chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Board.chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Board.chosen.DominoBack, UriKind.Relative));
+
+                MeepleChoice1.Visibility = Visibility.Visible;
             }
-            if(sender.Equals(Choose2))
+            if (sender.Equals(Choose2))
             {
-                player1Chosen = domino6;
+                player1Board.chosen = domino6;
                 HideSelectDominoButtons();
-                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Board.chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Board.chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Board.chosen.DominoBack, UriKind.Relative));
+
+                MeepleChoice2.Visibility = Visibility.Visible;
             }
             if (sender.Equals(Choose3))
             {
-                player1Chosen = domino7;
+                player1Board.chosen = domino7;
                 HideSelectDominoButtons();
-                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Board.chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Board.chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Board.chosen.DominoBack, UriKind.Relative));
+
+                MeepleChoice3.Visibility = Visibility.Visible;
             }
             if (sender.Equals(Choose4))
             {
-                player1Chosen = domino8;
+                player1Board.chosen = domino8;
                 HideSelectDominoButtons();
-                SelectedTile1.Source = new BitmapImage(new Uri(player1Chosen.Tile1.TileImage, UriKind.Relative));
-                SelectedTile2.Source = new BitmapImage(new Uri(player1Chosen.Tile2.TileImage, UriKind.Relative));
-                SelectedDomino.Source = new BitmapImage(new Uri(player1Chosen.DominoBack, UriKind.Relative));
+                SelectedTile1.Source = new BitmapImage(new Uri(player1Board.chosen.Tile1.TileImage, UriKind.Relative));
+                SelectedTile2.Source = new BitmapImage(new Uri(player1Board.chosen.Tile2.TileImage, UriKind.Relative));
+                SelectedDomino.Source = new BitmapImage(new Uri(player1Board.chosen.DominoBack, UriKind.Relative));
+
+                MeepleChoice4.Visibility = Visibility.Visible;
             }
             ShowTileSelectionButtons();
         }
