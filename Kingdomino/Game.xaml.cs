@@ -64,7 +64,7 @@ namespace KingDomino
             player1Board = new Board("blue");
             player1Origin = player1Board.GetOrigin();
             player1Score = 0;
-            //Score.Text += player1Score;
+            Score.Text += player1Score;
             player2Board = new Board("green");
             player2Origin = player2Board.GetOrigin();
             player2Score = 0;
@@ -689,7 +689,7 @@ namespace KingDomino
 
                     HideMeeples();
                     CalculateScores();
-                    //Score.Text = "Score: " + player1Score.ToString();
+                    Score.Text = "Score: " + player1Score.ToString();
                 }
             }
         }
