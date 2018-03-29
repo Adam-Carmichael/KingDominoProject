@@ -104,7 +104,7 @@
         <Button x:Name="FiveThreeButton" Content="5/3" HorizontalAlignment="Left" Margin="360,500,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
         <Button x:Name="FiveFourButton" Content="5/4" HorizontalAlignment="Left" Margin="360,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
         <Button x:Name="FiveFiveButton" Content="5/5" HorizontalAlignment="Left" Margin="360,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <!--<TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="23,303,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="33" Width="83"/>-->
+        <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="23,303,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="33" Width="83"/>
       
         <Image x:Name="MeepleChoice1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
         <Image x:Name="MeepleChoice2" HorizontalAlignment="Left" Height="55" Margin="177,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
