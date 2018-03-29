@@ -15,6 +15,13 @@ namespace KingDomino
             get { return playBoard; }
             set { playBoard = value; }
         }
+        private Domino chosen;
+        public Domino Chosen
+        {
+            get { return chosen; }
+            set { this.chosen = value; }
+        }
+
         private String originCastlePath = "Resources/OriginCastle/";
         public Board(String color)
         {
