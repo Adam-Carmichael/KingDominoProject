@@ -26,17 +26,11 @@ namespace KingDomino
             get { return dominoBack; }
             set { dominoBack = value; }
         }
-        private int number;
-        public int Number
-        {
-            get { return number; }
-        }
-        public Domino(Tile tile1, Tile tile2, String dominoBack, int number)
+        public Domino(Tile tile1, Tile tile2, String dominoBack)
         {
             this.tile1 = tile1;
             this.tile2 = tile2;
             this.dominoBack = dominoBack;
-            this.number = number;
         }
     }
 }

@@ -19,23 +19,9 @@ namespace KingDomino
     /// </summary>
     public partial class Game : Window
     {
-        private Board player1Board;
-        private Tile player1Origin;
-        private int player1Score;
-
-        private Board player2Board;
-        private Tile player2Origin;
-        private int player2Score;
-
-        private Board player3Board;
-        private Tile player3Origin;
-        private int player3Score;
-
-        private Board player4Board;
-        private Tile player4Origin;
-        private int player4Score;
-
         private DominoHolder dominoHolder = new DominoHolder();
+
+        private readonly ViewModel viewModel;
 
         private Domino domino1;
         private Domino domino2;
@@ -52,182 +38,11 @@ namespace KingDomino
         private int lastJpos = 0;       // Row position of last tile placed
         public Game()
         {
+            viewModel = new ViewModel();
+
             InitializeComponent();
 
-            MakeBoards();
-
             MakeInitialDominos();
-        }
-
-        private void MakeBoards()
-        {
-            player1Board = new Board("blue");
-            player1Origin = player1Board.GetOrigin();
-            player1Score = 0;
-            //Score.Text += player1Score;
-            player2Board = new Board("green");
-            player2Origin = player2Board.GetOrigin();
-            player2Score = 0;
-            player3Board = new Board("pink");
-            player3Origin = player3Board.GetOrigin();
-            player3Score = 0;
-            player4Board = new Board("yellow");
-            player4Origin = player4Board.GetOrigin();
-            player4Score = 0;
-        }
-
-        // This method generates a players board. Can be used when switching between player boards
-        private void RefreshBoard(Board board)
-        {
-            OneOne.Source = null;
-            OneTwo.Source = null;
-            OneThree.Source = null;
-            OneFour.Source = null;
-            OneFive.Source = null;
-            TwoOne.Source = null;
-            TwoTwo.Source = null;
-            TwoThree.Source = null;
-            TwoFour.Source = null;
-            TwoFive.Source = null;
-            ThreeOne.Source = null;
-            ThreeTwo.Source = null;
-            ThreeThree.Source = null;
-            ThreeFour.Source = null;
-            ThreeFive.Source = null;
-            FourOne.Source = null;
-            FourTwo.Source = null;
-            FourThree.Source = null;
-            FourFour.Source = null;
-            FourFive.Source = null;
-            FiveOne.Source = null;
-            FiveTwo.Source = null;
-            FiveThree.Source = null;
-            FiveFour.Source = null;
-            FiveFive.Source = null;
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    if (board.PlayBoard[i,j] != null)
-                    {
-                        if(i == 0)
-                        {
-                            if(j == 0)
-                            {
-                                OneOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if(j == 1)
-                            {
-                                OneTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if(j == 2)
-                            {
-                                OneThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if(j == 3)
-                            {
-                                OneFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 4)
-                            {
-                                OneFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                        }
-                        if(i == 1)
-                        {
-                            if (j == 0)
-                            {
-                                TwoOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 1)
-                            {
-                                TwoTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 2)
-                            {
-                                TwoThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 3)
-                            {
-                                TwoFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 4)
-                            {
-                                TwoFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                        }
-                        if(i == 2)
-                        {
-                            if (j == 0)
-                            {
-                                ThreeOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 1)
-                            {
-                                ThreeTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 2)
-                            {
-                                ThreeThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 3)
-                            {
-                                ThreeFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 4)
-                            {
-                                ThreeFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                        }
-                        if(i == 3)
-                        {
-                            if (j == 0)
-                            {
-                                FourOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 1)
-                            {
-                                FourTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 2)
-                            {
-                                FourThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 3)
-                            {
-                                FourFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 4)
-                            {
-                                FourFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                        }
-                        if(i == 4)
-                        {
-                            if (j == 0)
-                            {
-                                FiveOne.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 1)
-                            {
-                                FiveTwo.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 2)
-                            {
-                                FiveThree.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 3)
-                            {
-                                FiveFour.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                            if (j == 4)
-                            {
-                                FiveFive.Source = new BitmapImage(new Uri(board.PlayBoard[i, j].TileImage, UriKind.Relative));
-                            }
-                        }
-                    }
-                }
-            }
         }
 
         // Refreshs the four starting dominos and flips the next ones
@@ -316,7 +131,7 @@ namespace KingDomino
             }
             else
             {
-                
+
                 MainWindow main = new MainWindow();
                 main.Show();
                 Close();
@@ -366,7 +181,7 @@ namespace KingDomino
         // It will set the first tile if it is their first pick and their second tile if it is their second pick.
         private void ChooseSpot_Click(object sender, RoutedEventArgs e)
         {
-            if(sender.GetType().IsVisible)
+            if (sender.GetType().IsVisible)
             {
                 if (pick == 0)
                 {
@@ -688,7 +503,7 @@ namespace KingDomino
                     pick = 0;
 
                     HideMeeples();
-                    CalculateScores();
+                    viewModel.UpdateScores();
                     //Score.Text = "Score: " + player1Score.ToString();
                 }
             }
@@ -1047,13 +862,13 @@ namespace KingDomino
                         }
                     }
                 }
-                for(int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     if (player1Board.PlayBoard[4, i] != null)
                     {
                         if (player1Board.PlayBoard[4, i + 1] == null && (player1Board.PlayBoard[4, i].TileType.Equals(player1Board.Chosen.Tile1.TileType) || player1Board.PlayBoard[4, i].TileType.Equals("Origin")))
                         {
-                            if(i == 0)
+                            if (i == 0)
                             {
                                 FiveTwoButton.Visibility = Visibility.Visible;
                             }
@@ -1693,7 +1508,7 @@ namespace KingDomino
                 }
             }
 
-            if(!(OneOneButton.IsVisible || OneTwoButton.IsVisible || OneThreeButton.IsVisible || OneFourButton.IsVisible || OneFiveButton.IsVisible ||
+            if (!(OneOneButton.IsVisible || OneTwoButton.IsVisible || OneThreeButton.IsVisible || OneFourButton.IsVisible || OneFiveButton.IsVisible ||
                 TwoOneButton.IsVisible || TwoTwoButton.IsVisible || TwoThreeButton.IsVisible || TwoFourButton.IsVisible || TwoFiveButton.IsVisible ||
                     ThreeOneButton.IsVisible || ThreeTwoButton.IsVisible || ThreeThreeButton.IsVisible || ThreeFourButton.IsVisible || ThreeFiveButton.IsVisible ||
                 FourOneButton.IsVisible || FourTwoButton.IsVisible || FourThreeButton.IsVisible || FourFourButton.IsVisible || FourFiveButton.IsVisible ||
@@ -1810,34 +1625,11 @@ namespace KingDomino
             Choose4.Visibility = Visibility.Visible;
         }
 
-        // Calculate score method
-        private void CalculateScores()
-        {
-
-            this.player1Score = player1Board.CalculateScore();
-            this.player2Score = player2Board.CalculateScore();
-            this.player3Score = player3Board.CalculateScore();
-            this.player4Score = player4Board.CalculateScore();
-        }
-
         private void Board_Click(object sender, RoutedEventArgs e)
         {
-            if(sender.Equals(YourBoard))
-            {
-                RefreshBoard(player1Board);
-            }
-            /**if (sender.Equals(Player2Board))
-            {
-                RefreshBoard(player2Board);
-            }
-            if (sender.Equals(Player3Board))
-            {
-                RefreshBoard(player3Board);
-            }
-            if (sender.Equals(Player4Board))
-            {
-                RefreshBoard(player4Board);
-            }**/
+            string tempString = ((Button)sender).GetValue(FrameworkElement.NameProperty) as string;
+            int tempInt = Int32.Parse(tempString.Substring(2));
+            viewModel.switchBoardView(tempInt);
         }
 
         private void HideBoardButtons()
@@ -1856,19 +1648,14 @@ namespace KingDomino
             Player4Board.Visibility = Visibility.Visible;**/
         }
 
-        private void ChatSend_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void SelectTileButton_Click(object sender, RoutedEventArgs e)
         {
-            if(sender.Equals(SelectTile1Button))
+            if (sender.Equals(SelectTile1Button))
             {
                 ShowOptions();
                 HideTileSelectionButtons();
             }
-            if(sender.Equals(SelectTile2Button))
+            if (sender.Equals(SelectTile2Button))
             {
                 Tile tile1 = player1Board.Chosen.Tile2;
                 Tile tile2 = player1Board.Chosen.Tile1;

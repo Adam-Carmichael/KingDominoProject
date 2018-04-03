@@ -10,4 +10,9 @@ namespace KingDomino
     {
         Field, Forest, Grass, Lake, Mine, Swamp
     }
+
+    public enum Meeple
+    {
+        Blue, Green, Pink, Yellow
+    }
 }
