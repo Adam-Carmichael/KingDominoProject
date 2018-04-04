@@ -56,7 +56,9 @@
     </ApplicationDefinition>
     <Compile Include="Board.cs" />
     <Compile Include="DominoHolder.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="ViewModel.cs" />
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
