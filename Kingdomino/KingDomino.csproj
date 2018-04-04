@@ -58,6 +58,7 @@
     <Compile Include="DominoHolder.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="TileType.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>
