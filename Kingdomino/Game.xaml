@@ -19,19 +19,19 @@
         </RichTextBox>
         <TextBlock x:Name="Chat" HorizontalAlignment="Left" Margin="591,0,0,0" TextWrapping="Wrap" Text="Welcome to King Domino" VerticalAlignment="Top" Height="645" Width="104"/>
         <TextBlock x:Name="PlayerName" HorizontalAlignment="Left" Margin="591,646,0,0" TextWrapping="Wrap" Text="Player :" VerticalAlignment="Top"/>-->
-        <Image x:Name="Domino1" HorizontalAlignment="Left" Height="55" Margin="10,155,0,0" Source="Resources/Domino/01.png" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[0].DominoBack}"/>
-        <Image x:Name="Domino2" HorizontalAlignment="Left" Height="55" Margin="155,155,0,0" Source="Resources/Domino/02.png" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[1].DominoBack}"/>
-        <Image x:Name="Domino3" HorizontalAlignment="Left" Height="55" Margin="300,155,0,0" Source="Resources/Domino/03.png" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[2].DominoBack}"/>
-        <Image x:Name="Domino4" HorizontalAlignment="Left" Height="55" Margin="445,155,0,0" Source="Resources/Domino/04.png" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[3].DominoBack}"/>
+        <Image x:Name="Domino1" HorizontalAlignment="Left" Height="55" Margin="10,155,0,0" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[0].DominoBack}"/>
+        <Image x:Name="Domino2" HorizontalAlignment="Left" Height="55" Margin="155,155,0,0" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[1].DominoBack}"/>
+        <Image x:Name="Domino3" HorizontalAlignment="Left" Height="55" Margin="300,155,0,0" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[2].DominoBack}"/>
+        <Image x:Name="Domino4" HorizontalAlignment="Left" Height="55" Margin="445,155,0,0" VerticalAlignment="Top" Width="110" Source="{binding NextDomino[3].DominoBack}"/>
 
-        <Image x:Name="Tile1" HorizontalAlignment="Left" Height="55" Margin="10,85,0,0" Source="Resources/Terrain/0Field01.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[0].Tile1.TileImage}"/>
-        <Image x:Name="Tile2" HorizontalAlignment="Left" Height="55" Margin="65,85,0,0" Source="Resources/Terrain/0Field02.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[0].Tile2.TileImage}"/>
-        <Image x:Name="Tile3" HorizontalAlignment="Left" Height="55" Margin="155,85,0,0" Source="Resources/Terrain/0Field03.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[1].Tile1.TileImage}"/>
-        <Image x:Name="Tile4" HorizontalAlignment="Left" Height="55" Margin="210,85,0,0" Source="Resources/Terrain/0Field04.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[1].Tile2.TileImage}"/>
-        <Image x:Name="Tile5" HorizontalAlignment="Left" Height="55" Margin="300,85,0,0" Source="Resources/Terrain/0Field05.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[2].Tile1.TileImage}"/>
-        <Image x:Name="Tile6" HorizontalAlignment="Left" Height="55" Margin="355,85,0,0" Source="Resources/Terrain/0Field06.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[2].Tile2.TileImage}"/>
-        <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" Source="Resources/Terrain/0Field07.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[3].Tile1.TileImage}"/>
-        <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" Source="Resources/Terrain/0Field08.png" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[3].Tile2.TileImage}"/>
+        <Image x:Name="Tile1" HorizontalAlignment="Left" Height="55" Margin="10,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[0].Tile1.TileImage}"/>
+        <Image x:Name="Tile2" HorizontalAlignment="Left" Height="55" Margin="65,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[0].Tile2.TileImage}"/>
+        <Image x:Name="Tile3" HorizontalAlignment="Left" Height="55" Margin="155,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[1].Tile1.TileImage}"/>
+        <Image x:Name="Tile4" HorizontalAlignment="Left" Height="55" Margin="210,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[1].Tile2.TileImage}"/>
+        <Image x:Name="Tile5" HorizontalAlignment="Left" Height="55" Margin="300,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[2].Tile1.TileImage}"/>
+        <Image x:Name="Tile6" HorizontalAlignment="Left" Height="55" Margin="355,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[2].Tile2.TileImage}"/>
+        <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[3].Tile1.TileImage}"/>
+        <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" VerticalAlignment="Top" Width="55" Source="{binding CurrentDomino[3].Tile2.TileImage}"/>
         
         <Button x:Name="PB1" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="230,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
         <Button x:Name="PB2" BorderThickness="3" Content="Player 2 Board" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
