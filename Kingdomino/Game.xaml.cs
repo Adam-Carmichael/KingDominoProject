@@ -19,21 +19,11 @@ namespace KingDomino
     /// </summary>
     public partial class Game : Window
     {
-        private DominoHolder dominoHolder = new DominoHolder();
+        
 
         private readonly ViewModel viewModel;
 
-        private Domino domino1;
-        private Domino domino2;
-        private Domino domino3;
-        private Domino domino4;
-        private Domino domino5;
-        private Domino domino6;
-        private Domino domino7;
-        private Domino domino8;
-
         private int pick = 0;
-        private int roundNumber = 1;
         private int lastIpos = 0;       // Column position of last tile placed (board is at this point in time arranged by i columns and j rows)
         private int lastJpos = 0;       // Row position of last tile placed
         public Game()
@@ -42,139 +32,9 @@ namespace KingDomino
 
             InitializeComponent();
 
-            MakeInitialDominos();
-        }
-
-        // Refreshs the four starting dominos and flips the next ones
-        private void RefreshSelectionDomionos()
-        {
-
-            //Create new backfacing dominos and set the old ones as the new tiles
-            if (roundNumber <= 10)
-            {
-                roundNumber++;
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                domino1 = dominoHolder.RandomDomino();
-                Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-                domino2 = dominoHolder.RandomDomino();
-                Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-                domino3 = dominoHolder.RandomDomino();
-                Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-                domino4 = dominoHolder.RandomDomino();
-                Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-            }
-
-            //Removes the backfacing dominos once there is no more dominos left in the DominoHolder and then sets the last dominos as the new tiles
-            else if (roundNumber == 11)
-            {
-                roundNumber++;
-                domino5 = domino1;
-                Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-                domino6 = domino2;
-                Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-                domino7 = domino3;
-                Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-                domino8 = domino4;
-                Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
-
-
-                Domino1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Domino4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
-
-            //Removes the tiles now that there is no more tiles or dominos
-            else if (roundNumber == 13)
-            {
-                roundNumber++;
-                Tile1.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile2.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile3.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile4.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile5.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile6.Source = new BitmapImage(new Uri("", UriKind.Relative));
-
-                Tile7.Source = new BitmapImage(new Uri("", UriKind.Relative));
-                Tile8.Source = new BitmapImage(new Uri("", UriKind.Relative));
-            }
-            else
-            {
-
-                MainWindow main = new MainWindow();
-                main.Show();
-                Close();
-            }
-        }
-
-        //Sets up the inital setup
-        private void MakeInitialDominos()
-        {
-            ThreeThree.Source = new BitmapImage(new Uri(player1Origin.TileImage, UriKind.Relative));
-
-            HideOptions();
-            HideTileSelectionButtons();
-
-            //Set up the first backfacing dominos
-            domino1 = dominoHolder.RandomDomino();
-            Domino1.Source = new BitmapImage(new Uri(domino1.DominoBack, UriKind.Relative));
-
-            domino2 = dominoHolder.RandomDomino();
-            Domino2.Source = new BitmapImage(new Uri(domino2.DominoBack, UriKind.Relative));
-
-            domino3 = dominoHolder.RandomDomino();
-            Domino3.Source = new BitmapImage(new Uri(domino3.DominoBack, UriKind.Relative));
-
-            domino4 = dominoHolder.RandomDomino();
-            Domino4.Source = new BitmapImage(new Uri(domino4.DominoBack, UriKind.Relative));
-
-            //Set up the first tiles
-            domino5 = dominoHolder.RandomDomino();
-            Tile1.Source = new BitmapImage(new Uri(domino5.Tile1.TileImage, UriKind.Relative));
-            Tile2.Source = new BitmapImage(new Uri(domino5.Tile2.TileImage, UriKind.Relative));
-
-            domino6 = dominoHolder.RandomDomino();
-            Tile3.Source = new BitmapImage(new Uri(domino6.Tile1.TileImage, UriKind.Relative));
-            Tile4.Source = new BitmapImage(new Uri(domino6.Tile2.TileImage, UriKind.Relative));
-
-            domino7 = dominoHolder.RandomDomino();
-            Tile5.Source = new BitmapImage(new Uri(domino7.Tile1.TileImage, UriKind.Relative));
-            Tile6.Source = new BitmapImage(new Uri(domino7.Tile2.TileImage, UriKind.Relative));
-
-            domino8 = dominoHolder.RandomDomino();
-            Tile7.Source = new BitmapImage(new Uri(domino8.Tile1.TileImage, UriKind.Relative));
-            Tile8.Source = new BitmapImage(new Uri(domino8.Tile2.TileImage, UriKind.Relative));
+            viewModel.CreateBackFacingDominos();
+            viewModel.SetCurrentDominosFromNextDominos();
+            viewModel.CreateBackFacingDominos();
         }
 
         // Sets the image where the button where the user clicked as one of their tiles of their selected domino.

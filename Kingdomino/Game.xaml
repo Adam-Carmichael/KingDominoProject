@@ -19,19 +19,19 @@
         </RichTextBox>
         <TextBlock x:Name="Chat" HorizontalAlignment="Left" Margin="591,0,0,0" TextWrapping="Wrap" Text="Welcome to King Domino" VerticalAlignment="Top" Height="645" Width="104"/>
         <TextBlock x:Name="PlayerName" HorizontalAlignment="Left" Margin="591,646,0,0" TextWrapping="Wrap" Text="Player :" VerticalAlignment="Top"/>-->
-        <Image x:Name="Domino1" HorizontalAlignment="Left" Height="55" Margin="10,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDomino[0].DominoBack}"/>
-        <Image x:Name="Domino2" HorizontalAlignment="Left" Height="55" Margin="155,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDomino[1].DominoBack}"/>
-        <Image x:Name="Domino3" HorizontalAlignment="Left" Height="55" Margin="300,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDomino[2].DominoBack}"/>
-        <Image x:Name="Domino4" HorizontalAlignment="Left" Height="55" Margin="445,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDomino[3].DominoBack}"/>
+        <Image x:Name="Domino1" HorizontalAlignment="Left" Height="55" Margin="10,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[0].DominoBack}"/>
+        <Image x:Name="Domino2" HorizontalAlignment="Left" Height="55" Margin="155,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[1].DominoBack}"/>
+        <Image x:Name="Domino3" HorizontalAlignment="Left" Height="55" Margin="300,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[2].DominoBack}"/>
+        <Image x:Name="Domino4" HorizontalAlignment="Left" Height="55" Margin="445,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[3].DominoBack}"/>
 
-        <Image x:Name="Tile1" HorizontalAlignment="Left" Height="55" Margin="10,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[0].Tile1.TileImage}"/>
-        <Image x:Name="Tile2" HorizontalAlignment="Left" Height="55" Margin="65,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[0].Tile2.TileImage}"/>
-        <Image x:Name="Tile3" HorizontalAlignment="Left" Height="55" Margin="155,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[1].Tile1.TileImage}"/>
-        <Image x:Name="Tile4" HorizontalAlignment="Left" Height="55" Margin="210,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[1].Tile2.TileImage}"/>
-        <Image x:Name="Tile5" HorizontalAlignment="Left" Height="55" Margin="300,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[2].Tile1.TileImage}"/>
-        <Image x:Name="Tile6" HorizontalAlignment="Left" Height="55" Margin="355,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[2].Tile2.TileImage}"/>
-        <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[3].Tile1.TileImage}"/>
-        <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDomino[3].Tile2.TileImage}"/>
+        <Image x:Name="Tile1" HorizontalAlignment="Left" Height="55" Margin="10,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[0].Tile1.TileImage}"/>
+        <Image x:Name="Tile2" HorizontalAlignment="Left" Height="55" Margin="65,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[0].Tile2.TileImage}"/>
+        <Image x:Name="Tile3" HorizontalAlignment="Left" Height="55" Margin="155,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[1].Tile1.TileImage}"/>
+        <Image x:Name="Tile4" HorizontalAlignment="Left" Height="55" Margin="210,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[1].Tile2.TileImage}"/>
+        <Image x:Name="Tile5" HorizontalAlignment="Left" Height="55" Margin="300,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[2].Tile1.TileImage}"/>
+        <Image x:Name="Tile6" HorizontalAlignment="Left" Height="55" Margin="355,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[2].Tile2.TileImage}"/>
+        <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[3].Tile1.TileImage}"/>
+        <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[3].Tile2.TileImage}"/>
         
         <Button x:Name="PB1" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="230,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
         <Button x:Name="PB2" BorderThickness="3" Content="Player 2 Board" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
@@ -47,66 +47,36 @@
         <Button x:Name="SelectTile1Button" Content="Tile1" HorizontalAlignment="Left" Margin="265,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
         <Button x:Name="SelectTile2Button" Content="Tile2" HorizontalAlignment="Left" Margin="320,315,0,0" VerticalAlignment="Top" Click ="SelectTileButton_Click" Width="55" Height="55"/>
 
-        <Image x:Name= "OneOne" HorizontalAlignment="Left" Height="55" Margin="140,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][0].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "OneTwo" HorizontalAlignment="Left" Height="55" Margin="140,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][1].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "OneThree" HorizontalAlignment="Left" Height="55" Margin="140,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][2].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "OneFour" HorizontalAlignment="Left" Height="55" Margin="140,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][3].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "OneFive" HorizontalAlignment="Left" Height="55" Margin="140,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][4].TileImage}" MouseLeftButtonDown=""/>
+        <Image x:Name= "OneOne" HorizontalAlignment="Left" Height="55" Margin="140,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][0].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "OneTwo" HorizontalAlignment="Left" Height="55" Margin="140,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][1].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "OneThree" HorizontalAlignment="Left" Height="55" Margin="140,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][2].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "OneFour" HorizontalAlignment="Left" Height="55" Margin="140,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][3].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "OneFive" HorizontalAlignment="Left" Height="55" Margin="140,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[0][4].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
 
-        <Image x:Name= "TwoOne" HorizontalAlignment="Left" Height="55" Margin="195,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][0].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "TwoTwo" HorizontalAlignment="Left" Height="55" Margin="195,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][1].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "TwoThree" HorizontalAlignment="Left" Height="55" Margin="195,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][2].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "TwoFour" HorizontalAlignment="Left" Height="55" Margin="195,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][3].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "TwoFive" HorizontalAlignment="Left" Height="55" Margin="195,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][4].TileImage}" MouseLeftButtonDown=""/>
+        <Image x:Name= "TwoOne" HorizontalAlignment="Left" Height="55" Margin="195,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][0].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "TwoTwo" HorizontalAlignment="Left" Height="55" Margin="195,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][1].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "TwoThree" HorizontalAlignment="Left" Height="55" Margin="195,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][2].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "TwoFour" HorizontalAlignment="Left" Height="55" Margin="195,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][3].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "TwoFive" HorizontalAlignment="Left" Height="55" Margin="195,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[1][4].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
 
-        <Image x:Name= "ThreeOne" HorizontalAlignment="Left" Height="55" Margin="250,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][0].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "ThreeTwo" HorizontalAlignment="Left" Height="55" Margin="250,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][1].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "ThreeThree" HorizontalAlignment="Left" Height="55" Margin="250,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][2].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "ThreeFour" HorizontalAlignment="Left" Height="55" Margin="250,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][3].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "ThreeFive" HorizontalAlignment="Left" Height="55" Margin="250,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][4].TileImage}" MouseLeftButtonDown=""/>
+        <Image x:Name= "ThreeOne" HorizontalAlignment="Left" Height="55" Margin="250,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][0].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "ThreeTwo" HorizontalAlignment="Left" Height="55" Margin="250,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][1].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "ThreeThree" HorizontalAlignment="Left" Height="55" Margin="250,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][2].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "ThreeFour" HorizontalAlignment="Left" Height="55" Margin="250,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][3].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "ThreeFive" HorizontalAlignment="Left" Height="55" Margin="250,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[2][4].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
 
-        <Image x:Name= "FourOne" HorizontalAlignment="Left" Height="55" Margin="305,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][0].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FourTwo" HorizontalAlignment="Left" Height="55" Margin="305,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][1].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FourThree" HorizontalAlignment="Left" Height="55" Margin="305,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][2].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FourFour" HorizontalAlignment="Left" Height="55" Margin="305,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][3].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FourFive" HorizontalAlignment="Left" Height="55" Margin="305,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][4].TileImage}" MouseLeftButtonDown=""/>
+        <Image x:Name= "FourOne" HorizontalAlignment="Left" Height="55" Margin="305,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][0].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FourTwo" HorizontalAlignment="Left" Height="55" Margin="305,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][1].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FourThree" HorizontalAlignment="Left" Height="55" Margin="305,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][2].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FourFour" HorizontalAlignment="Left" Height="55" Margin="305,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][3].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FourFive" HorizontalAlignment="Left" Height="55" Margin="305,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[3][4].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
 
-        <Image x:Name= "FiveOne" HorizontalAlignment="Left" Height="55" Margin="360,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][0].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FiveTwo" HorizontalAlignment="Left" Height="55" Margin="360,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][1].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FiveThree" HorizontalAlignment="Left" Height="55" Margin="360,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][2].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FiveFour" HorizontalAlignment="Left" Height="55" Margin="360,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][3].TileImage}" MouseLeftButtonDown=""/>
-        <Image x:Name= "FiveFive" HorizontalAlignment="Left" Height="55" Margin="360,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][4].TileImage}" MouseLeftButtonDown=""/>
+        <Image x:Name= "FiveOne" HorizontalAlignment="Left" Height="55" Margin="360,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][0].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FiveTwo" HorizontalAlignment="Left" Height="55" Margin="360,555,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][1].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FiveThree" HorizontalAlignment="Left" Height="55" Margin="360,500,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][2].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FiveFour" HorizontalAlignment="Left" Height="55" Margin="360,445,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][3].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
+        <Image x:Name= "FiveFive" HorizontalAlignment="Left" Height="55" Margin="360,390,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard[4][4].TileImage}" MouseLeftButtonDown="UpdatePlacedTile"/>
 
-        <!--<Button x:Name="OneOneButton" Content="1/1" HorizontalAlignment="Left" Margin="140,610,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="OneTwoButton" Content="1/2" HorizontalAlignment="Left" Margin="140,555,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="OneThreeButton" Content="1/3" HorizontalAlignment="Left" Margin="140,500,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="OneFourButton" Content="1/4" HorizontalAlignment="Left" Margin="140,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="OneFiveButton" Content="1/5" HorizontalAlignment="Left" Margin="140,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-
-        <Button x:Name="TwoOneButton" Content="2/1" HorizontalAlignment="Left" Margin="195,610,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="TwoTwoButton" Content="2/2" HorizontalAlignment="Left" Margin="195,555,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="TwoThreeButton" Content="2/3" HorizontalAlignment="Left" Margin="195,500,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="TwoFourButton" Content="2/4" HorizontalAlignment="Left" Margin="195,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="TwoFiveButton" Content="2/5" HorizontalAlignment="Left" Margin="195,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-
-        <Button x:Name="ThreeOneButton" Content="3/1" HorizontalAlignment="Left" Margin="250,610,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="ThreeTwoButton" Content="3/2" HorizontalAlignment="Left" Margin="250,555,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="ThreeThreeButton" Content="3/3" HorizontalAlignment="Left" Margin="250,500,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="ThreeFourButton" Content="3/4" HorizontalAlignment="Left" Margin="250,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="ThreeFiveButton" Content="3/5" HorizontalAlignment="Left" Margin="250,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-
-        <Button x:Name="FourOneButton" Content="4/1" HorizontalAlignment="Left" Margin="305,610,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FourTwoButton" Content="4/2" HorizontalAlignment="Left" Margin="305,555,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FourThreeButton" Content="4/3" HorizontalAlignment="Left" Margin="305,500,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FourFourButton" Content="4/4" HorizontalAlignment="Left" Margin="305,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FourFiveButton" Content="4/5" HorizontalAlignment="Left" Margin="305,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-
-        <Button x:Name="FiveOneButton" Content="5/1" HorizontalAlignment="Left" Margin="360,610,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FiveTwoButton" Content="5/2" HorizontalAlignment="Left" Margin="360,555,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FiveThreeButton" Content="5/3" HorizontalAlignment="Left" Margin="360,500,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FiveFourButton" Content="5/4" HorizontalAlignment="Left" Margin="360,445,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/>
-        <Button x:Name="FiveFiveButton" Content="5/5" HorizontalAlignment="Left" Margin="360,390,0,0" VerticalAlignment="Top" Click ="ChooseSpot_Click" Width="55" Height="55"/> -->
-        
         <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="23,303,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="33" Width="83"/>
 
         <Image x:Name="MeepleChoice1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
