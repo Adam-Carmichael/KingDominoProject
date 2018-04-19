@@ -14,8 +14,8 @@ namespace KingDomino
             get { return tileImage; }
             set { tileImage = value; }
         }
-        private String tileType;
-        public String TileType
+        private TileType tileType;
+        public TileType TileType
         {
             get { return tileType; }
             set { tileType = value; }
@@ -27,7 +27,7 @@ namespace KingDomino
             set { tileCrown = value; }
         }
 
-        public Tile(String tileImage, String tileType, int tileCrown)
+        public Tile(String tileImage, TileType tileType, int tileCrown)
         {
             this.tileImage = tileImage;
             this.tileType = tileType;

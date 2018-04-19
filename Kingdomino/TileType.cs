@@ -8,7 +8,7 @@ namespace KingDomino
 {
     public enum TileType
     {
-        Field, Forest, Grass, Lake, Mine, Swamp
+        Field, Forest, Grass, Lake, Mine, Swamp, Origin
     }
 
     public enum Meeple

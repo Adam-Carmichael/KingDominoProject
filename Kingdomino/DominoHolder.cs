@@ -9,8 +9,8 @@ namespace KingDomino
 {
     class DominoHolder
     {
-        private String terrainPath = "Resources/Terrain/";
-        private String dominoPath = "Resources/Domino/";
+        public readonly String defaultTilePath = "Resources/Misc/logo.png";
+
         private ArrayList dominos;
         private Random rnd = new Random();
 
@@ -35,7 +35,29 @@ namespace KingDomino
             foreach (string line in lines)
             {
                 String[] splitter = line.Split('|');
-                this.dominos.Add(new Domino(new Tile(splitter[0], splitter[1], Convert.ToInt32(splitter[2])), new Tile(splitter[3], splitter[4], Convert.ToInt32(splitter[5])), splitter[6], Convert.ToInt32(splitter[7])));
+                this.dominos.Add(new Domino(new Tile(splitter[0], convertStringToTileType(splitter[1]), Convert.ToInt32(splitter[2])), new Tile(splitter[3], convertStringToTileType(splitter[4]), Convert.ToInt32(splitter[5])), splitter[6], Convert.ToInt32(splitter[7])));
+            }
+        }
+
+        private TileType convertStringToTileType(String terrain)
+        {
+            switch(terrain)
+            {
+                case ("Field"):
+                    return TileType.Field;
+                case ("Forest"):
+                    return TileType.Forest;
+                case ("Grass"):
+                    return TileType.Grass;
+                case ("Lake"):
+                    return TileType.Lake;
+                case ("Mine"):
+                    return TileType.Mine;
+                case ("Swamp"):
+                    return TileType.Swamp;
+
+                default:
+                    return TileType.Origin;
             }
         }
     } 
