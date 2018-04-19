@@ -47,6 +47,7 @@ namespace KingDomino
                 {
                     if (sender.Equals(OneOneButton))
                     {
+                        OnPropertyChanged()
                         OneOne.Source = new BitmapImage(new Uri(player1Board.Chosen.Tile1.TileImage, UriKind.Relative));
                         player1Board.Add(player1Board.Chosen.Tile1, 0, 0);
                         lastIpos = 0;
@@ -1536,6 +1537,16 @@ namespace KingDomino
         {
             SelectTile1Button.Visibility = Visibility.Hidden;
             SelectTile2Button.Visibility = Visibility.Hidden;
+        }
+
+        private void TwoThree_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void TwoFour_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
