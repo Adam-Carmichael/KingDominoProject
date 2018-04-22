@@ -20,8 +20,20 @@ namespace KingDomino
             set { chatHistory = value; }
         }
         public ObservableCollection<Player> PlayerList { get; set; }
-        public ObservableCollection<Domino> NextDominos { get; set; }
-        public ObservableCollection<Domino> CurrentDominos { get; set; }
+        public ObservableCollection<Domino> NextDominos = new ObservableCollection<Domino>()
+        {
+            null,
+            null,
+            null,
+            null
+        };
+        public ObservableCollection<Domino> CurrentDominos = new ObservableCollection<Domino>()
+        {
+            null,
+            null,
+            null,
+            null
+        };
         public Board CurrentBoard { get; set; }
         public Domino ChosenDomino { get; set; }
         public Tile ChosenTile { get; set; }
@@ -94,7 +106,7 @@ namespace KingDomino
             CurrentDominos.Clear();
             foreach (Domino domino in NextDominos)
             {
-                CurrentDominos[index] = domino;
+                //CurrentDominos[index] = domino;
                 OnPropertyChanged("CurrentDominos[" + index + "]");
                 ++index;
             }
@@ -110,7 +122,7 @@ namespace KingDomino
         {
             GetFourRandomDominos(NextDominos);
 
-            SortDominos(NextDominos);
+            //SortDominos(NextDominos);
 
             for (int i = 0; i < 4; i++)
             {
