@@ -34,7 +34,7 @@ namespace KingDomino
 
         private Image[,] images;
 
-        private void createPlayers()
+        private void CreatePlayers()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -70,10 +70,7 @@ namespace KingDomino
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void OnDominoSelect(int index)
@@ -102,7 +99,7 @@ namespace KingDomino
                 ++index;
             }
         }
-        private void getFourRandomDominos(ObservableCollection<Domino> dominos)
+        private void GetFourRandomDominos(ObservableCollection<Domino> dominos)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -111,9 +108,9 @@ namespace KingDomino
         }
         public void CreateBackFacingDominos()
         {
-            getFourRandomDominos(NextDominos);
+            GetFourRandomDominos(NextDominos);
 
-            sortDominos(NextDominos);
+            SortDominos(NextDominos);
 
             for (int i = 0; i < 4; i++)
             {
@@ -122,7 +119,7 @@ namespace KingDomino
 
         }
 
-        private void sortDominos(ObservableCollection<Domino> dominos)
+        private void SortDominos(ObservableCollection<Domino> dominos)
         {
             int size = dominos.Count;
             for (int j = size - 1; j > 0; j--)
@@ -130,12 +127,12 @@ namespace KingDomino
                 for (int i = 0; i < j; i++)
                 {
                     if (dominos[i].Number > dominos[i + 1].Number)
-                        exchange(dominos, i, i + 1);
+                        Exchange(dominos, i, i + 1);
                 }
             }
         }
 
-        private void exchange(ObservableCollection<Domino> dominos, int m, int n)
+        private void Exchange(ObservableCollection<Domino> dominos, int m, int n)
         {
             Domino tempDomino;
 
@@ -203,11 +200,11 @@ namespace KingDomino
             images[row, col] = image;
         }
 
-        private void checkMove()
+        private void CheckMove()
         {
 
         }
-
+        /*
         public void ShowOptions(int playerNumber)
         {
             HideOptions();
@@ -1083,6 +1080,6 @@ namespace KingDomino
                 ShowBoardButtons();
                 pick = 0;
             }
-        }
+        }*/
     }
 }

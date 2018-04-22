@@ -26,7 +26,7 @@ namespace KingDomino
         public Board(String color)
         {
             this.playBoard = new Tile[5, 5];
-            this.playBoard[2, 2] = new Tile(originCastlePath + color + ".png", "Origin", 0);
+            this.playBoard[2, 2] = new Tile(originCastlePath + color + ".png", TileType.Origin, 0);
         }
 
         public int CalculateScore()

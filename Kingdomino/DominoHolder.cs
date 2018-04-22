@@ -31,15 +31,15 @@ namespace KingDomino
         }
         public void DominoHolderGenerator()
         {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\ngl4\Downloads\KingDominoProject-master\Kingdomino\dominos.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Nick\Documents\GitHub\Kingdomino\Kingdomino\dominos.txt");
             foreach (string line in lines)
             {
                 String[] splitter = line.Split('|');
-                this.dominos.Add(new Domino(new Tile(splitter[0], convertStringToTileType(splitter[1]), Convert.ToInt32(splitter[2])), new Tile(splitter[3], convertStringToTileType(splitter[4]), Convert.ToInt32(splitter[5])), splitter[6], Convert.ToInt32(splitter[7])));
+                this.dominos.Add(new Domino(new Tile(splitter[0], ConvertStringToTileType(splitter[1]), Convert.ToInt32(splitter[2])), new Tile(splitter[3], ConvertStringToTileType(splitter[4]), Convert.ToInt32(splitter[5])), splitter[6], Convert.ToInt32(splitter[7])));
             }
         }
 
-        private TileType convertStringToTileType(String terrain)
+        private TileType ConvertStringToTileType(String terrain)
         {
             switch(terrain)
             {

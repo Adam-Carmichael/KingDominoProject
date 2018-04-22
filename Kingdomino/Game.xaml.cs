@@ -29,9 +29,8 @@ namespace KingDomino
         public Game()
         {
             viewModel = new ViewModel();
-
+            DataContext = viewModel;
             InitializeComponent();
-
             viewModel.CreateBackFacingDominos();
             viewModel.SetCurrentDominosFromNextDominos();
             viewModel.CreateBackFacingDominos();
@@ -39,7 +38,7 @@ namespace KingDomino
 
         // Sets the image where the button where the user clicked as one of their tiles of their selected domino.
         // It will set the first tile if it is their first pick and their second tile if it is their second pick.
-        private void ChooseSpot_Click(object sender, RoutedEventArgs e)
+        /*private void ChooseSpot_Click(object sender, RoutedEventArgs e)
         {
             if (sender.GetType().IsVisible) //checks if object is visible, meaning it is a viable option
             {
@@ -178,18 +177,18 @@ namespace KingDomino
 
         private void HideBoardButtons()
         {
-            //Player.Board.Visibility = Visibility.Hidden;
-            /**Player2Board.Visibility = Visibility.Hidden;
+            Player.Board.Visibility = Visibility.Hidden;
+            Player2Board.Visibility = Visibility.Hidden;
             Player3Board.Visibility = Visibility.Hidden;
-            Player4Board.Visibility = Visibility.Hidden;**/
+            Player4Board.Visibility = Visibility.Hidden;
         }
 
         private void ShowBoardButtons()
         {
             //YourBoard.Visibility = Visibility.Visible;
-            /**Player2Board.Visibility = Visibility.Visible;
+            Player2Board.Visibility = Visibility.Visible;
             Player3Board.Visibility = Visibility.Visible;
-            Player4Board.Visibility = Visibility.Visible;**/
+            Player4Board.Visibility = Visibility.Visible;
         }
 
         private void SelectTileButton_Click(object sender, RoutedEventArgs e)
@@ -220,35 +219,49 @@ namespace KingDomino
         {
             SelectTile1Button.Visibility = Visibility.Hidden;
             SelectTile2Button.Visibility = Visibility.Hidden;
+        }*/
+    
+        private void BoardClick(object sender, RoutedEventArgs e)
+        {
+            viewModel.UpdatePlacedTile(1,1);
         }
 
-        private void createImageList()
+        private void Board_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.AddImageToList(0, 0, One_One);
-            viewModel.AddImageToList(0, 1, One_Two);
-            viewModel.AddImageToList(0, 2, One_Three);
-            viewModel.AddImageToList(0, 3, One_Four);
-            viewModel.AddImageToList(0, 4, One_Five);
-            viewModel.AddImageToList(1, 0, Two_One);
-            viewModel.AddImageToList(1, 1, Two_Two);
-            viewModel.AddImageToList(1, 2, Two_Three);
-            viewModel.AddImageToList(1, 3, Two_Four);
-            viewModel.AddImageToList(1, 4, Two_Five);
-            viewModel.AddImageToList(2, 0, Three_One);
-            viewModel.AddImageToList(2, 1, Three_Two);
-            viewModel.AddImageToList(2, 2, Three_Three);
-            viewModel.AddImageToList(2, 3, Three_Four);
-            viewModel.AddImageToList(2, 4, Three_Five);
-            viewModel.AddImageToList(3, 0, Four_One);
-            viewModel.AddImageToList(3, 1, Four_Two);
-            viewModel.AddImageToList(3, 2, Four_Three);
-            viewModel.AddImageToList(3, 3, Four_Four);
-            viewModel.AddImageToList(3, 4, Four_Five);
-            viewModel.AddImageToList(4, 0, Five_One);
-            viewModel.AddImageToList(4, 1, Five_Two);
-            viewModel.AddImageToList(4, 2, Five_Three);
-            viewModel.AddImageToList(4, 3, Five_Four);
-            viewModel.AddImageToList(4, 4, Five_Five);
+
+        }
+
+        private void Choose_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void CreateImageList()
+        {
+            viewModel.AddImageToList(1, 1, One_One);
+            viewModel.AddImageToList(1, 2, One_Two);
+            viewModel.AddImageToList(1, 3, One_Three);
+            viewModel.AddImageToList(1, 4, One_Four);
+            viewModel.AddImageToList(1, 5, One_Five);
+            viewModel.AddImageToList(2, 1, Two_One);
+            viewModel.AddImageToList(2, 2, Two_Two);
+            viewModel.AddImageToList(2, 3, Two_Three);
+            viewModel.AddImageToList(2, 4, Two_Four);
+            viewModel.AddImageToList(2, 5, Two_Five);
+            viewModel.AddImageToList(3, 1, Three_One);
+            viewModel.AddImageToList(3, 2, Three_Two);
+            viewModel.AddImageToList(3, 3, Three_Three);
+            viewModel.AddImageToList(3, 4, Three_Four);
+            viewModel.AddImageToList(3, 5, Three_Five);
+            viewModel.AddImageToList(4, 1, Four_One);
+            viewModel.AddImageToList(4, 2, Four_Two);
+            viewModel.AddImageToList(4, 3, Four_Three);
+            viewModel.AddImageToList(4, 4, Four_Four);
+            viewModel.AddImageToList(4, 5, Four_Five);
+            viewModel.AddImageToList(5, 1, Five_One);
+            viewModel.AddImageToList(5, 2, Five_Two);
+            viewModel.AddImageToList(5, 3, Five_Three);
+            viewModel.AddImageToList(5, 4, Five_Four);
+            viewModel.AddImageToList(5, 5, Five_Five);
         }
 
     }
