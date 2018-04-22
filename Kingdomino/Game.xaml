@@ -24,7 +24,7 @@
         <Image x:Name="Tile7" HorizontalAlignment="Left" Height="55" Margin="445,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[3].Tile1.TileImage}"/>
         <Image x:Name="Tile8" HorizontalAlignment="Left" Height="55" Margin="500,85,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentDominos[3].Tile2.TileImage}"/>
 
-        <Button x:Name="PB1" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="230,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
+        <Button x:Name="PB1" BorderThickness="3" Content="Your Board" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
         <Button x:Name="PB2" BorderThickness="3" Content="Player 2 Board" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
         <Button x:Name="PB3" BorderThickness="3" Content="Player 3 Board" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>
         <Button x:Name="PB4" BorderThickness="3" Content="Player 4 Board" HorizontalAlignment="Left" Margin="445,10,0,0" VerticalAlignment="Top" Click="Board_Click" Width="110" Height="22" FontFamily="Showcard Gothic"/>

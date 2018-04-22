@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +14,11 @@ namespace KingDomino
 
         private ArrayList dominos;
         private Random rnd = new Random();
-        private readonly ViewModel viewModel;
 
         public Random Rnd { get => rnd; set => rnd = value; }
 
         public DominoHolder()
         {
-            viewModel = new ViewModel();
             dominos = new ArrayList();
             DominoHolderGenerator();
         }
@@ -31,10 +30,11 @@ namespace KingDomino
             dominos.RemoveAt(random);
             return test;
         }
+
         public void DominoHolderGenerator()
         {
             string fileName = "dominos.txt";
-            string dominosPath = viewModel.findPath(fileName);
+            string dominosPath = Path.GetFullPath(fileName);
             string[] lines = System.IO.File.ReadAllLines(@dominosPath);
             foreach (string line in lines)
             {

@@ -21,11 +21,6 @@ namespace KingDomino
     {
         private readonly ViewModel viewModel;
 
-        private int pick = 0;
-
-        private int lastIpos = 0;       // Column position of last tile placed (board is at this point in time arranged by i columns and j rows)
-        private int lastJpos = 0;       // Row position of last tile placed
-
         public Game()
         {
             viewModel = new ViewModel();

@@ -21,20 +21,8 @@ namespace KingDomino
             set { chatHistory = value; }
         }
         public ObservableCollection<Player> PlayerList { get; set; }
-        public ObservableCollection<Domino> NextDominos = new ObservableCollection<Domino>()
-        {
-            null,
-            null,
-            null,
-            null
-        };
-        public ObservableCollection<Domino> CurrentDominos = new ObservableCollection<Domino>()
-        {
-            null,
-            null,
-            null,
-            null
-        };
+        public ObservableCollection<Domino> NextDominos = new ObservableCollection<Domino>();
+        public ObservableCollection<Domino> CurrentDominos = new ObservableCollection<Domino>();
         public Board CurrentBoard { get; set; }
         public Domino ChosenDomino { get; set; }
         public Tile ChosenTile { get; set; }
@@ -101,16 +89,6 @@ namespace KingDomino
             OnPropertyChanged("Score");
         }
 
-        public string findPath(string fileName)
-        {
-            string fullPath;
-
-            fullPath = Path.GetFullPath(fileName);
-            Console.WriteLine(fullPath);
-
-            return fullPath;
-        }
-
         public void SetCurrentDominosFromNextDominos()
         {
             int index = 0;
@@ -126,7 +104,7 @@ namespace KingDomino
         {
             for (int i = 0; i < 4; i++)
             {
-                dominos[i] = dominoHolder.RandomDomino();
+                dominos.Add(dominoHolder.RandomDomino());
             }
         }
         public void CreateBackFacingDominos()
