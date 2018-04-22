@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using System.IO;
 
 namespace KingDomino
 {
-    class ViewModel : INotifyPropertyChanged
+    class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
     {
         private string chatHistory;
         public string ChatHistory
@@ -69,6 +70,10 @@ namespace KingDomino
         // INotifyPropertyChanged: 
         // OnPropertyChanged must be called to tell a view bound to this implementation to get specified updated property
         public event PropertyChangedEventHandler PropertyChanged;
+        // INotifyCollectionChanged:
+        // May be what we need instead of propertyChanged
+        //public event PropertyChangedEventHandler PropertyChanged;
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
