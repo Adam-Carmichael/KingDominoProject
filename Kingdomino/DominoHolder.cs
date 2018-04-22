@@ -13,11 +13,13 @@ namespace KingDomino
 
         private ArrayList dominos;
         private Random rnd = new Random();
+        private readonly ViewModel viewModel;
 
         public Random Rnd { get => rnd; set => rnd = value; }
 
         public DominoHolder()
         {
+            viewModel = new ViewModel();
             dominos = new ArrayList();
             DominoHolderGenerator();
         }
@@ -31,7 +33,9 @@ namespace KingDomino
         }
         public void DominoHolderGenerator()
         {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Nick\Documents\GitHub\Kingdomino\Kingdomino\dominos.txt");
+            string fileName = "dominos.txt";
+            string dominosPath = viewModel.findPath(fileName);
+            string[] lines = System.IO.File.ReadAllLines(@dominosPath);
             foreach (string line in lines)
             {
                 String[] splitter = line.Split('|');

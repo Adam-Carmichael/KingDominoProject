@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows;
+using System.IO;
 
 namespace KingDomino
 {
@@ -98,6 +99,16 @@ namespace KingDomino
             }
 
             OnPropertyChanged("Score");
+        }
+
+        public string findPath(string fileName)
+        {
+            string fullPath;
+
+            fullPath = Path.GetFullPath(fileName);
+            Console.WriteLine(fullPath);
+
+            return fullPath;
         }
 
         public void SetCurrentDominosFromNextDominos()
