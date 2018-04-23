@@ -21,12 +21,12 @@ namespace KingDomino
             get { return chatHistory; }
             set { chatHistory = value; }
         }
-        public ObservableCollection<Player> PlayerList { get; set; }
+        public ObservableCollection<Player> PlayerList = new ObservableCollection<Player>();
         public ObservableCollection<Domino> NextDominos = new ObservableCollection<Domino>();
         public ObservableCollection<Domino> CurrentDominos = new ObservableCollection<Domino>();
-        public Board CurrentBoard { get; set; }
-        public Domino ChosenDomino { get; set; }
-        public Tile ChosenTile { get; set; }
+        public Board CurrentBoard;
+        public Domino ChosenDomino;
+        public Tile ChosenTile;
 
         public string Score { get; set; }
 
@@ -34,13 +34,13 @@ namespace KingDomino
 
         private DominoHolder dominoHolder = new DominoHolder();
 
-        private Image[,] images;
+        public Image[,] images;
 
-        private void CreatePlayers()
+        public void CreatePlayers()
         {
             for (int i = 0; i < 4; i++)
             {
-                PlayerList[i] = new Player();
+                PlayerList.Add(new Player());
             }
         }
         public void DisplayChatMessage(int index, string text)
@@ -62,7 +62,7 @@ namespace KingDomino
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    OnPropertyChanged("CurrentBoard[" + i + "][" + j + "]");
+                    OnPropertyChanged("CurrentBoard[" + i + "][" + j + "].TileImage");
                 }
             }
         }
@@ -79,9 +79,10 @@ namespace KingDomino
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void OnDominoSelect(int index)
+        public void UpdateChosenDomino(int index)
         {
-
+            ChosenDomino = CurrentDominos[index];
+            OnPropertyChanged("ChosenDomino");
         }
 
         public void UpdateScores()
@@ -100,6 +101,7 @@ namespace KingDomino
             CurrentDominos.Clear();
             foreach (Domino domino in NextDominos)
             {
+                CurrentDominos.Add(domino);
                 //CurrentDominos[index] = domino;
                 OnPropertyChanged("CurrentDominos[" + index + "]");
                 ++index;
@@ -116,7 +118,7 @@ namespace KingDomino
         {
             GetFourRandomDominos(NextDominos);
 
-            //SortDominos(NextDominos);
+            SortDominos(NextDominos);
 
             for (int i = 0; i < 4; i++)
             {

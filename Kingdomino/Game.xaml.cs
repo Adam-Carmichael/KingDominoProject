@@ -26,9 +26,12 @@ namespace KingDomino
             viewModel = new ViewModel();
             DataContext = viewModel;
             InitializeComponent();
+            viewModel.CreatePlayers();
+            viewModel.SwitchBoardView(1);
             viewModel.CreateBackFacingDominos();
             viewModel.SetCurrentDominosFromNextDominos();
             viewModel.CreateBackFacingDominos();
+            
         }
 
         // Sets the image where the button where the user clicked as one of their tiles of their selected domino.
@@ -215,20 +218,59 @@ namespace KingDomino
             SelectTile1Button.Visibility = Visibility.Hidden;
             SelectTile2Button.Visibility = Visibility.Hidden;
         }*/
-    
-        private void BoardClick(object sender, RoutedEventArgs e)
+
+        private void Spot_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.UpdatePlacedTile(1,1);
+            for(int i = 0; i < 5; i++)
+            {
+                for(int j = 0; j < 5; j++)
+                {
+                    if(sender.Equals(viewModel.images[i, j]))
+                    {
+                        viewModel.UpdatePlacedTile(i, j);
+                    }
+                }
+            }
         }
 
         private void Board_Click(object sender, RoutedEventArgs e)
         {
-
+            if(sender.Equals(PB1))
+            {
+                viewModel.SwitchBoardView(0);
+            }
+            else if (sender.Equals(PB2))
+            {
+                viewModel.SwitchBoardView(1);
+            }
+            else if (sender.Equals(PB3))
+            {
+                viewModel.SwitchBoardView(2);
+            }
+            else if (sender.Equals(PB4))
+            {
+                viewModel.SwitchBoardView(3);
+            }
         }
 
         private void Choose_Click(object sender, RoutedEventArgs e)
         {
-
+            if(sender.Equals(Choose1))
+            {
+                viewModel.UpdateChosenDomino(1);
+            }
+            else if (sender.Equals(Choose2))
+            {
+                viewModel.UpdateChosenDomino(2);
+            }
+            else if (sender.Equals(Choose3))
+            {
+                viewModel.UpdateChosenDomino(3);
+            }
+            else if (sender.Equals(Choose4))
+            {
+                viewModel.UpdateChosenDomino(4);
+            }
         }
         private void CreateImageList()
         {

@@ -31,7 +31,7 @@ namespace KingDomino
 
         public Player()
         {
-            Board = new Board("blue");
+            this.Board = new Board("blue");
         }
     }
 }
