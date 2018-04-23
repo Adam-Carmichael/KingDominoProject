@@ -255,22 +255,8 @@ namespace KingDomino
 
         private void Choose_Click(object sender, RoutedEventArgs e)
         {
-            if(sender.Equals(Choose1))
-            {
-                viewModel.UpdateChosenDomino(1);
-            }
-            else if (sender.Equals(Choose2))
-            {
-                viewModel.UpdateChosenDomino(2);
-            }
-            else if (sender.Equals(Choose3))
-            {
-                viewModel.UpdateChosenDomino(3);
-            }
-            else if (sender.Equals(Choose4))
-            {
-                viewModel.UpdateChosenDomino(4);
-            }
+            String length = sender.ToString();
+            viewModel.UpdateChosenDomino(Int32.Parse(sender.ToString().Substring(length.Length - 1)) - 1);
         }
         private void CreateImageList()
         {
