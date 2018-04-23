@@ -10,7 +10,7 @@
     <Grid>
         <Image x:Name="background" HorizontalAlignment="Left" Height="689" Source="Resources/Misc/blueBoardGradient.png" VerticalAlignment="Top" Width="712" Stretch="Fill"/>
 
-        <Image x:Name="Domino1" HorizontalAlignment="Left" Height="55" Margin="10,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[0].DominoBack}"/>
+        <Image x:Name="Domino1" HorizontalAlignment="Left" Height="55" Margin="10,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding Path = NextDominos[0].DominoBack}"/>
         <Image x:Name="Domino2" HorizontalAlignment="Left" Height="55" Margin="155,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[1].DominoBack}"/>
         <Image x:Name="Domino3" HorizontalAlignment="Left" Height="55" Margin="300,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[2].DominoBack}"/>
         <Image x:Name="Domino4" HorizontalAlignment="Left" Height="55" Margin="445,155,0,0" VerticalAlignment="Top" Width="110" Source="{Binding NextDominos[3].DominoBack}"/>

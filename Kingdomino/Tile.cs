@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace KingDomino
 {
     public class Tile
         {
-        private String tileImage;
-        public String TileImage
+        private BitmapImage tileImage;
+        public BitmapImage TileImage
         {
             get { return tileImage; }
             set { tileImage = value; }
@@ -29,7 +30,7 @@ namespace KingDomino
 
         public Tile(String tileImage, TileType tileType, int tileCrown)
         {
-            this.tileImage = tileImage;
+            this.tileImage = new BitmapImage(new Uri(tileImage, UriKind.Relative));
             this.tileType = tileType;
             this.tileCrown = tileCrown;
         }

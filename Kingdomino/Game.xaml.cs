@@ -24,14 +24,14 @@ namespace KingDomino
         public Game()
         {
             viewModel = new ViewModel();
-            DataContext = viewModel;
-            InitializeComponent();
+            this.DataContext = viewModel;
             viewModel.CreatePlayers();
             viewModel.SwitchBoardView(1);
             viewModel.CreateBackFacingDominos();
             viewModel.SetCurrentDominosFromNextDominos();
             viewModel.CreateBackFacingDominos();
-            
+            InitializeComponent();
+
         }
 
         // Sets the image where the button where the user clicked as one of their tiles of their selected domino.
@@ -235,22 +235,8 @@ namespace KingDomino
 
         private void Board_Click(object sender, RoutedEventArgs e)
         {
-            if(sender.Equals(PB1))
-            {
-                viewModel.SwitchBoardView(0);
-            }
-            else if (sender.Equals(PB2))
-            {
-                viewModel.SwitchBoardView(1);
-            }
-            else if (sender.Equals(PB3))
-            {
-                viewModel.SwitchBoardView(2);
-            }
-            else if (sender.Equals(PB4))
-            {
-                viewModel.SwitchBoardView(3);
-            }
+            String length = ((Button) sender).Name;
+            viewModel.UpdateChosenDomino(Int32.Parse(length.Substring(length.Length - 1)) - 1);
         }
 
         private void Choose_Click(object sender, RoutedEventArgs e)

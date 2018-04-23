@@ -21,9 +21,9 @@ namespace KingDomino
             get { return chatHistory; }
             set { chatHistory = value; }
         }
-        public ObservableCollection<Player> PlayerList = new ObservableCollection<Player>();
-        public ObservableCollection<Domino> NextDominos = new ObservableCollection<Domino>();
-        public ObservableCollection<Domino> CurrentDominos = new ObservableCollection<Domino>();
+        public ObservableCollection<Player> PlayerList { get; set; }
+        public ObservableCollection<Domino> NextDominos { get; set; }
+        public ObservableCollection<Domino> CurrentDominos { get; set; }
         public Board CurrentBoard;
         public Domino ChosenDomino;
         public Tile ChosenTile;
@@ -35,6 +35,13 @@ namespace KingDomino
         private DominoHolder dominoHolder = new DominoHolder();
 
         public Image[,] images;
+
+        public ViewModel()
+        {
+            PlayerList = new ObservableCollection<Player>();
+            NextDominos = new ObservableCollection<Domino>();
+            CurrentDominos = new ObservableCollection<Domino>();
+        }
 
         public void CreatePlayers()
         {
@@ -102,23 +109,23 @@ namespace KingDomino
             foreach (Domino domino in NextDominos)
             {
                 CurrentDominos.Add(domino);
-                //CurrentDominos[index] = domino;
                 OnPropertyChanged("CurrentDominos[" + index + "]");
                 ++index;
             }
         }
-        private void GetFourRandomDominos(ObservableCollection<Domino> dominos)
+        private void GetFourRandomDominos()
         {
+            NextDominos.Clear();
             for (int i = 0; i < 4; i++)
             {
-                dominos.Add(dominoHolder.RandomDomino());
+                NextDominos.Add(dominoHolder.RandomDomino());
             }
         }
         public void CreateBackFacingDominos()
         {
-            GetFourRandomDominos(NextDominos);
+            GetFourRandomDominos();
 
-            SortDominos(NextDominos);
+            SortDominos();
 
             for (int i = 0; i < 4; i++)
             {
@@ -127,15 +134,15 @@ namespace KingDomino
 
         }
 
-        private void SortDominos(ObservableCollection<Domino> dominos)
+        private void SortDominos()
         {
-            int size = dominos.Count;
+            int size = NextDominos.Count;
             for (int j = size - 1; j > 0; j--)
             {
                 for (int i = 0; i < j; i++)
                 {
-                    if (dominos[i].Number > dominos[i + 1].Number)
-                        Exchange(dominos, i, i + 1);
+                    if (NextDominos[i].Number > NextDominos[i + 1].Number)
+                        Exchange(NextDominos, i, i + 1);
                 }
             }
         }

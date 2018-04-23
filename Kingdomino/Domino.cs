@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace KingDomino
 {
@@ -20,8 +21,8 @@ namespace KingDomino
             get { return tile2; }
             set { tile2 = value; }
         }
-        private String dominoBack;
-        public String DominoBack
+        private BitmapImage dominoBack;
+        public BitmapImage DominoBack
         {
             get { return dominoBack; }
             set { dominoBack = value; }
@@ -37,7 +38,7 @@ namespace KingDomino
         {
             this.tile1 = tile1;
             this.tile2 = tile2;
-            this.dominoBack = dominoBack;
+            this.dominoBack = new BitmapImage(new Uri(dominoBack, UriKind.Relative));
             this.number = number;
         }
     }
