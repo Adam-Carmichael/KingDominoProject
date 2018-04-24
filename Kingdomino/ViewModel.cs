@@ -24,9 +24,9 @@ namespace KingDomino
         public ObservableCollection<Player> PlayerList { get; set; }
         public ObservableCollection<Domino> NextDominos { get; set; }
         public ObservableCollection<Domino> CurrentDominos { get; set; }
-        public Board CurrentBoard;
-        public Domino ChosenDomino;
-        public Tile ChosenTile;
+        public Board CurrentBoard { get; set; }
+        public Domino ChosenDomino { get; set; }
+        public Tile ChosenTile { get; set; }
 
         public string Score { get; set; }
 
@@ -41,6 +41,12 @@ namespace KingDomino
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
+            CreatePlayers();
+            CurrentBoard = PlayerList[0].Board;
+            images = new Image[5, 5];
+            CreateBackFacingDominos();
+            SetCurrentDominosFromNextDominos();
+            CreateBackFacingDominos();
         }
 
         public void CreatePlayers()
@@ -59,7 +65,7 @@ namespace KingDomino
         public void UpdatePlacedTile(int x, int y)
         {
             CurrentBoard.Add(ChosenTile, x, y);
-            OnPropertyChanged("CurrentBoard[" + x + "][" + y + "]");
+            OnPropertyChanged("CurrentBoard[" + x + "," + y + "]");
         }
 
         public void SwitchBoardView(int index)
@@ -69,7 +75,7 @@ namespace KingDomino
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    OnPropertyChanged("CurrentBoard[" + i + "][" + j + "].TileImage");
+                    OnPropertyChanged("CurrentBoard[" + i + "," + j + "].TileImage");
                 }
             }
         }
@@ -90,6 +96,16 @@ namespace KingDomino
         {
             ChosenDomino = CurrentDominos[index];
             OnPropertyChanged("ChosenDomino");
+            if(roundNumber <= 10)
+            {
+                SetCurrentDominosFromNextDominos();
+                CreateBackFacingDominos();
+            }
+            else if(roundNumber == 11)
+            {
+                SetCurrentDominosFromNextDominos();
+            }
+            roundNumber++;
         }
 
         public void UpdateScores()

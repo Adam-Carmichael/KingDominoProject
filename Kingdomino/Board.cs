@@ -9,8 +9,8 @@ namespace KingDomino
 {
     class Board
     {
-        private Tile[,] playBoard;
-        public Tile[,] PlayBoard
+        private Tile[][] playBoard;
+        public Tile[][] PlayBoard
         {
             get { return playBoard; }
             set { playBoard = value; }
@@ -25,8 +25,13 @@ namespace KingDomino
         private String originCastlePath = "Resources/OriginCastle/";
         public Board(String color)
         {
-            this.playBoard = new Tile[5, 5];
-            this.playBoard[2, 2] = new Tile(originCastlePath + color + ".png", TileType.Origin, 0);
+            this.playBoard = new Tile[5][];
+            this.playBoard[0] = new Tile[5];
+            this.playBoard[1] = new Tile[5];
+            this.playBoard[2] = new Tile[5];
+            this.playBoard[3] = new Tile[5];
+            this.playBoard[4] = new Tile[5];
+            this.playBoard[2][2] = new Tile(originCastlePath + color + ".png", TileType.Origin, 0);
         }
 
         public int CalculateScore()
@@ -37,7 +42,7 @@ namespace KingDomino
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    Tile tempTile = PlayBoard[i, j];
+                    Tile tempTile = PlayBoard[i][j];
                     Boolean[,] checkedTilePositions = new Boolean[5, 5];
 
                     if (tempTile != null && tempTile.TileCrown > 0)
@@ -95,7 +100,7 @@ namespace KingDomino
         {
             int score = 0;
 
-            Tile tempTile = PlayBoard[row, col];
+            Tile tempTile = PlayBoard[row][col];
 
             if (tempTile != null && tempTile.TileType.Equals(tile.TileType) && !checkedTilePositions[row, col])
             {
@@ -113,11 +118,11 @@ namespace KingDomino
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (this.playBoard[i, j] != null)
+                    if (this.playBoard[i][j] != null)
                     {
-                        if (this.playBoard[i, j].TileType.Equals("Origin"))
+                        if (this.playBoard[i][j].TileType.Equals("Origin"))
                         {
-                            return this.playBoard[i, j];
+                            return this.playBoard[i][j];
                         }
                     }
                 }
@@ -127,7 +132,7 @@ namespace KingDomino
 
         public void Add(Tile tile, int i, int j)
         {
-            this.playBoard[i, j] = tile;
+            this.playBoard[i][j] = tile;
         }
     }
 }
