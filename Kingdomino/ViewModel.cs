@@ -80,6 +80,7 @@ namespace KingDomino
             CurrentBoard.Add(ChosenTile, x, y);
             NullifyPlaceHolder();
             OnPropertyChanged("CurrentBoard");
+            CheckNextOptions(x, y, ChosenTile);
         }
 
         public void SwitchBoardView(int index)
@@ -275,6 +276,14 @@ namespace KingDomino
             {
                 CheckDirection(row, col + 1, tile);
             }
+        }
+
+        private void CheckNextOptions(int row, int col, Tile tile)
+        {
+            NullifyPlaceHolder();
+            CheckAvailableMoves(row, col, tile);
+            OnPropertyChanged("CurrentBoard");
+            SetBoardTileVisiblity();
         }
 
         private void CheckDirection(int row, int col, Tile tile)
