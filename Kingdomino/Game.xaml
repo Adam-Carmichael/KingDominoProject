@@ -32,91 +32,91 @@
         <Button x:Name="Choose2" Content="Choose Domino 2" HorizontalAlignment="Left" Margin="155,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic" Visibility="{Binding ShowButtons}"/>
         <Button x:Name="Choose3" Content="Choose Domino 3" HorizontalAlignment="Left" Margin="300,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic" Visibility="{Binding ShowButtons}"/>
         <Button x:Name="Choose4" Content="Choose Domino 4" HorizontalAlignment="Left" Margin="445,52,0,0" VerticalAlignment="Top" Click ="Choose_Click" Width="110" Height="25" FontFamily="Showcard Gothic" Visibility="{Binding ShowButtons}"/>
-        <Button x:Name="SelectedTile1Button" Click="Tile_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="265,260,0,0">
+        <Button x:Name="SelectedTile1Button" Click="Tile_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="265,260,0,0" Visibility="{Binding ShowChosenButtons}">
             <Image x:Name= "SelectedTile1" Source="{Binding ChosenDomino.Tile1.TileImage}"/>
         </Button>
-        <Button x:Name="SelectedTile2Button" Click="Tile_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="320,260,0,0">
+        <Button x:Name="SelectedTile2Button" Click="Tile_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="320,260,0,0" Visibility="{Binding ShowChosenButtons}">
                 <Image x:Name= "SelectedTile2" Source="{Binding ChosenDomino.Tile2.TileImage}"/>
         </Button>
-        <Image x:Name= "SelectedDomino" HorizontalAlignment="Left" Height="55" Margin="265,315,0,0" VerticalAlignment="Top" Width="110" Source="{Binding ChosenDomino.DominoBack}"/>
+        <Image x:Name= "SelectedDomino" HorizontalAlignment="Left" Height="55" Margin="265,315,0,0" VerticalAlignment="Top" Width="110" Source="{Binding ChosenDomino.DominoBack}" Visibility="{Binding ShowChosenButtons}"/>
 
-        <Button x:Name="One_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,390,0,0" Visibility="{Binding BoardVisibility[0][0]}">
+        <Button x:Name="One_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,390,0,0" Visibility="{Binding BoardVisibility[0][0]}" IsEnabled="{Binding BoardEnable[0][0]}">
             <Image x:Name= "One_One" Source="{Binding CurrentBoard.PlayBoard[0][0].TileImage}"/>
         </Button>
-        <Button x:Name="One_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,390,0,0" Visibility="{Binding BoardVisibility[0][1]}">
+        <Button x:Name="One_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,390,0,0" Visibility="{Binding BoardVisibility[0][1]}" IsEnabled="{Binding BoardEnable[0][1]}">
             <Image x:Name= "One_Two" Source="{Binding CurrentBoard.PlayBoard[0][1].TileImage}"/>
         </Button>
-        <Button x:Name="One_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,390,0,0" Visibility="{Binding BoardVisibility[0][2]}">
+        <Button x:Name="One_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,390,0,0" Visibility="{Binding BoardVisibility[0][2]}" IsEnabled="{Binding BoardEnable[0][2]}">
             <Image x:Name= "One_Three" Source="{Binding CurrentBoard.PlayBoard[0][2].TileImage}"/>
         </Button>
-        <Button x:Name="One_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,390,0,0" Visibility="{Binding BoardVisibility[0][3]}">
+        <Button x:Name="One_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,390,0,0" Visibility="{Binding BoardVisibility[0][3]}" IsEnabled="{Binding BoardEnable[0][3]}">
             <Image x:Name= "One_Four" Source="{Binding CurrentBoard.PlayBoard[0][3].TileImage}"/>
         </Button>
-        <Button x:Name="One_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,390,0,0" Visibility="{Binding BoardVisibility[0][4]}">
+        <Button x:Name="One_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,390,0,0" Visibility="{Binding BoardVisibility[0][4]}" IsEnabled="{Binding BoardEnable[0][4]}">
             <Image x:Name= "One_Five" Source="{Binding CurrentBoard.PlayBoard[0][4].TileImage}"/>
         </Button>
 
-        <Button x:Name="Two_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,445,0,0" Visibility="{Binding BoardVisibility[1][0]}">
+        <Button x:Name="Two_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,445,0,0" Visibility="{Binding BoardVisibility[1][0]}" IsEnabled="{Binding BoardEnable[1][0]}">
             <Image x:Name= "Two_One" Source="{Binding CurrentBoard.PlayBoard[1][0].TileImage}"/>
         </Button>
-        <Button x:Name="Two_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,445,0,0" Visibility="{Binding BoardVisibility[1][1]}">
+        <Button x:Name="Two_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,445,0,0" Visibility="{Binding BoardVisibility[1][1]}" IsEnabled="{Binding BoardEnable[1][1]}">
             <Image x:Name= "Two_Two" Source="{Binding CurrentBoard.PlayBoard[1][1].TileImage}"/>
         </Button>
-        <Button x:Name="Two_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,445,0,0" Visibility="{Binding BoardVisibility[1][2]}">
+        <Button x:Name="Two_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,445,0,0" Visibility="{Binding BoardVisibility[1][2]}" IsEnabled="{Binding BoardEnable[1][2]}">
             <Image x:Name= "Two_Three" Source="{Binding CurrentBoard.PlayBoard[1][2].TileImage}"/>
         </Button>
-        <Button x:Name="Two_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,445,0,0" Visibility="{Binding BoardVisibility[1][3]}">
+        <Button x:Name="Two_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,445,0,0" Visibility="{Binding BoardVisibility[1][3]}" IsEnabled="{Binding BoardEnable[1][3]}">
             <Image x:Name= "Two_Four" Source="{Binding CurrentBoard.PlayBoard[1][3].TileImage}"/>
         </Button>
-        <Button x:Name="Two_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,445,0,0" Visibility="{Binding BoardVisibility[1][4]}">
+        <Button x:Name="Two_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,445,0,0" Visibility="{Binding BoardVisibility[1][4]}" IsEnabled="{Binding BoardEnable[1][4]}">
             <Image x:Name= "Two_Five" Source="{Binding CurrentBoard.PlayBoard[1][4].TileImage}"/>
         </Button>
 
-        <Button x:Name="Three_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,500,0,0" Visibility="{Binding BoardVisibility[2][0]}">
+        <Button x:Name="Three_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,500,0,0" Visibility="{Binding BoardVisibility[2][0]}" IsEnabled="{Binding BoardEnable[2][0]}">
             <Image x:Name= "Three_One" Source="{Binding CurrentBoard.PlayBoard[2][0].TileImage}"/>
         </Button>
-        <Button x:Name="Three_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,500,0,0" Visibility="{Binding BoardVisibility[2][1]}">
+        <Button x:Name="Three_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,500,0,0" Visibility="{Binding BoardVisibility[2][1]}" IsEnabled="{Binding BoardEnable[2][1]}">
             <Image x:Name= "Three_Two" Source="{Binding CurrentBoard.PlayBoard[2][1].TileImage}"/>
         </Button>
-        <Button x:Name="Three_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,500,0,0" Visibility="{Binding BoardVisibility[2][2]}">
+        <Button x:Name="Three_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,500,0,0" Visibility="{Binding BoardVisibility[2][2]}" IsEnabled="{Binding BoardEnable[2][2]}">
             <Image x:Name= "Three_Three" Source="{Binding CurrentBoard.PlayBoard[2][2].TileImage}"/>
         </Button>
-        <Button x:Name="Three_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,500,0,0" Visibility="{Binding BoardVisibility[2][3]}">
+        <Button x:Name="Three_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,500,0,0" Visibility="{Binding BoardVisibility[2][3]}" IsEnabled="{Binding BoardEnable[2][3]}">
             <Image x:Name= "Three_Four" Source="{Binding CurrentBoard.PlayBoard[2][3].TileImage}"/>
         </Button>
-        <Button x:Name="Three_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,500,0,0" Visibility="{Binding BoardVisibility[2][4]}">
+        <Button x:Name="Three_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,500,0,0" Visibility="{Binding BoardVisibility[2][4]}" IsEnabled="{Binding BoardEnable[2][4]}">
             <Image x:Name= "Three_Five" Source="{Binding CurrentBoard.PlayBoard[2][4].TileImage}"/>
         </Button>
 
-        <Button x:Name="Four_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,555,0,0" Visibility="{Binding BoardVisibility[3][0]}">
+        <Button x:Name="Four_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,555,0,0" Visibility="{Binding BoardVisibility[3][0]}" IsEnabled="{Binding BoardEnable[3][0]}">
             <Image x:Name= "Four_One" Source="{Binding CurrentBoard.PlayBoard[3][0].TileImage}"/>
         </Button>
-        <Button x:Name="Four_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,555,0,0" Visibility="{Binding BoardVisibility[3][1]}">
+        <Button x:Name="Four_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,555,0,0" Visibility="{Binding BoardVisibility[3][1]}" IsEnabled="{Binding BoardEnable[3][1]}">
             <Image x:Name= "Four_Two" Source="{Binding CurrentBoard.PlayBoard[3][1].TileImage}"/>
         </Button>
-        <Button x:Name="Four_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,555,0,0" Visibility="{Binding BoardVisibility[3][2]}">
+        <Button x:Name="Four_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,555,0,0" Visibility="{Binding BoardVisibility[3][2]}" IsEnabled="{Binding BoardEnable[3][2]}">
             <Image x:Name= "Four_Three" Source="{Binding CurrentBoard.PlayBoard[3][2].TileImage}"/>
         </Button>
-        <Button x:Name="Four_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,555,0,0" Visibility="{Binding BoardVisibility[3][3]}">
+        <Button x:Name="Four_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,555,0,0" Visibility="{Binding BoardVisibility[3][3]}" IsEnabled="{Binding BoardEnable[3][3]}">
             <Image x:Name= "Four_Four" Source="{Binding CurrentBoard.PlayBoard[3][3].TileImage}"/>
         </Button>
-        <Button x:Name="Four_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,555,0,0" Visibility="{Binding BoardVisibility[3][4]}">
+        <Button x:Name="Four_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,555,0,0" Visibility="{Binding BoardVisibility[3][4]}" IsEnabled="{Binding BoardEnable[3][4]}">
             <Image x:Name= "Four_Five" Source="{Binding CurrentBoard.PlayBoard[3][4].TileImage}"/>
         </Button>
 
-        <Button x:Name="Five_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,610,0,0" Visibility="{Binding BoardVisibility[4][0]}">
+        <Button x:Name="Five_OneButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="140,610,0,0" Visibility="{Binding BoardVisibility[4][0]}" IsEnabled="{Binding BoardEnable[4][0]}">
             <Image x:Name= "Five_One" Source="{Binding CurrentBoard.PlayBoard[4][0].TileImage}"/>
         </Button>
-        <Button x:Name="Five_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,610,0,0" Visibility="{Binding BoardVisibility[4][1]}">
+        <Button x:Name="Five_TwoButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="195,610,0,0" Visibility="{Binding BoardVisibility[4][1]}" IsEnabled="{Binding BoardEnable[4][1]}">
             <Image x:Name= "Five_Two" Source="{Binding CurrentBoard.PlayBoard[4][1].TileImage}"/>
         </Button>
-        <Button x:Name="Five_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,610,0,0" Visibility="{Binding BoardVisibility[4][2]}">
+        <Button x:Name="Five_ThreeButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="250,610,0,0" Visibility="{Binding BoardVisibility[4][2]}" IsEnabled="{Binding BoardEnable[4][2]}">
             <Image x:Name= "Five_Three" Source="{Binding CurrentBoard.PlayBoard[4][2].TileImage}"/>
         </Button>
-        <Button x:Name="Five_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,610,0,0" Visibility="{Binding BoardVisibility[4][3]}">
+        <Button x:Name="Five_FourButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="305,610,0,0" Visibility="{Binding BoardVisibility[4][3]}" IsEnabled="{Binding BoardEnable[4][3]}">
             <Image x:Name= "Five_Four" Source="{Binding CurrentBoard.PlayBoard[4][3].TileImage}"/>
         </Button>
-        <Button x:Name="Five_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,610,0,0" Visibility="{Binding BoardVisibility[4][4]}">
+        <Button x:Name="Five_FiveButton" Click="Spot_Click" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top" Width="55" Margin="360,610,0,0" Visibility="{Binding BoardVisibility[4][4]}" IsEnabled="{Binding BoardEnable[4][4]}">
             <Image x:Name= "Five_Five" Source="{Binding CurrentBoard.PlayBoard[4][4].TileImage}"/>
         </Button>
 
@@ -151,7 +151,7 @@
         <Image x:Name= "Five_Five" HorizontalAlignment="Left" Height="55" Margin="360,610,0,0" VerticalAlignment="Top" Width="55" Source="{Binding CurrentBoard.PlayBoard[4][4].TileImage}" MouseLeftButtonDown="Spot_Click"/>
         -->
         
-        <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="23,303,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="33" Width="83"/>
+        <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="23,303,0,0" TextWrapping="Wrap" Text="{Binding Score}" VerticalAlignment="Top" Height="33" Width="83"/>
 
         <Image x:Name="MeepleChoice1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
         <Image x:Name="MeepleChoice2" HorizontalAlignment="Left" Height="55" Margin="177,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
