@@ -65,7 +65,7 @@ namespace KingDomino
         public void UpdatePlacedTile(int x, int y)
         {
             CurrentBoard.Add(ChosenTile, x, y);
-            OnPropertyChanged("CurrentBoard[" + x + "," + y + "]");
+            OnPropertyChanged("CurrentBoard");
         }
 
         public void SwitchBoardView(int index)
@@ -75,7 +75,7 @@ namespace KingDomino
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    OnPropertyChanged("CurrentBoard[" + i + "," + j + "].TileImage");
+                    OnPropertyChanged("CurrentBoard");
                 }
             }
         }
@@ -95,6 +95,7 @@ namespace KingDomino
         public void UpdateChosenDomino(int index)
         {
             ChosenDomino = CurrentDominos[index];
+            ChosenTile = ChosenDomino.Tile1;
             OnPropertyChanged("ChosenDomino");
             if(roundNumber <= 10)
             {

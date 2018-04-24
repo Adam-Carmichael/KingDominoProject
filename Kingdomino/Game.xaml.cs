@@ -25,6 +25,7 @@ namespace KingDomino
         {
             viewModel = new ViewModel();
             this.DataContext = viewModel;
+            CreateImageList();
             InitializeComponent();
         }
 
@@ -215,11 +216,11 @@ namespace KingDomino
 
         private void Spot_Click(object sender, RoutedEventArgs e)
         {
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 for(int j = 0; j < 5; j++)
                 {
-                    if (sender.Equals(viewModel.images[i, j]))
+                    if (((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 6).Equals("One_One"))
                     {
                         viewModel.UpdatePlacedTile(i, j);
                     }
@@ -227,44 +228,58 @@ namespace KingDomino
             }
         }
 
+        /*private void Spot_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("test1");
+            Console.WriteLine(((Image)sender).Name);
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    if (((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 6).Equals(viewModel.images[i, j].Name))
+                    {
+                        viewModel.UpdatePlacedTile(i, j);
+                    }
+                }
+            }
+        }*/
+
         private void Board_Click(object sender, RoutedEventArgs e)
         {
-            String length = ((Button) sender).Name;
-            viewModel.SwitchBoardView(Int32.Parse(length.Substring(length.Length - 1)) - 1);
+            viewModel.SwitchBoardView(Int32.Parse(((Button)sender).Name.Substring(((Button)sender).Name.Length - 1)) - 1);
         }
 
         private void Choose_Click(object sender, RoutedEventArgs e)
         {
-            String length = sender.ToString();
-            viewModel.UpdateChosenDomino(Int32.Parse(sender.ToString().Substring(length.Length - 1)) - 1);
+            viewModel.UpdateChosenDomino(Int32.Parse(sender.ToString().Substring(sender.ToString().Length - 1)) - 1);
         }
         private void CreateImageList()
         {
-            viewModel.AddImageToList(1, 1, One_One);
-            viewModel.AddImageToList(1, 2, One_Two);
-            viewModel.AddImageToList(1, 3, One_Three);
-            viewModel.AddImageToList(1, 4, One_Four);
-            viewModel.AddImageToList(1, 5, One_Five);
-            viewModel.AddImageToList(2, 1, Two_One);
-            viewModel.AddImageToList(2, 2, Two_Two);
-            viewModel.AddImageToList(2, 3, Two_Three);
-            viewModel.AddImageToList(2, 4, Two_Four);
-            viewModel.AddImageToList(2, 5, Two_Five);
-            viewModel.AddImageToList(3, 1, Three_One);
-            viewModel.AddImageToList(3, 2, Three_Two);
-            viewModel.AddImageToList(3, 3, Three_Three);
-            viewModel.AddImageToList(3, 4, Three_Four);
-            viewModel.AddImageToList(3, 5, Three_Five);
-            viewModel.AddImageToList(4, 1, Four_One);
-            viewModel.AddImageToList(4, 2, Four_Two);
-            viewModel.AddImageToList(4, 3, Four_Three);
-            viewModel.AddImageToList(4, 4, Four_Four);
-            viewModel.AddImageToList(4, 5, Four_Five);
-            viewModel.AddImageToList(5, 1, Five_One);
-            viewModel.AddImageToList(5, 2, Five_Two);
-            viewModel.AddImageToList(5, 3, Five_Three);
-            viewModel.AddImageToList(5, 4, Five_Four);
-            viewModel.AddImageToList(5, 5, Five_Five);
+            viewModel.AddImageToList(0, 0, One_One);
+            viewModel.AddImageToList(0, 1, One_Two);
+            viewModel.AddImageToList(0, 2, One_Three);
+            viewModel.AddImageToList(0, 3, One_Four);
+            viewModel.AddImageToList(0, 4, One_Five);
+            viewModel.AddImageToList(1, 0, Two_One);
+            viewModel.AddImageToList(1, 1, Two_Two);
+            viewModel.AddImageToList(1, 2, Two_Three);
+            viewModel.AddImageToList(1, 3, Two_Four);
+            viewModel.AddImageToList(1, 4, Two_Five);
+            viewModel.AddImageToList(2, 0, Three_One);
+            viewModel.AddImageToList(2, 1, Three_Two);
+            viewModel.AddImageToList(2, 2, Three_Three);
+            viewModel.AddImageToList(2, 3, Three_Four);
+            viewModel.AddImageToList(2, 4, Three_Five);
+            viewModel.AddImageToList(3, 0, Four_One);
+            viewModel.AddImageToList(3, 1, Four_Two);
+            viewModel.AddImageToList(3, 2, Four_Three);
+            viewModel.AddImageToList(3, 3, Four_Four);
+            viewModel.AddImageToList(3, 4, Four_Five);
+            viewModel.AddImageToList(4, 0, Five_One);
+            viewModel.AddImageToList(4, 1, Five_Two);
+            viewModel.AddImageToList(4, 2, Five_Three);
+            viewModel.AddImageToList(4, 3, Five_Four);
+            viewModel.AddImageToList(4, 4, Five_Five);
         }
 
     }
