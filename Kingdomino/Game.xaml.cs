@@ -20,13 +20,15 @@ namespace KingDomino
     public partial class Game : Window
     {
         private readonly ViewModel viewModel;
+        private Image[,] images;
 
         public Game()
         {
             viewModel = new ViewModel();
             this.DataContext = viewModel;
-            CreateImageList();
             InitializeComponent();
+            images = new Image[5, 5];
+            CreateImageList();
         }
 
         // Sets the image where the button where the user clicked as one of their tiles of their selected domino.
@@ -220,7 +222,7 @@ namespace KingDomino
             {
                 for(int j = 0; j < 5; j++)
                 {
-                    if (((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 6).Equals("One_One"))
+                    if (((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 6).Equals(images[i,j].Name))
                     {
                         viewModel.UpdatePlacedTile(i, j);
                     }
@@ -228,21 +230,10 @@ namespace KingDomino
             }
         }
 
-        /*private void Spot_Click(object sender, RoutedEventArgs e)
+        private void Tile_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("test1");
-            Console.WriteLine(((Image)sender).Name);
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    if (((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 6).Equals(viewModel.images[i, j].Name))
-                    {
-                        viewModel.UpdatePlacedTile(i, j);
-                    }
-                }
-            }
-        }*/
+            viewModel.UpdateChosenTile(Int32.Parse(((Button) sender).Name.Substring(12,1)));
+        }
 
         private void Board_Click(object sender, RoutedEventArgs e)
         {
@@ -255,32 +246,31 @@ namespace KingDomino
         }
         private void CreateImageList()
         {
-            viewModel.AddImageToList(0, 0, One_One);
-            viewModel.AddImageToList(0, 1, One_Two);
-            viewModel.AddImageToList(0, 2, One_Three);
-            viewModel.AddImageToList(0, 3, One_Four);
-            viewModel.AddImageToList(0, 4, One_Five);
-            viewModel.AddImageToList(1, 0, Two_One);
-            viewModel.AddImageToList(1, 1, Two_Two);
-            viewModel.AddImageToList(1, 2, Two_Three);
-            viewModel.AddImageToList(1, 3, Two_Four);
-            viewModel.AddImageToList(1, 4, Two_Five);
-            viewModel.AddImageToList(2, 0, Three_One);
-            viewModel.AddImageToList(2, 1, Three_Two);
-            viewModel.AddImageToList(2, 2, Three_Three);
-            viewModel.AddImageToList(2, 3, Three_Four);
-            viewModel.AddImageToList(2, 4, Three_Five);
-            viewModel.AddImageToList(3, 0, Four_One);
-            viewModel.AddImageToList(3, 1, Four_Two);
-            viewModel.AddImageToList(3, 2, Four_Three);
-            viewModel.AddImageToList(3, 3, Four_Four);
-            viewModel.AddImageToList(3, 4, Four_Five);
-            viewModel.AddImageToList(4, 0, Five_One);
-            viewModel.AddImageToList(4, 1, Five_Two);
-            viewModel.AddImageToList(4, 2, Five_Three);
-            viewModel.AddImageToList(4, 3, Five_Four);
-            viewModel.AddImageToList(4, 4, Five_Five);
+            images[0, 0] = One_One;
+            images[0, 1] = One_Two;
+            images[0, 2] = One_Three;
+            images[0, 3] = One_Four;
+            images[0, 4] = One_Five;
+            images[1, 0] = Two_One;
+            images[1, 1] = Two_Two;
+            images[1, 2] = Two_Three;
+            images[1, 3] = Two_Four;
+            images[1, 4] = Two_Five;
+            images[2, 0] = Three_One;
+            images[2, 1] = Three_Two;
+            images[2, 2] = Three_Three;
+            images[2, 3] = Three_Four;
+            images[2, 4] = Three_Five;
+            images[3, 0] = Four_One;
+            images[3, 1] = Four_Two;
+            images[3, 2] = Four_Three;
+            images[3, 3] = Four_Four;
+            images[3, 4] = Four_Five;
+            images[4, 0] = Five_One;
+            images[4, 1] = Five_Two;
+            images[4, 2] = Five_Three;
+            images[4, 3] = Five_Four;
+            images[4, 4] = Five_Five;
         }
-
     }
 }

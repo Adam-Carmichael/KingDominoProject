@@ -28,22 +28,30 @@ namespace KingDomino
         public Domino ChosenDomino { get; set; }
         public Tile ChosenTile { get; set; }
 
+        public Visibility ShowButtons { get; set; }
+        public Visibility[][] BoardVisibility { get; set; }
+
         public string Score { get; set; }
 
         private int roundNumber = 1;
 
         private DominoHolder dominoHolder = new DominoHolder();
 
-        public Image[,] images;
-
         public ViewModel()
         {
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
+            BoardVisibility = new Visibility[5][];
+            BoardVisibility[0] = new Visibility[5];
+            BoardVisibility[1] = new Visibility[5];
+            BoardVisibility[2] = new Visibility[5];
+            BoardVisibility[3] = new Visibility[5];
+            BoardVisibility[4] = new Visibility[5];
             CreatePlayers();
             CurrentBoard = PlayerList[0].Board;
-            images = new Image[5, 5];
+            ShowButtons = Visibility.Visible;
+            SetBoardTileVisiblity();
             CreateBackFacingDominos();
             SetCurrentDominosFromNextDominos();
             CreateBackFacingDominos();
@@ -56,6 +64,7 @@ namespace KingDomino
                 PlayerList.Add(new Player());
             }
         }
+
         public void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
@@ -71,13 +80,26 @@ namespace KingDomino
         public void SwitchBoardView(int index)
         {
             CurrentBoard = PlayerList[index].Board;
+            OnPropertyChanged("CurrentBoard");
+        }
+
+        public void SetBoardTileVisiblity()
+        {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    OnPropertyChanged("CurrentBoard");
+                    if(CurrentBoard.PlayBoard[i][j] != null)
+                    {
+                        BoardVisibility[i][j] = Visibility.Visible;
+                    }
+                    else
+                    {
+                        BoardVisibility[i][j] = Visibility.Hidden;
+                    }
                 }
             }
+            OnPropertyChanged("BoardVisibility");
         }
 
         // INotifyPropertyChanged: 
@@ -95,7 +117,6 @@ namespace KingDomino
         public void UpdateChosenDomino(int index)
         {
             ChosenDomino = CurrentDominos[index];
-            ChosenTile = ChosenDomino.Tile1;
             OnPropertyChanged("ChosenDomino");
             if(roundNumber <= 10)
             {
@@ -105,8 +126,23 @@ namespace KingDomino
             else if(roundNumber == 11)
             {
                 SetCurrentDominosFromNextDominos();
+                NextDominos.Clear();
             }
+            ShowButtons = Visibility.Hidden;
+            OnPropertyChanged("ShowButtons");
             roundNumber++;
+        }
+
+        public void UpdateChosenTile(int index)
+        {
+            if(index == 1)
+            {
+                ChosenTile = ChosenDomino.Tile1;
+            }
+            else
+            {
+                ChosenTile = ChosenDomino.Tile2;
+            }
         }
 
         public void UpdateScores()
@@ -126,9 +162,9 @@ namespace KingDomino
             foreach (Domino domino in NextDominos)
             {
                 CurrentDominos.Add(domino);
-                OnPropertyChanged("CurrentDominos[" + index + "]");
                 ++index;
             }
+            OnPropertyChanged("CurrentDominos");
         }
         private void GetFourRandomDominos()
         {
@@ -143,11 +179,8 @@ namespace KingDomino
             GetFourRandomDominos();
 
             SortDominos();
-
-            for (int i = 0; i < 4; i++)
-            {
-                OnPropertyChanged("NextDominos[" + i + "]");
-            }
+            
+            OnPropertyChanged("NextDominos");
 
         }
 
@@ -174,7 +207,7 @@ namespace KingDomino
         }
 
         // Refreshs the four starting dominos and flips the next ones
-        public void RefreshSelectionDominos()
+        /*public void RefreshSelectionDominos()
         {
 
             //Create new backfacing dominos and set the old ones as the new tiles
@@ -205,7 +238,7 @@ namespace KingDomino
                 //main.Show();
                 //Close();
             }
-        }
+        }*/
 
         public int ConvertNameFromStringToInt(string imageName)
         {
@@ -225,11 +258,6 @@ namespace KingDomino
                 default:
                     return -1;
             }
-        }
-
-        public void AddImageToList(int row, int col, Image image)
-        {
-            images[row, col] = image;
         }
 
         private void CheckMove()
