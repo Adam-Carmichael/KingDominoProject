@@ -15,6 +15,7 @@ namespace KingDomino
 {
     class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
     {
+        private Tile placeholderTile;
         private string chatHistory;
         public string ChatHistory
         {
@@ -39,9 +40,12 @@ namespace KingDomino
 
         public ViewModel()
         {
+            placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
+            
             BoardVisibility = new Visibility[5][];
             BoardVisibility[0] = new Visibility[5];
             BoardVisibility[1] = new Visibility[5];
@@ -74,6 +78,7 @@ namespace KingDomino
         public void UpdatePlacedTile(int x, int y)
         {
             CurrentBoard.Add(ChosenTile, x, y);
+            NullifyPlaceHolder();
             OnPropertyChanged("CurrentBoard");
         }
 
@@ -143,6 +148,7 @@ namespace KingDomino
             {
                 ChosenTile = ChosenDomino.Tile2;
             }
+            ShowOptions(ChosenTile);
         }
 
         public void UpdateScores()
@@ -204,6 +210,81 @@ namespace KingDomino
             tempDomino = dominos[m];
             dominos[m] = dominos[n];
             dominos[n] = tempDomino;
+        }
+
+        private void NullifyPlaceHolder()
+        {
+            for (int row = 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    if (CurrentBoard.PlayBoard[row][col] != null && CurrentBoard.PlayBoard[row][col] == placeholderTile)
+                    {
+                        CurrentBoard.PlayBoard[row][col] = null;
+                    }
+                }
+            }
+        }
+
+        public void ShowOptions(Tile chosenTile)
+        {
+            NullifyPlaceHolder();
+            for (int row = 0; row < 5; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    if (CurrentBoard.PlayBoard[row][col] != null)
+                    {
+                        Tile tempTile = CurrentBoard.PlayBoard[row][col];
+                        TileType tempTileType = tempTile.TileType;
+
+                        if (chosenTile.TileType == tempTileType || tempTileType == TileType.Origin)
+                        {
+                            //check directions here
+                            CheckAvailableMoves(row, col, chosenTile);                          
+                        }
+                    }
+                }
+            }
+            OnPropertyChanged("CurrentBoard");
+            SetBoardTileVisiblity();
+        }
+        private void CheckAvailableMoves(int row, int col, Tile tile)
+        {
+            Boolean north = row > 0;
+            Boolean west = col > 0;
+            Boolean south = row < 4;
+            Boolean east = col < 4;
+
+            if (north)
+            {
+                CheckDirection(row - 1, col, tile);
+            }
+
+            if (west)
+            {
+                CheckDirection(row, col - 1, tile);
+            }
+
+            if (south)
+            {
+                CheckDirection(row + 1, col, tile);
+            }
+
+            if (east)
+            {
+                CheckDirection(row, col + 1, tile);
+            }
+        }
+
+        private void CheckDirection(int row, int col, Tile tile)
+        {
+            //Tile tempTile = CurrentBoard.PlayBoard[row][col];
+
+            if (CurrentBoard.PlayBoard[row][col] == null)
+            {
+                CurrentBoard.PlayBoard[row][col] = placeholderTile;
+            }
         }
 
         // Refreshs the four starting dominos and flips the next ones
