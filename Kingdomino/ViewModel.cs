@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,31 +30,40 @@ namespace KingDomino
         public Tile ChosenTile { get; set; }
 
         public Visibility ShowButtons { get; set; }
+        public Visibility ShowChosenButtons { get; set; }
         public Visibility[][] BoardVisibility { get; set; }
+        public Boolean[][] BoardEnable { get; set; }
 
         public string Score { get; set; }
 
         private int roundNumber = 1;
+        private int pick = 1;
 
         private DominoHolder dominoHolder = new DominoHolder();
 
         public ViewModel()
         {
             placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
-
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
-            
             BoardVisibility = new Visibility[5][];
             BoardVisibility[0] = new Visibility[5];
             BoardVisibility[1] = new Visibility[5];
             BoardVisibility[2] = new Visibility[5];
             BoardVisibility[3] = new Visibility[5];
             BoardVisibility[4] = new Visibility[5];
-            CreatePlayers();
-            CurrentBoard = PlayerList[0].Board;
             ShowButtons = Visibility.Visible;
+            ShowChosenButtons = Visibility.Hidden;
+            BoardEnable = new Boolean[5][];
+            BoardEnable[0] = new Boolean[5];
+            BoardEnable[1] = new Boolean[5];
+            BoardEnable[2] = new Boolean[5];
+            BoardEnable[3] = new Boolean[5];
+            BoardEnable[4] = new Boolean[5];
+            CreatePlayers();
+            UpdateScores();
+            CurrentBoard = PlayerList[0].Board;
             SetBoardTileVisiblity();
             CreateBackFacingDominos();
             SetCurrentDominosFromNextDominos();
@@ -77,16 +86,51 @@ namespace KingDomino
 
         public void UpdatePlacedTile(int x, int y)
         {
-            CurrentBoard.Add(ChosenTile, x, y);
-            NullifyPlaceHolder();
-            OnPropertyChanged("CurrentBoard");
-            CheckNextOptions(x, y, ChosenTile);
+            if(pick == 1)
+            {
+                CurrentBoard.Add(ChosenTile, x, y);
+                OnPropertyChanged("CurrentBoard");
+                CheckNextOptions(x, y, ChosenTile);
+                pick++;
+            }
+            else
+            {
+                if(ChosenTile.Equals(ChosenDomino.Tile1))
+                {
+                    ChosenTile = ChosenDomino.Tile2;
+                }
+                else
+                {
+                    ChosenTile = ChosenDomino.Tile1;
+                }
+                CurrentBoard.Add(ChosenTile, x, y);
+                OnPropertyChanged("CurrentBoard");
+                NullifyPlaceHolder();
+                SetBoardTileVisiblity();
+                ShowButtons = Visibility.Visible;
+                OnPropertyChanged("ShowButtons");
+                pick = 1;
+            }
         }
 
         public void SwitchBoardView(int index)
         {
             CurrentBoard = PlayerList[index].Board;
             OnPropertyChanged("CurrentBoard");
+        }
+
+        private void NullifyPlaceHolder()
+        {
+            for(int row = 0; row < 5; row ++)
+            {
+                for(int col = 0; col < 5; col++)
+                {
+                    if(CurrentBoard.PlayBoard[row][col] != null && CurrentBoard.PlayBoard[row][col] == placeholderTile)
+                    {
+                        CurrentBoard.PlayBoard[row][col] = null;
+                    }
+                }
+            }
         }
 
         public void SetBoardTileVisiblity()
@@ -98,6 +142,7 @@ namespace KingDomino
                     if(CurrentBoard.PlayBoard[i][j] != null)
                     {
                         BoardVisibility[i][j] = Visibility.Visible;
+                        BoardEnable[i][j] = true;
                     }
                     else
                     {
@@ -105,6 +150,7 @@ namespace KingDomino
                     }
                 }
             }
+            OnPropertyChanged("BoardEnable");
             OnPropertyChanged("BoardVisibility");
         }
 
@@ -134,6 +180,8 @@ namespace KingDomino
                 SetCurrentDominosFromNextDominos();
                 NextDominos.Clear();
             }
+            ShowChosenButtons = Visibility.Visible;
+            OnPropertyChanged("ShowChosenButtons");
             ShowButtons = Visibility.Hidden;
             OnPropertyChanged("ShowButtons");
             roundNumber++;
@@ -156,9 +204,9 @@ namespace KingDomino
         {
             foreach (Player player in PlayerList)
             {
-                player.Board.CalculateScore();
+                Score = "Score: " + player.Board.CalculateScore();
             }
-
+            Score = "Score: " + PlayerList[0].Board.CalculateScore();
             OnPropertyChanged("Score");
         }
 
@@ -212,21 +260,6 @@ namespace KingDomino
             dominos[m] = dominos[n];
             dominos[n] = tempDomino;
         }
-
-        private void NullifyPlaceHolder()
-        {
-            for (int row = 0; row < 5; row++)
-            {
-                for (int col = 0; col < 5; col++)
-                {
-                    if (CurrentBoard.PlayBoard[row][col] != null && CurrentBoard.PlayBoard[row][col] == placeholderTile)
-                    {
-                        CurrentBoard.PlayBoard[row][col] = null;
-                    }
-                }
-            }
-        }
-
         public void ShowOptions(Tile chosenTile)
         {
             NullifyPlaceHolder();
@@ -242,7 +275,7 @@ namespace KingDomino
                         if (chosenTile.TileType == tempTileType || tempTileType == TileType.Origin)
                         {
                             //check directions here
-                            CheckAvailableMoves(row, col, chosenTile);                          
+                            CheckAvailableMoves(row, col, chosenTile);
                         }
                     }
                 }
