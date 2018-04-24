@@ -56,14 +56,24 @@
     </ApplicationDefinition>
     <Compile Include="Board.cs" />
     <Compile Include="DominoHolder.cs" />
+<<<<<<< HEAD
     <Compile Include="Tile.cs" />
+=======
+    <Compile Include="Player.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="TileType.cs" />
+    <Compile Include="ViewModel.cs" />
+>>>>>>> UI-Development2
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+<<<<<<< HEAD
       <SubType>Designer</SubType>
+=======
+>>>>>>> UI-Development2
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

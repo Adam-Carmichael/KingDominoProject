@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+=======
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+>>>>>>> UI-Development2
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +16,13 @@ namespace KingDomino
 {
     class DominoHolder
     {
+<<<<<<< HEAD
         private String terrainPath = "Resources/Terrain/";
         private String dominoPath = "Resources/Domino/";
+=======
+        public readonly String defaultTilePath = "Resources/Misc/logo.png";
+
+>>>>>>> UI-Development2
         private ArrayList dominos;
         private Random rnd = new Random();
 
@@ -32,6 +44,7 @@ namespace KingDomino
 
         public void DominoHolderGenerator()
         {
+<<<<<<< HEAD
             // 1-12
             this.dominos.Add(new Domino(new Tile(terrainPath + "0Field01.png", "Field", 0), new Tile(terrainPath + "0Field01.png", "Field", 0), dominoPath + "01.png")); // Field & Field
             this.dominos.Add(new Domino(new Tile(terrainPath + "0Field01.png", "Field", 0), new Tile(terrainPath + "0Field01.png", "Field", 0), dominoPath + "02.png")); // Field & Field
@@ -86,4 +99,38 @@ namespace KingDomino
             this.dominos.Add(new Domino(new Tile(terrainPath + "0Field01.png", "Field", 0), new Tile(terrainPath + "3Mine01.png", "Mine", 3), dominoPath + "48.png")); // Field & Mine3
         }
     }
+=======
+            string fileName = "dominos.txt";
+            string dominosPath = Path.GetFullPath(fileName);
+            string[] lines = System.IO.File.ReadAllLines(@dominosPath);
+            foreach (string line in lines)
+            {
+                String[] splitter = line.Split('|');
+                this.dominos.Add(new Domino(new Tile(splitter[0], ConvertStringToTileType(splitter[1]), Convert.ToInt32(splitter[2])), new Tile(splitter[3], ConvertStringToTileType(splitter[4]), Convert.ToInt32(splitter[5])), splitter[6], Convert.ToInt32(splitter[7])));
+            }
+        }
+
+        private TileType ConvertStringToTileType(String terrain)
+        {
+            switch(terrain)
+            {
+                case ("Field"):
+                    return TileType.Field;
+                case ("Forest"):
+                    return TileType.Forest;
+                case ("Grass"):
+                    return TileType.Grass;
+                case ("Lake"):
+                    return TileType.Lake;
+                case ("Mine"):
+                    return TileType.Mine;
+                case ("Swamp"):
+                    return TileType.Swamp;
+
+                default:
+                    return TileType.Origin;
+            }
+        }
+    } 
+>>>>>>> UI-Development2
 }
