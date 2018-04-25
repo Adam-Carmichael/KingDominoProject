@@ -194,7 +194,6 @@ namespace KingDomino
                     if(CurrentBoard.PlayBoard[i][j] != null)
                     {
                         BoardVisibility[i][j] = Visibility.Visible;
-                        //BoardEnable[i][j] = true;
                     }
                     else
                     {

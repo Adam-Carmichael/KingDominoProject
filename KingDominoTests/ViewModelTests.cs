@@ -89,7 +89,10 @@ namespace KingDomino.Tests
         [TestMethod()]
         public void SwitchBoardViewTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            testVM.CurrentBoard = testVM.PlayerList[0].Board;
+            testVM.SwitchBoardView(1);
+            Assert.AreEqual(testVM.CurrentBoard, testVM.PlayerList[1].Board);
         }
 
         [TestMethod()]
