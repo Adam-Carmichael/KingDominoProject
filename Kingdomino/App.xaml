@@ -5,7 +5,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <BitmapImage x:Key="ImageSource2" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="C:\Users\Nick\source\repos\KingDomino\KingDomino\Resources\Domino\01.png"/>
+        <BitmapImage x:Key="ImageSource2" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Resources/Domino/01.png"/>
+        <local:MainMenuModel x:Key="MainMenuModel" />
 
     </Application.Resources>
 </Application>

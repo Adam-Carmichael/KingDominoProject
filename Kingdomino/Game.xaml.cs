@@ -22,7 +22,7 @@ namespace KingDomino
         private readonly ViewModel viewModel;
         private Image[,] images;
 
-        public Game(ViewModel model, bool host, string name)
+        public Game(ViewModel model, string name)
         {
             this.viewModel = model;
             this.DataContext = viewModel;

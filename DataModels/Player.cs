@@ -9,7 +9,11 @@ namespace DataModels
     public class Player
     {
         private bool isOccupied;
-        public bool IsOccupied{ get; set; }
+        public bool IsOccupied
+        {
+            get { return isOccupied; }
+            set { this.isOccupied = value; }
+        }
 
         private string name;
         public string Name

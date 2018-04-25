@@ -30,7 +30,7 @@ namespace KingDomino
             Hide();
 
             _msgHandler.Start();
-            Game game = new Game(model, host, Name);
+            Game game = new Game(model, PlayerName);
             game.Show();
         }
 
