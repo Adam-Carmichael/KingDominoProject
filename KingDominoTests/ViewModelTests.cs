@@ -50,7 +50,16 @@ namespace KingDomino.Tests
         [TestMethod()]
         public void UpdateChosenTileTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            Tile testTile1 = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            Tile testTile2 = new Tile("Resources/Misc/logo.png", TileType.Null, 1);
+            Domino testDomino = new Domino(testTile1, testTile2, "Resources/Domino/01.png", 1);
+            testVM.ChosenDomino = testDomino;
+            testVM.UpdateChosenTile(0);
+            Assert.AreEqual(1, testVM.ChosenTile.TileCrown);
+
+            testVM.UpdateChosenTile(1);
+            Assert.AreEqual(0, testVM.ChosenTile.TileCrown);
         }
 
         [TestMethod()]
