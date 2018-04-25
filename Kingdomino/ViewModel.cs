@@ -43,38 +43,18 @@ namespace KingDomino
 
         public ViewModel()
         {
-            
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
-
             placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
-
-            BoardVisibility = new Visibility[5][];
-            BoardVisibility[0] = new Visibility[5];
-            BoardVisibility[1] = new Visibility[5];
-            BoardVisibility[2] = new Visibility[5];
-            BoardVisibility[3] = new Visibility[5];
-            BoardVisibility[4] = new Visibility[5];
-
+            InitializeBoardVisibilty();
             ShowButtons = Visibility.Visible;
             ShowChosenButtons = Visibility.Hidden;
-
-            BoardEnable = new Boolean[5][];
-            BoardEnable[0] = new Boolean[5];
-            BoardEnable[1] = new Boolean[5];
-            BoardEnable[2] = new Boolean[5];
-            BoardEnable[3] = new Boolean[5];
-            BoardEnable[4] = new Boolean[5];
-
+            InitializeBoardEnable();
             CreatePlayers();
-
             CurrentBoard = PlayerList[0].Board;
-
             UpdateScores();
-
             SetBoardTileVisiblity();
-
             CreateBackFacingDominos();
             SetCurrentDominosFromNextDominos();
             CreateBackFacingDominos();
@@ -242,7 +222,6 @@ namespace KingDomino
             Score = "Score: " + CurrentBoard.CalculateScore();
             OnPropertyChanged("Score");
         }
-
         public void SetCurrentDominosFromNextDominos()
         {
             int index = 0;
@@ -355,6 +334,27 @@ namespace KingDomino
             if (CurrentBoard.PlayBoard[row][col] == null)
             {
                 CurrentBoard.PlayBoard[row][col] = placeholderTile;
+            }
+        }
+        private void InitializeBoardVisibilty()
+        {
+            int ROW = 5;
+
+            BoardVisibility = new Visibility[ROW][];
+
+            for (int col = 0; col < 5; col++)
+            {
+                BoardVisibility[col] = new Visibility[ROW];
+            }
+        }
+        private void InitializeBoardEnable()
+        {
+            int ROWS = 5;
+            BoardEnable = new Boolean[ROWS][];
+
+            for (int col = 0; col < 5; col++)
+            {
+                BoardEnable[col] = new Boolean[ROWS];
             }
         }
     }

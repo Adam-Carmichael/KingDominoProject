@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KingDomino
 {
-    class DominoHolder
+    public class DominoHolder
     {
         public readonly String defaultTilePath = "Resources/Misc/logo.png";
 

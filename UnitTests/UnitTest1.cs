@@ -2,22 +2,50 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KingDomino;
 
-namespace UnitTests
+namespace KingDomino.Tests
+{
+    [TestClass()]
+    public class UnitTest1
+    {
+        [TestMethod()]
+        public void DominoHolderTest()
+        {
+            DominoHolder dominos = new DominoHolder();
+            Assert.IsNotNull(dominos);
+        }
+
+        [TestMethod()]
+        public void RandomDominoTest()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void DominoHolderGeneratorTest()
+        {
+            Assert.Fail();
+        }
+    }
+}
 {
     [TestClass]
-    public class ViewModelUnitTests : ViewModel
+    public class ViewModelUnitTests
     {
-        Domino ChosenDomino = new Domino();
+        Domino ChosenDomino;
+        Domino placeholderTile;
+        //ViewModel viewModel = new ViewModel();
 
         [TestMethod]
         public void UpdateChosenDominoTest()
         {
-            ChosenDomino = CurrentDominos[index];
-            OnPropertyChanged("ChosenDomino");
-            ShowChosenButtons = Visibility.Visible;
-            OnPropertyChanged("ShowChosenButtons");
-            ShowButtons = Visibility.Hidden;
-            OnPropertyChanged("ShowButtons");
+            //ChosenDomino = CurrentDominos[index];
+
+            //OnPropertyChanged("ChosenDomino");
+            //ShowChosenButtons = Visibility.Visible;
+            //OnPropertyChanged("ShowChosenButtons");
+            //ShowButtons = Visibility.Hidden;
+            //OnPropertyChanged("ShowButtons");
+            Assert.Fail();
         }
     }
 }
