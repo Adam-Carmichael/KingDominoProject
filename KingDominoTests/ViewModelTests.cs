@@ -65,7 +65,25 @@ namespace KingDomino.Tests
         [TestMethod()]
         public void UpdatePlacedTileTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            Tile testTile1 = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            Tile testTile2 = new Tile("Resources/Misc/logo.png", TileType.Null, 1);
+            Domino testDomino = new Domino(testTile1, testTile2, "Resources/Domino/01.png", 1);
+        
+            testVM.ChosenTile = testTile1;
+            testVM.UpdatePlacedTile(1, 2);
+            Assert.AreEqual(testTile1, testVM.CurrentBoard.PlayBoard[1][2]);
+
+            testVM.ChosenDomino = testDomino;
+            testVM.UpdatePlacedTile(1, 1);
+            Assert.AreEqual(testTile2, testVM.ChosenTile);
+
+            testVM.UpdatePlacedTile(1, 3);
+            testVM.UpdatePlacedTile(0, 2);
+            Assert.AreEqual(testTile1, testVM.ChosenTile);
+
+            testVM.UpdatePlacedTile(2, 1);
+            Assert.AreEqual(testTile1, testVM.CurrentBoard.PlayBoard[2][1]);
         }
 
         [TestMethod()]
