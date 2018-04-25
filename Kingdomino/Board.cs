@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KingDomino
 {
-    class Board
+    public class Board
     {
         private Tile[][] playBoard;
         public Tile[][] PlayBoard
@@ -118,12 +118,9 @@ namespace KingDomino
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if (this.playBoard[i][j] != null)
+                    if (playBoard[i][j] != null && playBoard[i][j].TileType == TileType.Origin)
                     {
-                        if (this.playBoard[i][j].TileType.Equals("Origin"))
-                        {
-                            return this.playBoard[i][j];
-                        }
+                        return playBoard[i][j];
                     }
                 }
             }
@@ -132,7 +129,7 @@ namespace KingDomino
 
         public void Add(Tile tile, int i, int j)
         {
-            this.playBoard[i][j] = tile;
+            playBoard[i][j] = tile;
         }
     }
 }

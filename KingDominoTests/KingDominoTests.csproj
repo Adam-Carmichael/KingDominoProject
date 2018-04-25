@@ -56,6 +56,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BoardTests.cs" />
     <Compile Include="DominoHolderTests.cs" />
     <Compile Include="DominoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
