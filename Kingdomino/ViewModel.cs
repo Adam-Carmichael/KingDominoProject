@@ -137,6 +137,7 @@ namespace KingDomino
                 CurrentBoard.Add(ChosenTile, x, y);
                 OnPropertyChanged("CurrentBoard");
                 NullifyPlaceHolder();
+                EnablePlaceholderButtons();
                 SetBoardTileVisiblity();
                 UpdateScores();
                 pick = 1;
@@ -186,6 +187,7 @@ namespace KingDomino
                     }
                 }
             }
+            OnPropertyChanged("CurrentBoard");
         }
         private void EnablePlaceholderButtons()
         {

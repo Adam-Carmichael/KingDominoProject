@@ -33,9 +33,7 @@ namespace KingDomino
 
         public void DominoHolderGenerator()
         {
-            string fileName = "dominos.txt";
-            string dominosPath = Path.GetFullPath(fileName);
-            string[] lines = System.IO.File.ReadAllLines(@dominosPath);
+            string[] lines = Properties.Resources.dominos.Split('\n');
             foreach (string line in lines)
             {
                 String[] splitter = line.Split('|');
