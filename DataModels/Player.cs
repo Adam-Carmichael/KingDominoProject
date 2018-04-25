@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KingDomino
+namespace DataModels
 {
-    class Player
+    public class Player
     {
+        private bool isOccupied;
+        public bool IsOccupied{ get; set; }
+
         private string name;
         public string Name
         {
@@ -29,8 +32,10 @@ namespace KingDomino
             set { this.board = value; }
         }
 
-        public Player()
+        public Player(bool full, string name)
         {
+            IsOccupied = full;
+            Name = name;
             this.Board = new Board("blue");
         }
     }

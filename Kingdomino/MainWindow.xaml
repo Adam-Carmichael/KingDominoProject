@@ -9,8 +9,8 @@
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Source="Resources/Misc/Box Top.png" Width="712" Stretch="Fill" />
         <Button x:Name="Start" Content="Start Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,300,0,0" VerticalAlignment="Top" Click="Start_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
-        <!--<Button x:Name="Join" Content="Join Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,400,0,0" VerticalAlignment="Top" Click="Join_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic"/>-->
-        <Button x:Name="Quit" Content="Quit" BorderThickness="3" HorizontalAlignment="Left" Margin="275,400,0,0" VerticalAlignment="Top" Click ="Quit_Click" Height="60"  Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Join" Content="Join Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,400,0,0" VerticalAlignment="Top" Click="Join_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
+        <Button x:Name="Quit" Content="Quit" BorderThickness="3" HorizontalAlignment="Left" Margin="275,500,0,0" VerticalAlignment="Top" Click ="Quit_Click" Height="60"  Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
 
     </Grid>
 </Window>

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KingDomino
+namespace DataModels
 {
-    class Board
+    public class Board
     {
         private Tile[][] playBoard;
         public Tile[][] PlayBoard

@@ -10,13 +10,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows;
 using System.IO;
+using PeerManager;
+using DataModels;
 
 namespace KingDomino
 {
     class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
     {
+        private IMessenger _msgHandler;
         private Tile placeholderTile;
         private string chatHistory;
+        private bool host;
+
         public string ChatHistory
         {
             get { return chatHistory; }
@@ -41,8 +46,10 @@ namespace KingDomino
 
         private DominoHolder dominoHolder = new DominoHolder();
 
-        public ViewModel()
+        public ViewModel(bool host)
         {
+            this.host = host;
+            _msgHandler = new Messenger(host, ReceiveMessage);
             
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
@@ -66,9 +73,7 @@ namespace KingDomino
             BoardEnable[2] = new Boolean[5];
             BoardEnable[3] = new Boolean[5];
             BoardEnable[4] = new Boolean[5];
-
-            CreatePlayers();
-
+            
             CurrentBoard = PlayerList[0].Board;
 
             UpdateScores();
@@ -80,13 +85,13 @@ namespace KingDomino
             CreateBackFacingDominos();
         }
 
-        public void CreatePlayers()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                PlayerList.Add(new Player());
-            }
-        }
+       // public void CreatePlayers()
+       // {
+       //     for (int i = 0; i < 4; i++)
+       //     {
+       //         PlayerList.Add(new Player());
+       //     }
+       // }
         public void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
@@ -140,7 +145,9 @@ namespace KingDomino
                 SetBoardTileVisiblity();
                 UpdateScores();
                 pick = 1;
-                RotateDominoSelection();
+
+                if (host)
+                    RotateDominoSelection();
                 /** 
                  * 
                  * TODO
@@ -262,6 +269,14 @@ namespace KingDomino
                 NextDominos.Add(dominoHolder.RandomDomino());
             }
         }
+        private void GetFourSpecifiedDominos(int[] nums)
+        {
+            NextDominos.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                NextDominos.Add(dominoHolder.SpecificDomino(nums[i]));
+            }
+        }
         public void CreateBackFacingDominos()
         {
             GetFourRandomDominos();
@@ -355,6 +370,76 @@ namespace KingDomino
             if (CurrentBoard.PlayBoard[row][col] == null)
             {
                 CurrentBoard.PlayBoard[row][col] = placeholderTile;
+            }
+        }
+        public void InitComm(bool host)
+        {
+            this._msgHandler = new Messenger(host, ReceiveMessage);
+        }
+        
+        public void UpdatePlayerData(int index, bool isFull, string name)
+        {
+            PlayerList[index] = new Player(isFull, name);
+            OnPropertyChanged("PlayerList[" + index + "].Name");
+        }
+        
+        public void UpdatePlayerData(int index, string name)
+        {
+            PlayerList[index].Name = name;
+            OnPropertyChanged("PlayerList[" + index + "].Name");
+        }
+
+        // establishes the identity of this client
+        public void InitThisPlayer(int playerNum, string name)
+        {
+            PlayerList[playerNum] = new Player(true, name);
+            UpdatePlayerData(playerNum, true, name);
+            _msgHandler.SendPlayerUpdate(playerNum, PlayerList[playerNum]);
+            ChatHistory += String.Format("Hi, {0}! You have joined as Player {1}\n", name, playerNum);
+            OnPropertyChanged("ChatHistory");
+        }
+
+        private void UpdateOtherPlayerTile(int domino, int side, int x, int y)
+        {
+            if (side == 1) {
+                Tile newTile = dominoHolder.SpecificDomino(domino).Tile1;
+            }
+            else
+            {
+                Tile newTile = dominoHolder.SpecificDomino(domino).Tile2;
+            }
+        }
+
+        // message delegate determines what to do with inbound information
+        public void ReceiveMessage(SerializedMessage message)
+        {
+            switch (message.Purpose)
+            {
+                case Purpose.Query:
+                    _msgHandler.SendPlayerUpdate(message.PeerId, PlayerList[message.PeerId]);
+                    break;
+                case Purpose.Init:
+                    // ThisPlayer = message.PeerId;
+                    // InitThisPlayer(ThisPlayer, InitName, InitColor);
+                    break;
+                case Purpose.Chat:
+                    DisplayChatMessage(message.PeerId, message.Text);
+                    break;
+                case Purpose.Deal:
+                    int[] nums = message.Dominos;
+                    GetFourSpecifiedDominos(nums);
+                    break;
+                case Purpose.Select:
+                    break;
+                case Purpose.Tile:
+                    UpdateOtherPlayerTile(message.Domino, message.Side, message.Xcoord, message.Ycoord);
+                    break;
+                case Purpose.Player:
+                    UpdatePlayerData(message.PeerId, message.IsFull, message.PlayerName);
+                    break;
+                default:
+                    DisplayChatMessage(0, "Error: Network message not recognized");
+                    break;
             }
         }
     }

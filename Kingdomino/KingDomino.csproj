@@ -54,11 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Board.cs" />
     <Compile Include="DominoHolder.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="TileType.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>
@@ -71,7 +67,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Domino.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -280,6 +275,16 @@
     <Resource Include="Resources\OriginCastle\green.png" />
     <Resource Include="Resources\OriginCastle\pink.png" />
     <Resource Include="Resources\OriginCastle\yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
+      <Project>{61fe5ca1-bb2b-444d-968c-949ce0016d16}</Project>
+      <Name>DataModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="PeerManager\PeerManager.csproj">
+      <Project>{f4c967b1-0764-406e-bb9e-f443badc0c34}</Project>
+      <Name>PeerManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

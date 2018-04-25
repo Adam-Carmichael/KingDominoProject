@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataModels;
 
 namespace KingDomino
 {
@@ -28,6 +29,12 @@ namespace KingDomino
             int random = Rnd.Next(dominos.Count);
             Domino test = (Domino) dominos[random];
             dominos.RemoveAt(random);
+            return test;
+        }
+
+        public Domino SpecificDomino(int n)
+        {
+            Domino test = (Domino)dominos[n];
             return test;
         }
 

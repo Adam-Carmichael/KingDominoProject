@@ -20,12 +20,15 @@ namespace KingDomino
         private void Join_Click(object sender, RoutedEventArgs e)
         {
 
+            Hide();
+            Game game = new Game(false);
+            game.Show();
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             Hide();
-            Game game = new Game();
+            Game game = new Game(true);
             game.Show();
         }
     }
