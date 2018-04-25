@@ -14,25 +14,37 @@ namespace KingDomino.Tests
         [TestMethod()]
         public void ViewModelTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            Assert.IsNotNull(testVM.PlayerList);
+            Assert.IsNotNull(testVM.NextDominos);
+            Assert.IsNotNull(testVM.CurrentDominos);
         }
 
         [TestMethod()]
         public void CreatePlayersTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            Assert.AreEqual(4, testVM.PlayerList.Count);
         }
 
         [TestMethod()]
         public void DisplayChatMessageTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            testVM.PlayerList[0].Name = "General Kenobi";
+            testVM.DisplayChatMessage(0, "Hello There!");
+            Assert.AreEqual("General Kenobi: Hello There!\n", testVM.ChatHistory);
         }
 
         [TestMethod()]
         public void UpdateChosenDominoTest()
         {
-            Assert.Fail();
+            ViewModel testVM = new ViewModel();
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            Domino testDomino = new Domino(testTile, testTile, "Resources/Domino/01.png", 1);
+            testVM.CurrentDominos[0] = testDomino;
+            testVM.UpdateChosenDomino(0);
+            Assert.AreEqual(testDomino, testVM.ChosenDomino);
         }
 
         [TestMethod()]
