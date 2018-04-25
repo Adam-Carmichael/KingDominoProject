@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace KingDomino.Tests
 {
@@ -84,6 +85,59 @@ namespace KingDomino.Tests
 
             testVM.UpdatePlacedTile(2, 1);
             Assert.AreEqual(testTile1, testVM.CurrentBoard.PlayBoard[2][1]);
+        }
+
+        [TestMethod()]
+        public void RotateDominoSelectionRound10Test()
+        {
+            ViewModel testVM = new ViewModel();
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            Domino testDomino = new Domino(testTile, testTile, "Resources/Domino/01.png", 1);
+            testVM.ChosenTile = testTile;
+            testVM.ChosenDomino = testDomino;
+
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+
+            Domino[] testNextDominos = new Domino[4];
+            testVM.NextDominos.CopyTo(testNextDominos,0);
+            testVM.UpdatePlacedTile(2, 1);
+            Domino[] testCurrentDominos = new Domino[4];
+            testVM.CurrentDominos.CopyTo(testCurrentDominos, 0);
+            Assert.AreEqual(testNextDominos[0].Number, testCurrentDominos[0].Number);
+        }
+        [TestMethod()]
+        public void RotateDominoSelectionRound11Test()
+        {
+            ViewModel testVM = new ViewModel();
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            Domino testDomino = new Domino(testTile, testTile, "Resources/Domino/01.png", 1);
+            testVM.ChosenTile = testTile;
+            testVM.ChosenDomino = testDomino;
+
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+
+            Domino[] testNextDominos = new Domino[4];
+            testVM.NextDominos.CopyTo(testNextDominos, 0);
+            testVM.UpdatePlacedTile(2, 1);
+            Assert.IsNull(testNextDominos);
+            //Domino[] testCurrentDominos = new Domino[4];
+            //testVM.CurrentDominos.CopyTo(testCurrentDominos, 0);
+            //Assert.AreEqual(testNextDominos[0].Number, testCurrentDominos[0].Number);
         }
 
         [TestMethod()]

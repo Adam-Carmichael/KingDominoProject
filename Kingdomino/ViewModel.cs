@@ -56,8 +56,7 @@ namespace KingDomino
             UpdateScores();
             SetBoardTileVisiblity();
             CreateBackFacingDominos();
-            SetCurrentDominosFromNextDominos();
-            CreateBackFacingDominos();
+            RotateDominoSelection();
         }
 
         public void CreatePlayers()
@@ -132,7 +131,7 @@ namespace KingDomino
         }
 
         private void RotateDominoSelection()
-        {
+        { 
             if (roundNumber <= 10)
             {
                 SetCurrentDominosFromNextDominos();
