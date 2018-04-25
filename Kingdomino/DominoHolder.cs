@@ -31,7 +31,7 @@ namespace KingDomino
             return test;
         }
 
-        public void DominoHolderGenerator()
+        private void DominoHolderGenerator()
         {
             string fileName = "dominos.txt";
             string dominosPath = Path.GetFullPath(fileName);

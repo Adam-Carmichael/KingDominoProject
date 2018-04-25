@@ -12,6 +12,7 @@ namespace KingDomino.Tests
     [TestClass()]
     public class DominoHolderTests
     {
+
         [TestMethod()]
         public void DominoHolderTest()
         {
@@ -22,13 +23,8 @@ namespace KingDomino.Tests
         [TestMethod()]
         public void RandomDominoTest()
         {
-            Assert.Fail();
+            DominoHolder dominoHolder = new DominoHolder();
+            Domino randDomino = dominoHolder.RandomDomino();
+            Assert.IsNotNull(randDomino);
         }
-
-        [TestMethod()]
-        public void DominoHolderGeneratorTest()
-        {
-            Assert.Fail();
-        }
-    }
 }
