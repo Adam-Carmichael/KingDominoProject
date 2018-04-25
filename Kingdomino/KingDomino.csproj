@@ -281,5 +281,8 @@
     <Resource Include="Resources\OriginCastle\pink.png" />
     <Resource Include="Resources\OriginCastle\yellow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dominos.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
