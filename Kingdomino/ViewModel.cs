@@ -13,7 +13,7 @@ using System.IO;
 
 namespace KingDomino
 {
-    class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
+    public class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
     {
         private Tile placeholderTile;
         private string chatHistory;

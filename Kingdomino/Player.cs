@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KingDomino
 {
-    class Player
+    public class Player
     {
         private string name;
         public string Name
