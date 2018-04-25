@@ -27,4 +27,5 @@ namespace KingDomino.Tests
             Domino randDomino = dominoHolder.RandomDomino();
             Assert.IsNotNull(randDomino);
         }
+    }
 }

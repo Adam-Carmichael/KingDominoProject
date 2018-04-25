@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DominoHolderTests.cs" />
+    <Compile Include="DominoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
