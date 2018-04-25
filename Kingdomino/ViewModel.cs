@@ -21,7 +21,11 @@ namespace KingDomino
         private Tile placeholderTile;
         private string chatHistory;
         private bool host;
+        private int roundNumber = 1;
+        private int pick = 1;
+        private DominoHolder dominoHolder = new DominoHolder();
 
+        // Binding Properties
         public string ChatHistory
         {
             get { return chatHistory; }
@@ -33,19 +37,12 @@ namespace KingDomino
         public Board CurrentBoard { get; set; }
         public Domino ChosenDomino { get; set; }
         public Tile ChosenTile { get; set; }
-
         public Visibility ShowButtons { get; set; }
         public Visibility ShowChosenButtons { get; set; }
         public Visibility[][] BoardVisibility { get; set; }
         public Boolean[][] BoardEnable { get; set; }
-
         public string Score { get; set; }
-
-        private int roundNumber = 1;
-        private int pick = 1;
-
-        private DominoHolder dominoHolder = new DominoHolder();
-
+        
         public ViewModel(bool host)
         {
             this.host = host;
@@ -92,11 +89,13 @@ namespace KingDomino
        //         PlayerList.Add(new Player());
        //     }
        // }
+
         public void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
             OnPropertyChanged("ChatHistory");
         }
+
         public void UpdateChosenDomino(int index)
         {
             ChosenDomino = CurrentDominos[index];
@@ -106,6 +105,7 @@ namespace KingDomino
             ShowButtons = Visibility.Hidden;
             OnPropertyChanged("ShowButtons");
         }
+
         public void UpdateChosenTile(int index)
         {
             if (index == 1)
@@ -118,6 +118,7 @@ namespace KingDomino
             }
             ShowOptions(ChosenTile);
         }
+
         public void UpdatePlacedTile(int x, int y)
         {
             if (pick == 1)
@@ -194,6 +195,7 @@ namespace KingDomino
                 }
             }
         }
+
         private void EnablePlaceholderButtons()
         {
             for (int row = 0; row < 5; row++)

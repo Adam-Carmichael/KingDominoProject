@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>KingDomino.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -281,7 +284,7 @@
       <Project>{61fe5ca1-bb2b-444d-968c-949ce0016d16}</Project>
       <Name>DataModels</Name>
     </ProjectReference>
-    <ProjectReference Include="PeerManager\PeerManager.csproj">
+    <ProjectReference Include="..\PeerManager\PeerManager.csproj">
       <Project>{f4c967b1-0764-406e-bb9e-f443badc0c34}</Project>
       <Name>PeerManager</Name>
     </ProjectReference>

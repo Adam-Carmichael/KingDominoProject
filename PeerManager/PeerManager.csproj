@@ -60,13 +60,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DataModels\DataModels.csproj">
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
       <Project>{61fe5ca1-bb2b-444d-968c-949ce0016d16}</Project>
       <Name>DataModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataModel\DataModel.csproj">
-      <Project>{094daf84-22f4-4a0d-bfaf-4831e3d2eb52}</Project>
-      <Name>DataModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
