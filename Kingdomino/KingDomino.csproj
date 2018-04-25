@@ -73,7 +73,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DominoHolder.cs" />
-    <Compile Include="MainMenuModel.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>

@@ -6,7 +6,7 @@
     <Application.Resources>
 
         <BitmapImage x:Key="ImageSource2" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Resources/Domino/01.png"/>
-        <local:MainMenuModel x:Key="MainMenuModel" />
+        <local:ViewModel x:Key="ViewModel" />
 
     </Application.Resources>
 </Application>

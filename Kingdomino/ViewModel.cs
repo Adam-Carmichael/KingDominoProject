@@ -25,7 +25,11 @@ namespace KingDomino
         private int pick = 1;
         private DominoHolder dominoHolder = new DominoHolder();
 
-        // Binding Properties
+        // Binding Properties for MainWindow
+        public Visibility ButtonsVisible { get; set; }
+        public Visibility NameInputVisible { get; set; }
+
+        // Binding Properties for Game
         public string ChatHistory { get; set; }
         public ObservableCollection<Player> PlayerList { get; set; }
         public ObservableCollection<Domino> NextDominos { get; set; }
@@ -41,6 +45,9 @@ namespace KingDomino
         
         public ViewModel()
         {
+            ButtonsVisible = Visibility.Visible;
+            NameInputVisible = Visibility.Hidden;
+
             PlayerList = new ObservableCollection<Player>() {null, null, null, null};
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
