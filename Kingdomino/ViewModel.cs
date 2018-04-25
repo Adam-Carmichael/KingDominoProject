@@ -15,22 +15,18 @@ using DataModels;
 
 namespace KingDomino
 {
-    class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
+    public class ViewModel : INotifyPropertyChanged
     {
         private IMessenger _msgHandler;
+        private int thisPlayerID;
         private Tile placeholderTile;
-        private string chatHistory;
         private bool host;
         private int roundNumber = 1;
         private int pick = 1;
         private DominoHolder dominoHolder = new DominoHolder();
 
         // Binding Properties
-        public string ChatHistory
-        {
-            get { return chatHistory; }
-            set { chatHistory = value; }
-        }
+        public string ChatHistory { get; set; }
         public ObservableCollection<Player> PlayerList { get; set; }
         public ObservableCollection<Domino> NextDominos { get; set; }
         public ObservableCollection<Domino> CurrentDominos { get; set; }
@@ -43,12 +39,9 @@ namespace KingDomino
         public Boolean[][] BoardEnable { get; set; }
         public string Score { get; set; }
         
-        public ViewModel(bool host)
+        public ViewModel()
         {
-            this.host = host;
-            _msgHandler = new Messenger(host, ReceiveMessage);
-            
-            PlayerList = new ObservableCollection<Player>();
+            PlayerList = new ObservableCollection<Player>() {null, null, null, null};
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
 
@@ -71,29 +64,19 @@ namespace KingDomino
             BoardEnable[3] = new Boolean[5];
             BoardEnable[4] = new Boolean[5];
             
-            CurrentBoard = PlayerList[0].Board;
-
-            UpdateScores();
-
-            SetBoardTileVisiblity();
 
             CreateBackFacingDominos();
             SetCurrentDominosFromNextDominos();
             CreateBackFacingDominos();
         }
 
-       // public void CreatePlayers()
-       // {
-       //     for (int i = 0; i < 4; i++)
-       //     {
-       //         PlayerList.Add(new Player());
-       //     }
-       // }
-
-        public void DisplayChatMessage(int index, string text)
+        public void CreatePlayers()
         {
-            ChatHistory += PlayerList[index].Name + ": " + text + "\n";
-            OnPropertyChanged("ChatHistory");
+            CurrentBoard = PlayerList[0].Board;
+
+            UpdateScores();
+
+            SetBoardTileVisiblity();
         }
 
         public void UpdateChosenDomino(int index)
@@ -235,17 +218,6 @@ namespace KingDomino
             OnPropertyChanged("BoardVisibility");
         }
 
-        // INotifyPropertyChanged: 
-        // OnPropertyChanged must be called to tell a view bound to this implementation to get specified updated property
-        public event PropertyChangedEventHandler PropertyChanged;
-        // INotifyCollectionChanged:
-        // May be what we need instead of propertyChanged
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public void UpdateScores()
         {
             Score = "Score: " + CurrentBoard.CalculateScore();
@@ -263,6 +235,7 @@ namespace KingDomino
             }
             OnPropertyChanged("CurrentDominos");
         }
+
         private void GetFourRandomDominos()
         {
             NextDominos.Clear();
@@ -271,6 +244,7 @@ namespace KingDomino
                 NextDominos.Add(dominoHolder.RandomDomino());
             }
         }
+
         private void GetFourSpecifiedDominos(int[] nums)
         {
             NextDominos.Clear();
@@ -279,6 +253,7 @@ namespace KingDomino
                 NextDominos.Add(dominoHolder.SpecificDomino(nums[i]));
             }
         }
+
         public void CreateBackFacingDominos()
         {
             GetFourRandomDominos();
@@ -288,6 +263,7 @@ namespace KingDomino
             OnPropertyChanged("NextDominos");
 
         }
+
         private void SortDominos()
         {
             int size = NextDominos.Count;
@@ -302,6 +278,7 @@ namespace KingDomino
                 }
             }
         }
+
         private void Exchange(ObservableCollection<Domino> dominos, int m, int n)
         {
             Domino tempDomino;
@@ -310,6 +287,7 @@ namespace KingDomino
             dominos[m] = dominos[n];
             dominos[n] = tempDomino;
         }
+
         public void ShowOptions(Tile chosenTile)
         {
             for (int row = 0; row < 5; row++)
@@ -332,6 +310,7 @@ namespace KingDomino
             SetBoardTileVisiblity();
             EnablePlaceholderButtons();
         }
+
         private void CheckNextOptions(int row, int col, Tile tile)
         {
             NullifyPlaceHolder();
@@ -340,6 +319,7 @@ namespace KingDomino
             SetBoardTileVisiblity();
             EnablePlaceholderButtons();
         }
+
         private void CheckAvailableMoves(int row, int col, Tile tile)
         {
             Boolean north = row > 0;
@@ -367,6 +347,7 @@ namespace KingDomino
                 CheckDirection(row, col + 1, tile);
             }
         }
+
         private void CheckDirection(int row, int col, Tile tile)
         {
             if (CurrentBoard.PlayBoard[row][col] == null)
@@ -374,42 +355,36 @@ namespace KingDomino
                 CurrentBoard.PlayBoard[row][col] = placeholderTile;
             }
         }
-        public void InitComm(bool host)
+
+        /*
+         *
+         * INotifyPropertyChanged:
+         * OnPropertyChanged must be called to tell a view bound to this implementation to get specified updated property
+         *
+         */
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
         {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /*
+         *
+         *
+         * Networking
+         *
+         */
+
+        public void SendChat(string text)
+        {
+            _msgHandler.SendChatMessage(thisPlayerID, text);
+        }
+
+        public IMessenger InitComm(bool isHost)
+        {
+            this.host = isHost;
             this._msgHandler = new Messenger(host, ReceiveMessage);
-        }
-        
-        public void UpdatePlayerData(int index, bool isFull, string name)
-        {
-            PlayerList[index] = new Player(isFull, name);
-            OnPropertyChanged("PlayerList[" + index + "].Name");
-        }
-        
-        public void UpdatePlayerData(int index, string name)
-        {
-            PlayerList[index].Name = name;
-            OnPropertyChanged("PlayerList[" + index + "].Name");
-        }
-
-        // establishes the identity of this client
-        public void InitThisPlayer(int playerNum, string name)
-        {
-            PlayerList[playerNum] = new Player(true, name);
-            UpdatePlayerData(playerNum, true, name);
-            _msgHandler.SendPlayerUpdate(playerNum, PlayerList[playerNum]);
-            ChatHistory += String.Format("Hi, {0}! You have joined as Player {1}\n", name, playerNum);
-            OnPropertyChanged("ChatHistory");
-        }
-
-        private void UpdateOtherPlayerTile(int domino, int side, int x, int y)
-        {
-            if (side == 1) {
-                Tile newTile = dominoHolder.SpecificDomino(domino).Tile1;
-            }
-            else
-            {
-                Tile newTile = dominoHolder.SpecificDomino(domino).Tile2;
-            }
+            return _msgHandler;
         }
 
         // message delegate determines what to do with inbound information
@@ -421,8 +396,7 @@ namespace KingDomino
                     _msgHandler.SendPlayerUpdate(message.PeerId, PlayerList[message.PeerId]);
                     break;
                 case Purpose.Init:
-                    // ThisPlayer = message.PeerId;
-                    // InitThisPlayer(ThisPlayer, InitName, InitColor);
+                    InitThisPlayer(message.PeerId, message.PlayerName);
                     break;
                 case Purpose.Chat:
                     DisplayChatMessage(message.PeerId, message.Text);
@@ -434,7 +408,7 @@ namespace KingDomino
                 case Purpose.Select:
                     break;
                 case Purpose.Tile:
-                    UpdateOtherPlayerTile(message.Domino, message.Side, message.Xcoord, message.Ycoord);
+                    UpdateOtherPlayerTile(message.PeerId, message.Domino, message.Side, message.Xcoord, message.Ycoord);
                     break;
                 case Purpose.Player:
                     UpdatePlayerData(message.PeerId, message.IsFull, message.PlayerName);
@@ -443,6 +417,42 @@ namespace KingDomino
                     DisplayChatMessage(0, "Error: Network message not recognized");
                     break;
             }
+        }
+
+        // establishes the identity of this client
+        public void InitThisPlayer(int playerNum, string name)
+        {
+            thisPlayerID = playerNum;
+            UpdatePlayerData(playerNum, true, name);
+            _msgHandler.SendPlayerUpdate(playerNum, PlayerList[playerNum]);
+            ChatHistory += String.Format("Hi, {0}! You have joined as Player {1}\n", name, playerNum);
+            OnPropertyChanged("ChatHistory");
+        }
+
+        public void UpdatePlayerData(int index, bool isFull, string name)
+        {
+            PlayerList[index] = new Player();
+            OnPropertyChanged("PlayerList[" + index + "].Name");
+        }
+
+        private void UpdateOtherPlayerTile(int playerID, int domino, int side, int x, int y)
+        {
+            Tile newTile;
+            if (side == 1)
+            {
+                newTile = dominoHolder.SpecificDomino(domino).Tile1;
+            }
+            else
+            {
+                newTile = dominoHolder.SpecificDomino(domino).Tile2;
+            }
+            PlayerList[playerID].Board.Add(newTile, x, y);
+        }
+
+        public void DisplayChatMessage(int index, string text)
+        {
+            ChatHistory += PlayerList[index].Name + ": " + text + "\n";
+            OnPropertyChanged("ChatHistory");
         }
     }
 }

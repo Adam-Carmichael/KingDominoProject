@@ -22,9 +22,9 @@ namespace KingDomino
         private readonly ViewModel viewModel;
         private Image[,] images;
 
-        public Game(bool host)
+        public Game(ViewModel model, bool host, string name)
         {
-            viewModel = new ViewModel(host);
+            this.viewModel = model;
             this.DataContext = viewModel;
             InitializeComponent();
             images = new Image[5, 5];
@@ -216,6 +216,15 @@ namespace KingDomino
             SelectTile2Button.Visibility = Visibility.Hidden;
         }*/
 
+        private void InputBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return || e.Key == Key.Enter)
+            {
+                viewModel.SendChat(ChatInputBox.Text);
+                ChatInputBox.Clear();
+            }
+        }
+
         private void Spot_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < 5; i++)
@@ -244,6 +253,7 @@ namespace KingDomino
         {
             viewModel.UpdateChosenDomino(Int32.Parse(sender.ToString().Substring(sender.ToString().Length - 1)) - 1);
         }
+
         private void CreateImageList()
         {
             images[0, 0] = One_One;

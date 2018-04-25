@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KingDomino"
         mc:Ignorable="d"
-        Title="KingDomino" Height="720" Width="720">
+        Title="KingDomino" Height="720" Width="720"
+        d:DataContext = "{Binding MainMenuModel}">
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Left" Height="689" VerticalAlignment="Top" Source="Resources/Misc/Box Top.png" Width="712" Stretch="Fill" />
-        <Button x:Name="Start" Content="Start Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,300,0,0" VerticalAlignment="Top" Click="Start_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Join" Content="Join Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,400,0,0" VerticalAlignment="Top" Click="Join_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
-        <Button x:Name="Quit" Content="Quit" BorderThickness="3" HorizontalAlignment="Left" Margin="275,500,0,0" VerticalAlignment="Top" Click ="Quit_Click" Height="60"  Width="150" FontSize="20" FontFamily="Showcard Gothic"/>
 
+        <TextBox x:Name="NameInput" HorizontalAlignment="Left" Height="60" Margin="275,350,0,0" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Top" Width="150" Visibility="{Binding NameInputVisible}"/>
+        <Button x:Name="Go" Content="Go!" BorderThickness="3" HorizontalAlignment="Left" Margin="275,500,0,0" VerticalAlignment="Top" Click ="Go_Click" Height="60"  Width="150" FontSize="20" FontFamily="Showcard Gothic" Visibility="{Binding NameInputVisible}"/>
+
+        <Button x:Name="Start" Content="Start Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,300,0,0" VerticalAlignment="Top" Click="Start_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic" Visibility="{Binding ButtonsVisible}"/>
+        <Button x:Name="Join" Content="Join Game" BorderThickness="3" HorizontalAlignment="Left" Margin="275,400,0,0" VerticalAlignment="Top" Click="Join_Click" Height="60" Width="150" FontSize="20" FontFamily="Showcard Gothic" Visibility="{Binding ButtonsVisible}"/>
+        <Button x:Name="Quit" Content="Quit" BorderThickness="3" HorizontalAlignment="Left" Margin="275,500,0,0" VerticalAlignment="Top" Click ="Quit_Click" Height="60"  Width="150" FontSize="20" FontFamily="Showcard Gothic" Visibility="{Binding ButtonsVisible}"/>
     </Grid>
 </Window>

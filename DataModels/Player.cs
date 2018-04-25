@@ -32,10 +32,8 @@ namespace DataModels
             set { this.board = value; }
         }
 
-        public Player(bool full, string name)
+        public Player()
         {
-            IsOccupied = full;
-            Name = name;
             this.Board = new Board("blue");
         }
     }
