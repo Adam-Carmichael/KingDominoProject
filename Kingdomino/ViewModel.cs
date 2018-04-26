@@ -15,7 +15,7 @@ namespace KingDomino
 {
     class ViewModel : INotifyPropertyChanged
     {
-        private Tile placeholderTile;
+        private readonly Tile placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
         private string chatHistory;
         public string ChatHistory
         {
@@ -34,6 +34,9 @@ namespace KingDomino
         public Visibility[][] BoardVisibility { get; set; }
         public Boolean[][] BoardEnable { get; set; }
 
+        public Visibility[] Choose { get; set; }
+        private Boolean[] Chosen { get; set; }
+
         public string Score { get; set; }
 
         private int roundNumber = 1;
@@ -44,13 +47,27 @@ namespace KingDomino
 
         public ViewModel()
         {
-            
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
 
-            placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            InitVisiblityAndEnability();
+            Chosen = new Boolean[4];
+            CreatePlayers();
 
+            CurrentBoard = PlayerList[0].Board;
+
+            UpdateScores();
+
+            SetBoardTileVisiblity();
+
+            CreateBackFacingDominos();
+            SetCurrentDominosFromNextDominos();
+            CreateBackFacingDominos();
+        }
+
+        private void InitVisiblityAndEnability()
+        {
             BoardVisibility = new Visibility[5][];
             BoardVisibility[0] = new Visibility[5];
             BoardVisibility[1] = new Visibility[5];
@@ -68,17 +85,11 @@ namespace KingDomino
             BoardEnable[3] = new Boolean[5];
             BoardEnable[4] = new Boolean[5];
 
-            CreatePlayers();
-
-            CurrentBoard = PlayerList[0].Board;
-
-            UpdateScores();
-
-            SetBoardTileVisiblity();
-
-            CreateBackFacingDominos();
-            SetCurrentDominosFromNextDominos();
-            CreateBackFacingDominos();
+            Choose = new Visibility[4];
+            Choose[0] = Visibility.Visible;
+            Choose[1] = Visibility.Visible;
+            Choose[2] = Visibility.Visible;
+            Choose[3] = Visibility.Visible;
         }
 
         public void CreatePlayers()
@@ -96,10 +107,16 @@ namespace KingDomino
         public void UpdateChosenDomino(int index)
         {
             ChosenDomino = CurrentDominos[index];
+            Chosen[index] = true;
             SwitchToCorrectBoard();
             OnPropertyChanged("ChosenDomino");
             ShowChosenButtons = Visibility.Visible;
             OnPropertyChanged("ShowChosenButtons");
+            for(int i = 0; i < 4; i++)
+            {
+                Choose[i] = Visibility.Hidden;
+            }
+            OnPropertyChanged("Choose");
             ShowButtons = Visibility.Hidden;
             OnPropertyChanged("ShowButtons");
         }
@@ -148,6 +165,11 @@ namespace KingDomino
                     turn = 1;
                     RotateDominoSelection();
                     SwitchToCorrectBoard();
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Chosen[i] = false;
+                    }
+                    OnPropertyChanged("Choose");
                 }
                 else
                 {
@@ -159,10 +181,24 @@ namespace KingDomino
                  * TODO
                  * 
                  * **/
+                DisplayUnchosenDominos();
+                OnPropertyChanged("Choose");
                 ShowButtons = Visibility.Visible;
                 OnPropertyChanged("ShowButtons");
             }
         }
+
+        private void DisplayUnchosenDominos()
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                if(Chosen[i] == false)
+                {
+                    Choose[i] = Visibility.Visible;
+                }
+            }
+        }
+
         private void SwitchToCorrectBoard()
         {
             if (turn == 1)
@@ -220,6 +256,7 @@ namespace KingDomino
             }
             OnPropertyChanged("CurrentBoard");
         }
+
         private void EnablePlaceholderButtons()
         {
             for (int row = 0; row < 5; row++)
@@ -254,7 +291,6 @@ namespace KingDomino
                     }
                 }
             }
-            OnPropertyChanged("BoardEnable");
             OnPropertyChanged("BoardVisibility");
         }
 
