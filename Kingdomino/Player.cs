@@ -29,6 +29,13 @@ namespace KingDomino
             set { this.board = value; }
         }
 
+        private int turn;
+        public int Turn
+        {
+            get { return turn; }
+            set { this.turn = value; }
+        }
+
         public Player()
         {
             this.Board = new Board("blue");
