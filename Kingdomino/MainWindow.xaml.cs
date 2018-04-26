@@ -24,9 +24,9 @@ namespace KingDomino
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
             Game game = new Game();
             game.Show();
+            this.Close();
         }
     }
 }

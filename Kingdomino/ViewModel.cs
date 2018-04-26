@@ -13,43 +13,59 @@ using System.IO;
 
 namespace KingDomino
 {
-    class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
+    class ViewModel : INotifyPropertyChanged
     {
-        private Tile placeholderTile;
+        private readonly Tile placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
         private string chatHistory;
         public string ChatHistory
         {
             get { return chatHistory; }
             set { chatHistory = value; }
         }
-        public ObservableCollection<Player> PlayerList { get; set; }
+        private ObservableCollection<Player> PlayerList { get; set; }
         public ObservableCollection<Domino> NextDominos { get; set; }
         public ObservableCollection<Domino> CurrentDominos { get; set; }
-        public Board CurrentBoard { get; set; }
-        public Domino ChosenDomino { get; set; }
+        public Player CurrentPlayer { get; set; }
         public Tile ChosenTile { get; set; }
-
         public Visibility ShowButtons { get; set; }
         public Visibility ShowChosenButtons { get; set; }
         public Visibility[][] BoardVisibility { get; set; }
         public Boolean[][] BoardEnable { get; set; }
+        public Visibility End { get; set; }
+        public Visibility[] Choose { get; set; }
 
+        private Boolean[] Chosen { get; set; }
         public string Score { get; set; }
 
         private int roundNumber = 1;
         private int pick = 1;
+        private int turn = 1;
 
         private DominoHolder dominoHolder = new DominoHolder();
 
         public ViewModel()
         {
-            
             PlayerList = new ObservableCollection<Player>();
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
 
-            placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            InitVisiblityAndEnability();
+            Chosen = new Boolean[4];
+            CreatePlayers();
 
+            CurrentPlayer = PlayerList[0];
+
+            UpdateScores();
+
+            SetBoardTileVisiblity();
+
+            CreateBackFacingDominos();
+            SetCurrentDominosFromNextDominos();
+            CreateBackFacingDominos();
+        }
+
+        private void InitVisiblityAndEnability()
+        {
             BoardVisibility = new Visibility[5][];
             BoardVisibility[0] = new Visibility[5];
             BoardVisibility[1] = new Visibility[5];
@@ -67,37 +83,45 @@ namespace KingDomino
             BoardEnable[3] = new Boolean[5];
             BoardEnable[4] = new Boolean[5];
 
-            CreatePlayers();
+            Choose = new Visibility[4];
+            Choose[0] = Visibility.Visible;
+            Choose[1] = Visibility.Visible;
+            Choose[2] = Visibility.Visible;
+            Choose[3] = Visibility.Visible;
 
-            CurrentBoard = PlayerList[0].Board;
-
-            UpdateScores();
-
-            SetBoardTileVisiblity();
-
-            CreateBackFacingDominos();
-            SetCurrentDominosFromNextDominos();
-            CreateBackFacingDominos();
+            End = Visibility.Hidden;
         }
 
-        public void CreatePlayers()
+        private void CreatePlayers()
         {
             for (int i = 0; i < 4; i++)
             {
-                PlayerList.Add(new Player());
+                PlayerList.Add(new Player("Player " + (i + 1)));
+                PlayerList[i].Turn = i + 1;
             }
+            PlayerList[0].Board = new Board("blue");
+            PlayerList[1].Board = new Board("green");
+            PlayerList[2].Board = new Board("pink");
+            PlayerList[3].Board = new Board("yellow");
         }
-        public void DisplayChatMessage(int index, string text)
+        private void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
             OnPropertyChanged("ChatHistory");
         }
         public void UpdateChosenDomino(int index)
         {
-            ChosenDomino = CurrentDominos[index];
-            OnPropertyChanged("ChosenDomino");
+            SwitchToCorrectBoard();
+            CurrentPlayer.Board.Chosen = CurrentDominos[index];
+            OnPropertyChanged("CurrentPlayer");
+            Chosen[index] = true;
             ShowChosenButtons = Visibility.Visible;
             OnPropertyChanged("ShowChosenButtons");
+            for(int i = 0; i < 4; i++)
+            {
+                Choose[i] = Visibility.Hidden;
+            }
+            OnPropertyChanged("Choose");
             ShowButtons = Visibility.Hidden;
             OnPropertyChanged("ShowButtons");
         }
@@ -105,20 +129,21 @@ namespace KingDomino
         {
             if (index == 1)
             {
-                ChosenTile = ChosenDomino.Tile1;
+                ChosenTile = CurrentPlayer.Board.Chosen.Tile1;
             }
             else
             {
-                ChosenTile = ChosenDomino.Tile2;
+                ChosenTile = CurrentPlayer.Board.Chosen.Tile2;
             }
             ShowOptions(ChosenTile);
         }
+
         public void UpdatePlacedTile(int x, int y)
         {
             if (pick == 1)
             {
-                CurrentBoard.Add(ChosenTile, x, y);
-                OnPropertyChanged("CurrentBoard");
+                CurrentPlayer.Board.Add(ChosenTile, x, y);
+                OnPropertyChanged("CurrentPlayer");
                 CheckNextOptions(x, y, ChosenTile);
                 ShowChosenButtons = Visibility.Hidden;
                 OnPropertyChanged("ShowChosenButtons");
@@ -126,29 +151,297 @@ namespace KingDomino
             }
             else
             {
-                if (ChosenTile.Equals(ChosenDomino.Tile1))
+                if (ChosenTile.Equals(CurrentPlayer.Board.Chosen.Tile1))
                 {
-                    ChosenTile = ChosenDomino.Tile2;
+                    ChosenTile = CurrentPlayer.Board.Chosen.Tile2;
                 }
                 else
                 {
-                    ChosenTile = ChosenDomino.Tile1;
+                    ChosenTile = CurrentPlayer.Board.Chosen.Tile1;
                 }
-                CurrentBoard.Add(ChosenTile, x, y);
-                OnPropertyChanged("CurrentBoard");
+                CurrentPlayer.Board.Add(ChosenTile, x, y);
+                OnPropertyChanged("CurrentPlayer");
                 NullifyPlaceHolder();
                 EnablePlaceholderButtons();
                 SetBoardTileVisiblity();
                 UpdateScores();
                 pick = 1;
-                RotateDominoSelection();
+                if (turn == 4 && roundNumber != 12)
+                {
+                    turn = 1;
+                    RotateDominoSelection();
+                    SetPlayerTurns();
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Chosen[i] = false;
+                    }
+                    OnPropertyChanged("Choose");
+                }
+                else if(turn == 4 && roundNumber == 12)
+                {
+                    RotateDominoSelection();
+                    End = Visibility.Visible;
+                    OnPropertyChanged("End");
+                }
+                else
+                {
+                    turn++;
+                }
                 /** 
                  * 
                  * TODO
                  * 
                  * **/
+
+                SwitchToCorrectBoard();
+                DisplayUnchosenDominos();
+                OnPropertyChanged("Choose");
                 ShowButtons = Visibility.Visible;
                 OnPropertyChanged("ShowButtons");
+            }
+        }
+
+        private void DisplayUnchosenDominos()
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                if(Chosen[i] == false)
+                {
+                    Choose[i] = Visibility.Visible;
+                }
+            }
+        }
+
+        private void SetPlayerTurns()
+        {
+            // 0 first
+            if(PlayerList[0].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number)
+            {
+                PlayerList[0].Turn = 1;
+                PlayerList[1].Turn = 2;
+                PlayerList[2].Turn = 3;
+                PlayerList[3].Turn = 4;
+            }
+            else if (PlayerList[0].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number)
+            {
+                PlayerList[0].Turn = 1;
+                PlayerList[1].Turn = 2;
+                PlayerList[3].Turn = 3;
+                PlayerList[2].Turn = 4;
+            }
+            else if (PlayerList[0].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number)
+            {
+                PlayerList[0].Turn = 1;
+                PlayerList[3].Turn = 2;
+                PlayerList[1].Turn = 3;
+                PlayerList[2].Turn = 4;
+            }
+            else if (PlayerList[0].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number)
+            {
+                PlayerList[0].Turn = 1;
+                PlayerList[2].Turn = 2;
+                PlayerList[1].Turn = 3;
+                PlayerList[3].Turn = 4;
+            }
+            else if (PlayerList[0].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number)
+            {
+                PlayerList[0].Turn = 1;
+                PlayerList[2].Turn = 2;
+                PlayerList[3].Turn = 3;
+                PlayerList[1].Turn = 4;
+            }
+            else if (PlayerList[0].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number)
+            {
+                PlayerList[0].Turn = 1;
+                PlayerList[3].Turn = 2;
+                PlayerList[2].Turn = 3;
+                PlayerList[1].Turn = 4;
+            }
+
+            // 1 first
+            else if (PlayerList[1].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number)
+            {
+                PlayerList[1].Turn = 1;
+                PlayerList[0].Turn = 2;
+                PlayerList[2].Turn = 3;
+                PlayerList[3].Turn = 4;
+            }
+            else if (PlayerList[1].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number)
+            {
+                PlayerList[1].Turn = 1;
+                PlayerList[2].Turn = 2;
+                PlayerList[0].Turn = 3;
+                PlayerList[3].Turn = 4;
+            }
+            else if (PlayerList[1].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number)
+            {
+                PlayerList[1].Turn = 1;
+                PlayerList[0].Turn = 2;
+                PlayerList[3].Turn = 3;
+                PlayerList[2].Turn = 4;
+            }
+            else if (PlayerList[1].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number)
+            {
+                PlayerList[1].Turn = 1;
+                PlayerList[3].Turn = 2;
+                PlayerList[0].Turn = 3;
+                PlayerList[2].Turn = 4;
+            }
+            else if (PlayerList[1].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number)
+            {
+                PlayerList[1].Turn = 1;
+                PlayerList[3].Turn = 2;
+                PlayerList[2].Turn = 3;
+                PlayerList[0].Turn = 4;
+            }
+            else if (PlayerList[1].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number)
+            {
+                PlayerList[1].Turn = 1;
+                PlayerList[2].Turn = 2;
+                PlayerList[3].Turn = 3;
+                PlayerList[0].Turn = 4;
+            }
+
+            // 2 first
+            else if (PlayerList[2].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number)
+            {
+                PlayerList[2].Turn = 1;
+                PlayerList[1].Turn = 2;
+                PlayerList[0].Turn = 3;
+                PlayerList[3].Turn = 4;
+            }
+            else if (PlayerList[2].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number)
+            {
+                PlayerList[2].Turn = 1;
+                PlayerList[0].Turn = 2;
+                PlayerList[1].Turn = 3;
+                PlayerList[3].Turn = 4;
+            }
+            else if (PlayerList[2].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number)
+            {
+                PlayerList[2].Turn = 1;
+                PlayerList[1].Turn = 2;
+                PlayerList[3].Turn = 3;
+                PlayerList[0].Turn = 4;
+            }
+            else if (PlayerList[2].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number)
+            {
+                PlayerList[2].Turn = 1;
+                PlayerList[3].Turn = 2;
+                PlayerList[1].Turn = 3;
+                PlayerList[0].Turn = 4;
+            }
+            else if (PlayerList[2].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number)
+            {
+                PlayerList[2].Turn = 1;
+                PlayerList[0].Turn = 2;
+                PlayerList[3].Turn = 3;
+                PlayerList[1].Turn = 4;
+            }
+            else if (PlayerList[2].Board.Chosen.Number < PlayerList[3].Board.Chosen.Number && PlayerList[3].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number)
+            {
+                PlayerList[2].Turn = 1;
+                PlayerList[3].Turn = 2;
+                PlayerList[0].Turn = 3;
+                PlayerList[1].Turn = 4;
+            }
+
+            // 3 first
+            else if (PlayerList[3].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number)
+            {
+                PlayerList[3].Turn = 1;
+                PlayerList[1].Turn = 2;
+                PlayerList[2].Turn = 3;
+                PlayerList[0].Turn = 4;
+            }
+            else if (PlayerList[3].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number)
+            {
+                PlayerList[3].Turn = 1;
+                PlayerList[2].Turn = 2;
+                PlayerList[1].Turn = 3;
+                PlayerList[0].Turn = 4;
+            }
+            else if (PlayerList[3].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number)
+            {
+                PlayerList[3].Turn = 1;
+                PlayerList[1].Turn = 2;
+                PlayerList[0].Turn = 3;
+                PlayerList[2].Turn = 4;
+            }
+            else if (PlayerList[3].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number && PlayerList[1].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number)
+            {
+                PlayerList[3].Turn = 1;
+                PlayerList[0].Turn = 2;
+                PlayerList[1].Turn = 3;
+                PlayerList[2].Turn = 4;
+            }
+            else if (PlayerList[3].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number)
+            {
+                PlayerList[3].Turn = 1;
+                PlayerList[0].Turn = 2;
+                PlayerList[2].Turn = 3;
+                PlayerList[1].Turn = 4;
+            }
+            else if (PlayerList[3].Board.Chosen.Number < PlayerList[2].Board.Chosen.Number && PlayerList[2].Board.Chosen.Number < PlayerList[0].Board.Chosen.Number && PlayerList[0].Board.Chosen.Number < PlayerList[1].Board.Chosen.Number)
+            {
+                PlayerList[3].Turn = 1;
+                PlayerList[2].Turn = 2;
+                PlayerList[0].Turn = 3;
+                PlayerList[1].Turn = 4;
+            }
+            else
+            {
+                Console.WriteLine("ERROR PLAYER TURN");
+            }
+            OnPropertyChanged("PlayerList");
+        }
+
+        private void SwitchToCorrectBoard()
+        {
+            
+            if (turn == 1)
+            {
+                for(int i = 0; i < 4; i++)
+                {
+                    if(PlayerList[i].Turn == 1)
+                    {
+                        SwitchBoardView(i);
+                    }
+                }
+            }
+            else if (turn == 2)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (PlayerList[i].Turn == 2)
+                    {
+                        SwitchBoardView(i);
+                    }
+                }
+            }
+            else if (turn == 3)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (PlayerList[i].Turn == 3)
+                    {
+                        SwitchBoardView(i);
+                    }
+                }
+            }
+            else if (turn == 4)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (PlayerList[i].Turn == 4)
+                    {
+                        SwitchBoardView(i);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("ERROR DISPLAY CORRECT BOARD");
             }
         }
 
@@ -164,13 +457,17 @@ namespace KingDomino
                 SetCurrentDominosFromNextDominos();
                 NextDominos.Clear();
             }
+            else
+            {
+                CurrentDominos.Clear();
+            }
             roundNumber++;
         }
 
         public void SwitchBoardView(int index)
         {
-            CurrentBoard = PlayerList[index].Board;
-            OnPropertyChanged("CurrentBoard");
+            CurrentPlayer = PlayerList[index];
+            OnPropertyChanged("CurrentPlayer");
             UpdateScores();
             SetBoardTileVisiblity();
         }
@@ -181,21 +478,22 @@ namespace KingDomino
             {
                 for(int col = 0; col < 5; col++)
                 {
-                    if(CurrentBoard.PlayBoard[row][col] != null && CurrentBoard.PlayBoard[row][col] == placeholderTile)
+                    if(CurrentPlayer.Board.PlayBoard[row][col] != null && CurrentPlayer.Board.PlayBoard[row][col] == placeholderTile)
                     {
-                        CurrentBoard.PlayBoard[row][col] = null;
+                        CurrentPlayer.Board.PlayBoard[row][col] = null;
                     }
                 }
             }
-            OnPropertyChanged("CurrentBoard");
+            OnPropertyChanged("CurrentPlayer");
         }
+
         private void EnablePlaceholderButtons()
         {
             for (int row = 0; row < 5; row++)
             {
                 for (int col = 0; col < 5; col++)
                 {
-                    if (CurrentBoard.PlayBoard[row][col] != null && CurrentBoard.PlayBoard[row][col] == placeholderTile)
+                    if (CurrentPlayer.Board.PlayBoard[row][col] != null && CurrentPlayer.Board.PlayBoard[row][col] == placeholderTile)
                     {
                         BoardEnable[row][col] = true;  
                     }
@@ -207,16 +505,15 @@ namespace KingDomino
             }
             OnPropertyChanged("BoardEnable");
         }
-        public void SetBoardTileVisiblity()
+        private void SetBoardTileVisiblity()
         {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    if(CurrentBoard.PlayBoard[i][j] != null)
+                    if(CurrentPlayer.Board.PlayBoard[i][j] != null)
                     {
                         BoardVisibility[i][j] = Visibility.Visible;
-                        //BoardEnable[i][j] = true;
                     }
                     else
                     {
@@ -224,28 +521,25 @@ namespace KingDomino
                     }
                 }
             }
-            OnPropertyChanged("BoardEnable");
             OnPropertyChanged("BoardVisibility");
         }
 
         // INotifyPropertyChanged: 
         // OnPropertyChanged must be called to tell a view bound to this implementation to get specified updated property
         public event PropertyChangedEventHandler PropertyChanged;
-        // INotifyCollectionChanged:
-        // May be what we need instead of propertyChanged
-        //public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public void UpdateScores()
+
+        private void UpdateScores()
         {
-            Score = "Score: " + CurrentBoard.CalculateScore();
+            Score = "" + CurrentPlayer.Board.CalculateScore();
             OnPropertyChanged("Score");
         }
 
-        public void SetCurrentDominosFromNextDominos()
+        private void SetCurrentDominosFromNextDominos()
         {
             int index = 0;
             CurrentDominos.Clear();
@@ -256,6 +550,7 @@ namespace KingDomino
             }
             OnPropertyChanged("CurrentDominos");
         }
+
         private void GetFourRandomDominos()
         {
             NextDominos.Clear();
@@ -264,7 +559,8 @@ namespace KingDomino
                 NextDominos.Add(dominoHolder.RandomDomino());
             }
         }
-        public void CreateBackFacingDominos()
+
+        private void CreateBackFacingDominos()
         {
             GetFourRandomDominos();
 
@@ -273,6 +569,7 @@ namespace KingDomino
             OnPropertyChanged("NextDominos");
 
         }
+
         private void SortDominos()
         {
             int size = NextDominos.Count;
@@ -287,6 +584,7 @@ namespace KingDomino
                 }
             }
         }
+
         private void Exchange(ObservableCollection<Domino> dominos, int m, int n)
         {
             Domino tempDomino;
@@ -295,15 +593,17 @@ namespace KingDomino
             dominos[m] = dominos[n];
             dominos[n] = tempDomino;
         }
-        public void ShowOptions(Tile chosenTile)
+
+        private void ShowOptions(Tile chosenTile)
         {
+            NullifyPlaceHolder();
             for (int row = 0; row < 5; row++)
             {
                 for (int col = 0; col < 5; col++)
                 {
-                    if (CurrentBoard.PlayBoard[row][col] != null)
+                    if (CurrentPlayer.Board.PlayBoard[row][col] != null)
                     {
-                        Tile tempTile = CurrentBoard.PlayBoard[row][col];
+                        Tile tempTile = CurrentPlayer.Board.PlayBoard[row][col];
                         TileType tempTileType = tempTile.TileType;
 
                         if (chosenTile.TileType == tempTileType || tempTileType == TileType.Origin)
@@ -313,18 +613,20 @@ namespace KingDomino
                     }
                 }
             }
-            OnPropertyChanged("CurrentBoard");
+            OnPropertyChanged("CurrentPlayer");
             SetBoardTileVisiblity();
             EnablePlaceholderButtons();
         }
+
         private void CheckNextOptions(int row, int col, Tile tile)
         {
             NullifyPlaceHolder();
             CheckAvailableMoves(row, col, tile);
-            OnPropertyChanged("CurrentBoard");
+            OnPropertyChanged("CurrentPlayer");
             SetBoardTileVisiblity();
             EnablePlaceholderButtons();
         }
+
         private void CheckAvailableMoves(int row, int col, Tile tile)
         {
             Boolean north = row > 0;
@@ -352,12 +654,48 @@ namespace KingDomino
                 CheckDirection(row, col + 1, tile);
             }
         }
+
         private void CheckDirection(int row, int col, Tile tile)
         {
-            if (CurrentBoard.PlayBoard[row][col] == null)
+            if (CurrentPlayer.Board.PlayBoard[row][col] == null)
             {
-                CurrentBoard.PlayBoard[row][col] = placeholderTile;
+                CurrentPlayer.Board.PlayBoard[row][col] = placeholderTile;
             }
+        }
+
+        public String CalculateWinner()
+        {
+            String display = "";
+            if (PlayerList[0].Board.CalculateScore() > PlayerList[1].Board.CalculateScore() && PlayerList[0].Board.CalculateScore() > PlayerList[2].Board.CalculateScore() && PlayerList[0].Board.CalculateScore() > PlayerList[3].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[0].Name;
+            }
+            else if (PlayerList[1].Board.CalculateScore() > PlayerList[0].Board.CalculateScore() && PlayerList[1].Board.CalculateScore() > PlayerList[2].Board.CalculateScore() && PlayerList[1].Board.CalculateScore() > PlayerList[3].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[1].Name;
+            }
+            else if (PlayerList[2].Board.CalculateScore() > PlayerList[0].Board.CalculateScore() && PlayerList[2].Board.CalculateScore() > PlayerList[1].Board.CalculateScore() && PlayerList[2].Board.CalculateScore() > PlayerList[3].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[2].Name;
+            }
+            else if (PlayerList[3].Board.CalculateScore() > PlayerList[0].Board.CalculateScore() && PlayerList[3].Board.CalculateScore() > PlayerList[1].Board.CalculateScore() && PlayerList[3].Board.CalculateScore() > PlayerList[2].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[3].Name;
+            }
+            else
+            {
+                display = "Tie";
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                display += "\n" + PlayerList[i].Name + ": " + PlayerList[i].Board.CalculateScore();
+            }
+            return display;
+        }
+
+        private void CheckValidMove()
+        {
+
         }
     }
 }
