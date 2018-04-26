@@ -13,7 +13,7 @@ using System.IO;
 
 namespace KingDomino
 {
-    class ViewModel : INotifyPropertyChanged//, INotifyCollectionChanged
+    class ViewModel : INotifyPropertyChanged
     {
         private Tile placeholderTile;
         private string chatHistory;
@@ -38,6 +38,7 @@ namespace KingDomino
 
         private int roundNumber = 1;
         private int pick = 1;
+        private int turn = 1;
 
         private DominoHolder dominoHolder = new DominoHolder();
 
@@ -95,6 +96,7 @@ namespace KingDomino
         public void UpdateChosenDomino(int index)
         {
             ChosenDomino = CurrentDominos[index];
+            SwitchToCorrectBoard();
             OnPropertyChanged("ChosenDomino");
             ShowChosenButtons = Visibility.Visible;
             OnPropertyChanged("ShowChosenButtons");
@@ -141,7 +143,17 @@ namespace KingDomino
                 SetBoardTileVisiblity();
                 UpdateScores();
                 pick = 1;
-                RotateDominoSelection();
+                if (turn == 4)
+                {
+                    turn = 1;
+                    RotateDominoSelection();
+                    SwitchToCorrectBoard();
+                }
+                else
+                {
+                    turn++;
+                    SwitchToCorrectBoard();
+                }
                 /** 
                  * 
                  * TODO
@@ -149,6 +161,25 @@ namespace KingDomino
                  * **/
                 ShowButtons = Visibility.Visible;
                 OnPropertyChanged("ShowButtons");
+            }
+        }
+        private void SwitchToCorrectBoard()
+        {
+            if (turn == 1)
+            {
+                SwitchBoardView(0);
+            }
+            else if (turn == 2)
+            {
+                SwitchBoardView(1);
+            }
+            else if (turn == 3)
+            {
+                SwitchBoardView(2);
+            }
+            else if (turn == 4)
+            {
+                SwitchBoardView(3);
             }
         }
 
@@ -216,7 +247,6 @@ namespace KingDomino
                     if(CurrentBoard.PlayBoard[i][j] != null)
                     {
                         BoardVisibility[i][j] = Visibility.Visible;
-                        //BoardEnable[i][j] = true;
                     }
                     else
                     {
@@ -231,14 +261,12 @@ namespace KingDomino
         // INotifyPropertyChanged: 
         // OnPropertyChanged must be called to tell a view bound to this implementation to get specified updated property
         public event PropertyChangedEventHandler PropertyChanged;
-        // INotifyCollectionChanged:
-        // May be what we need instead of propertyChanged
-        //public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public void UpdateScores()
         {
             Score = "Score: " + CurrentBoard.CalculateScore();
