@@ -40,6 +40,13 @@ namespace KingDomino
                     if (((Button)sender).Name.Substring(0, ((Button)sender).Name.Length - 6).Equals(images[i,j].Name))
                     {
                         viewModel.UpdatePlacedTile(i, j);
+                        if(viewModel.roundNumber == 12 && viewModel.turn == 4 && viewModel.pick == 2)
+                        {
+                            MessageBox.Show(viewModel.CalculateWinner());
+                            MainWindow main = new MainWindow();
+                            main.Show();
+                            this.Close();
+                        }
                     }
                 }
             }

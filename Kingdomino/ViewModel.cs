@@ -38,9 +38,9 @@ namespace KingDomino
 
         public string Score { get; set; }
 
-        private int roundNumber = 1;
-        private int pick = 1;
-        private int turn = 1;
+        public int roundNumber = 1;
+        public int pick = 1;
+        public int turn = 1;
 
         private DominoHolder dominoHolder = new DominoHolder();
 
@@ -95,7 +95,7 @@ namespace KingDomino
         {
             for (int i = 0; i < 4; i++)
             {
-                PlayerList.Add(new Player());
+                PlayerList.Add(new Player("Player " + (i + 1)));
                 PlayerList[i].Turn = i + 1;
             }
         }
@@ -387,6 +387,7 @@ namespace KingDomino
 
         private void SwitchToCorrectBoard()
         {
+            
             if (turn == 1)
             {
                 for(int i = 0; i < 4; i++)
@@ -519,7 +520,7 @@ namespace KingDomino
 
         private void UpdateScores()
         {
-            Score = "Score: " + CurrentPlayer.Board.CalculateScore();
+            Score = "" + CurrentPlayer.Board.CalculateScore();
             OnPropertyChanged("Score");
         }
 
@@ -644,6 +645,36 @@ namespace KingDomino
             {
                 CurrentPlayer.Board.PlayBoard[row][col] = placeholderTile;
             }
+        }
+
+        public String CalculateWinner()
+        {
+            String display = "";
+            if (PlayerList[0].Board.CalculateScore() > PlayerList[1].Board.CalculateScore() && PlayerList[0].Board.CalculateScore() > PlayerList[2].Board.CalculateScore() && PlayerList[0].Board.CalculateScore() > PlayerList[3].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[0].Name;
+            }
+            else if (PlayerList[1].Board.CalculateScore() > PlayerList[0].Board.CalculateScore() && PlayerList[1].Board.CalculateScore() > PlayerList[2].Board.CalculateScore() && PlayerList[1].Board.CalculateScore() > PlayerList[3].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[1].Name;
+            }
+            else if (PlayerList[2].Board.CalculateScore() > PlayerList[0].Board.CalculateScore() && PlayerList[2].Board.CalculateScore() > PlayerList[1].Board.CalculateScore() && PlayerList[2].Board.CalculateScore() > PlayerList[3].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[2].Name;
+            }
+            else if (PlayerList[3].Board.CalculateScore() > PlayerList[0].Board.CalculateScore() && PlayerList[3].Board.CalculateScore() > PlayerList[1].Board.CalculateScore() && PlayerList[3].Board.CalculateScore() > PlayerList[2].Board.CalculateScore())
+            {
+                display = "Winner: " + PlayerList[3].Name;
+            }
+            else
+            {
+                display = "Tie";
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                display += "\n" + PlayerList[i].Name + ": " + PlayerList[i].Board.CalculateScore();
+            }
+            return display;
         }
 
         private void CheckValidMove()
