@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KingDomino
 {
-    public enum TileType
+    public enum Enums
     {
         Field, Forest, Grass, Lake, Mine, Swamp, Origin, Null
     }

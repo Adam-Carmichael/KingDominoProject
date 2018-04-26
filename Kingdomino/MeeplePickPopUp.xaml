@@ -1,0 +1,33 @@
+﻿<Page x:Class="KingDomino.MeeplePickPopUp"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KingDomino"
+      mc:Ignorable="d" 
+      d:DesignHeight="140" d:DesignWidth="370"
+      Title="KingDomino">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/Misc/blueBoardGradient.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <TextBlock x:Name="MeepleOptText" Padding="5" TextWrapping="Wrap" FontSize="20" FontFamily="Showcard Gothic"
+                   Background="BlanchedAlmond" TextAlignment="Center" HorizontalAlignment="Left" Margin="60,10,0,0"
+                   Text="Pick Your Meeple!" VerticalAlignment="Top" Height="40" Width="250"/>
+        
+        <Button Name="Blue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" Margin="10,80,0,0" Click="MeepleSelectButton_Click">
+            <Image x:Name="BlueMeeple" Source="{Binding PlayerList[0].Meeple.blue}"/>
+        </Button>
+        <Button Name="Green" HorizontalAlignment="Left" Height="50" Margin="110,80,0,0" VerticalAlignment="Top" Width="50" Click="MeepleSelectButton_Click">
+            <Image x:Name="GreenMeeple" Source="{Binding PlayerList[0].Meeple.green}"/>
+        </Button>
+        <Button Name="Pink" HorizontalAlignment="Left" Height="50" Margin="210,80,0,0" VerticalAlignment="Top" Width="50" Click="MeepleSelectButton_Click">
+            <Image x:Name="PinkMeeple" Source="{Binding PlayerList[0].Meeple.pink}"/>
+        </Button>
+        <Button Name="Yellow" HorizontalAlignment="Left" Height="50" Margin="310,80,0,0" VerticalAlignment="Top" Width="50" Click="MeepleSelectButton_Click">
+            <Image x:Name="YellowMeeple" Source="{Binding PlayerList[0].Meeple.yellow}"/>
+        </Button>
+    </Grid>
+</Page>

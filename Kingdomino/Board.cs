@@ -31,7 +31,7 @@ namespace KingDomino
             this.playBoard[2] = new Tile[5];
             this.playBoard[3] = new Tile[5];
             this.playBoard[4] = new Tile[5];
-            this.playBoard[2][2] = new Tile(originCastlePath + color + ".png", TileType.Origin, 0);
+            this.playBoard[2][2] = new Tile(originCastlePath + color + ".png", Enums.Origin, 0);
         }
 
         public int CalculateScore()

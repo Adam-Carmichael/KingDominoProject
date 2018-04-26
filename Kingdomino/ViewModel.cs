@@ -35,6 +35,7 @@ namespace KingDomino
         public Boolean[][] BoardEnable { get; set; }
 
         public string Score { get; set; }
+        
 
         private int roundNumber = 1;
         private int pick = 1;
@@ -48,7 +49,7 @@ namespace KingDomino
             NextDominos = new ObservableCollection<Domino>();
             CurrentDominos = new ObservableCollection<Domino>();
 
-            placeholderTile = new Tile("Resources/Misc/logo.png", TileType.Null, 0);
+            placeholderTile = new Tile("Resources/Misc/logo.png", Enums.Null, 0);
 
             BoardVisibility = new Visibility[5][];
             BoardVisibility[0] = new Visibility[5];
@@ -87,6 +88,12 @@ namespace KingDomino
                 PlayerList.Add(new Player());
             }
         }
+
+        public void InitPlayerMeeples(string meepleColor)
+        {
+
+        }
+
         public void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
@@ -140,6 +147,7 @@ namespace KingDomino
                 SetBoardTileVisiblity();
                 UpdateScores();
                 pick = 1;
+                
                 RotateDominoSelection();
                 /** 
                  * 
@@ -302,9 +310,9 @@ namespace KingDomino
                     if (CurrentBoard.PlayBoard[row][col] != null)
                     {
                         Tile tempTile = CurrentBoard.PlayBoard[row][col];
-                        TileType tempTileType = tempTile.TileType;
+                        Enums tempTileType = tempTile.TileType;
 
-                        if (chosenTile.TileType == tempTileType || tempTileType == TileType.Origin)
+                        if (chosenTile.TileType == tempTileType || tempTileType == Enums.Origin)
                         {
                             CheckAvailableMoves(row, col, chosenTile);
                         }

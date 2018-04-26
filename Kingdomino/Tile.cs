@@ -15,8 +15,8 @@ namespace KingDomino
             get { return tileImage; }
             set { tileImage = value; }
         }
-        private TileType tileType;
-        public TileType TileType
+        private Enums tileType;
+        public Enums TileType
         {
             get { return tileType; }
             set { tileType = value; }
@@ -28,7 +28,7 @@ namespace KingDomino
             set { tileCrown = value; }
         }
 
-        public Tile(String tileImage, TileType tileType, int tileCrown)
+        public Tile(String tileImage, Enums tileType, int tileCrown)
         {
             this.tileImage = new BitmapImage(new Uri(tileImage, UriKind.Relative));
             this.tileType = tileType;

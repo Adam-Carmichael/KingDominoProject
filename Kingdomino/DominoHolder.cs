@@ -15,8 +15,6 @@ namespace KingDomino
         private ArrayList dominos;
         private Random rnd = new Random();
 
-        public Random Rnd { get => rnd; set => rnd = value; }
-
         public DominoHolder()
         {
             dominos = new ArrayList();
@@ -25,7 +23,7 @@ namespace KingDomino
 
         public Domino RandomDomino()
         {
-            int random = Rnd.Next(dominos.Count);
+            int random = rnd.Next(dominos.Count);
             Domino test = (Domino) dominos[random];
             dominos.RemoveAt(random);
             return test;
@@ -43,25 +41,25 @@ namespace KingDomino
             }
         }
 
-        private TileType ConvertStringToTileType(String terrain)
+        private Enums ConvertStringToTileType(String terrain)
         {
             switch(terrain)
             {
                 case ("Field"):
-                    return TileType.Field;
+                    return Enums.Field;
                 case ("Forest"):
-                    return TileType.Forest;
+                    return Enums.Forest;
                 case ("Grass"):
-                    return TileType.Grass;
+                    return Enums.Grass;
                 case ("Lake"):
-                    return TileType.Lake;
+                    return Enums.Lake;
                 case ("Mine"):
-                    return TileType.Mine;
+                    return Enums.Mine;
                 case ("Swamp"):
-                    return TileType.Swamp;
+                    return Enums.Swamp;
 
                 default:
-                    return TileType.Origin;
+                    return Enums.Origin;
             }
         }
     } 
