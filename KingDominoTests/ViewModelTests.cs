@@ -104,6 +104,16 @@ namespace KingDomino.Tests
             testVM.UpdatePlacedTile(2, 1);
             testVM.UpdatePlacedTile(2, 1);
             testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+
 
             Domino[] testNextDominos = new Domino[4];
             testVM.NextDominos.CopyTo(testNextDominos,0);
@@ -130,11 +140,26 @@ namespace KingDomino.Tests
             testVM.UpdatePlacedTile(2, 1);
             testVM.UpdatePlacedTile(2, 1);
             testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
+            testVM.UpdatePlacedTile(2, 1);
 
             Domino[] testNextDominos = new Domino[4];
             testVM.NextDominos.CopyTo(testNextDominos, 0);
             testVM.UpdatePlacedTile(2, 1);
-            Assert.IsNull(testNextDominos);
+            Assert.IsNull(testNextDominos[0]);
             //Domino[] testCurrentDominos = new Domino[4];
             //testVM.CurrentDominos.CopyTo(testCurrentDominos, 0);
             //Assert.AreEqual(testNextDominos[0].Number, testCurrentDominos[0].Number);

@@ -222,12 +222,10 @@ namespace KingDomino
         }
         public void SetCurrentDominosFromNextDominos()
         {
-            int index = 0;
             CurrentDominos.Clear();
             foreach (Domino domino in NextDominos)
             {
                 CurrentDominos.Add(domino);
-                ++index;
             }
             OnPropertyChanged("CurrentDominos");
         }
