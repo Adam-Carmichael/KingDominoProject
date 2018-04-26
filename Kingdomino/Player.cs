@@ -39,7 +39,6 @@ namespace KingDomino
         public Player(String name)
         {
             this.name = name;
-            this.Board = new Board("blue");
         }
     }
 }

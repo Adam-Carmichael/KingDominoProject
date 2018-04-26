@@ -22,25 +22,24 @@ namespace KingDomino
             get { return chatHistory; }
             set { chatHistory = value; }
         }
-        public ObservableCollection<Player> PlayerList { get; set; }
+        private ObservableCollection<Player> PlayerList { get; set; }
         public ObservableCollection<Domino> NextDominos { get; set; }
         public ObservableCollection<Domino> CurrentDominos { get; set; }
         public Player CurrentPlayer { get; set; }
         public Tile ChosenTile { get; set; }
-
         public Visibility ShowButtons { get; set; }
         public Visibility ShowChosenButtons { get; set; }
         public Visibility[][] BoardVisibility { get; set; }
         public Boolean[][] BoardEnable { get; set; }
-
+        public Visibility End { get; set; }
         public Visibility[] Choose { get; set; }
-        private Boolean[] Chosen { get; set; }
 
+        private Boolean[] Chosen { get; set; }
         public string Score { get; set; }
 
-        public int roundNumber = 1;
-        public int pick = 1;
-        public int turn = 1;
+        private int roundNumber = 1;
+        private int pick = 1;
+        private int turn = 1;
 
         private DominoHolder dominoHolder = new DominoHolder();
 
@@ -89,6 +88,8 @@ namespace KingDomino
             Choose[1] = Visibility.Visible;
             Choose[2] = Visibility.Visible;
             Choose[3] = Visibility.Visible;
+
+            End = Visibility.Hidden;
         }
 
         private void CreatePlayers()
@@ -98,6 +99,10 @@ namespace KingDomino
                 PlayerList.Add(new Player("Player " + (i + 1)));
                 PlayerList[i].Turn = i + 1;
             }
+            PlayerList[0].Board = new Board("blue");
+            PlayerList[1].Board = new Board("green");
+            PlayerList[2].Board = new Board("pink");
+            PlayerList[3].Board = new Board("yellow");
         }
         private void DisplayChatMessage(int index, string text)
         {
@@ -161,7 +166,7 @@ namespace KingDomino
                 SetBoardTileVisiblity();
                 UpdateScores();
                 pick = 1;
-                if (turn == 4)
+                if (turn == 4 && roundNumber != 12)
                 {
                     turn = 1;
                     RotateDominoSelection();
@@ -171,6 +176,12 @@ namespace KingDomino
                         Chosen[i] = false;
                     }
                     OnPropertyChanged("Choose");
+                }
+                else if(turn == 4 && roundNumber == 12)
+                {
+                    RotateDominoSelection();
+                    End = Visibility.Visible;
+                    OnPropertyChanged("End");
                 }
                 else
                 {
@@ -446,6 +457,10 @@ namespace KingDomino
                 SetCurrentDominosFromNextDominos();
                 NextDominos.Clear();
             }
+            else
+            {
+                CurrentDominos.Clear();
+            }
             roundNumber++;
         }
 
@@ -581,6 +596,7 @@ namespace KingDomino
 
         private void ShowOptions(Tile chosenTile)
         {
+            NullifyPlaceHolder();
             for (int row = 0; row < 5; row++)
             {
                 for (int col = 0; col < 5; col++)

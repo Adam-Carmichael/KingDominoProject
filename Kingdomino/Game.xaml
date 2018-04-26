@@ -130,5 +130,6 @@
 
         <TextBox x:Name="ChatInputBox" HorizontalAlignment="Left" Height="50" Margin="575,630,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontFamily="Showcard Gothic"/>
         <TextBox x:Name="ChatLogBox" HorizontalAlignment="Left" Height="615" Margin="575,10,0,0" TextWrapping="Wrap" IsTabStop="False" Focusable="False" Text="{Binding ChatHistory}" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="200" FontFamily="Showcard Gothic"/>
+        <Button Content="End Game" HorizontalAlignment="Left" Margin="210,155,0,0" VerticalAlignment="Top" Width="145" Height="50" Click="EndGame_Click" Visibility="{Binding End}"/>
     </Grid>
 </Window>
