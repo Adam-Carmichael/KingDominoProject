@@ -120,8 +120,8 @@
         </Button>
 
         <TextBlock x:Name="CurrentPlayerName" HorizontalAlignment="Left" Margin="20,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="100" Text="{Binding CurrentPlayer.Name}" FontSize="15" FontFamily="Showcard Gothic"/>
-        <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="20,300,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="30" Width="100" FontSize="15" FontFamily="Showcard Gothic"/>
-        <TextBlock x:Name="ScoreNumber" HorizontalAlignment="Left" Margin="75,300,0,0" TextWrapping="Wrap" Text="{Binding Score}" VerticalAlignment="Top" Height="30" Width="30" FontSize="15" FontFamily="Showcard Gothic"/>
+        <TextBlock x:Name="Score" HorizontalAlignment="Left" Margin="20,300,0,0" TextWrapping="Wrap" Text="Score: " VerticalAlignment="Top" Height="30" Width="100" FontSize="25" FontFamily="Showcard Gothic"/>
+        <TextBlock x:Name="ScoreNumber" HorizontalAlignment="Left" Margin="105,300,0,0" TextWrapping="Wrap" Text="{Binding Score}" VerticalAlignment="Top" Height="30" Width="30" FontSize="25" FontFamily="Showcard Gothic"/>
 
         <Image x:Name="MeepleChoice1" HorizontalAlignment="Left" Height="55" Margin="23,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
         <Image x:Name="MeepleChoice2" HorizontalAlignment="Left" Height="55" Margin="177,85,0,0" VerticalAlignment="Top" Width="55" Source="Resources/Meeple/blue.png" Visibility="Hidden"/>
