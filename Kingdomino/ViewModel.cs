@@ -92,14 +92,14 @@ namespace KingDomino
             Choose[3] = Visibility.Visible;
         }
 
-        public void CreatePlayers()
+        private void CreatePlayers()
         {
             for (int i = 0; i < 4; i++)
             {
                 PlayerList.Add(new Player());
             }
         }
-        public void DisplayChatMessage(int index, string text)
+        private void DisplayChatMessage(int index, string text)
         {
             ChatHistory += PlayerList[index].Name + ": " + text + "\n";
             OnPropertyChanged("ChatHistory");
@@ -132,6 +132,7 @@ namespace KingDomino
             }
             ShowOptions(ChosenTile);
         }
+
         public void UpdatePlacedTile(int x, int y)
         {
             if (pick == 1)
@@ -275,7 +276,7 @@ namespace KingDomino
             }
             OnPropertyChanged("BoardEnable");
         }
-        public void SetBoardTileVisiblity()
+        private void SetBoardTileVisiblity()
         {
             for (int i = 0; i < 5; i++)
             {
@@ -303,13 +304,13 @@ namespace KingDomino
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void UpdateScores()
+        private void UpdateScores()
         {
             Score = "Score: " + CurrentBoard.CalculateScore();
             OnPropertyChanged("Score");
         }
 
-        public void SetCurrentDominosFromNextDominos()
+        private void SetCurrentDominosFromNextDominos()
         {
             int index = 0;
             CurrentDominos.Clear();
@@ -320,6 +321,7 @@ namespace KingDomino
             }
             OnPropertyChanged("CurrentDominos");
         }
+
         private void GetFourRandomDominos()
         {
             NextDominos.Clear();
@@ -328,7 +330,8 @@ namespace KingDomino
                 NextDominos.Add(dominoHolder.RandomDomino());
             }
         }
-        public void CreateBackFacingDominos()
+
+        private void CreateBackFacingDominos()
         {
             GetFourRandomDominos();
 
@@ -337,6 +340,7 @@ namespace KingDomino
             OnPropertyChanged("NextDominos");
 
         }
+
         private void SortDominos()
         {
             int size = NextDominos.Count;
@@ -351,6 +355,7 @@ namespace KingDomino
                 }
             }
         }
+
         private void Exchange(ObservableCollection<Domino> dominos, int m, int n)
         {
             Domino tempDomino;
@@ -359,7 +364,8 @@ namespace KingDomino
             dominos[m] = dominos[n];
             dominos[n] = tempDomino;
         }
-        public void ShowOptions(Tile chosenTile)
+
+        private void ShowOptions(Tile chosenTile)
         {
             for (int row = 0; row < 5; row++)
             {
@@ -381,6 +387,7 @@ namespace KingDomino
             SetBoardTileVisiblity();
             EnablePlaceholderButtons();
         }
+
         private void CheckNextOptions(int row, int col, Tile tile)
         {
             NullifyPlaceHolder();
@@ -389,6 +396,7 @@ namespace KingDomino
             SetBoardTileVisiblity();
             EnablePlaceholderButtons();
         }
+
         private void CheckAvailableMoves(int row, int col, Tile tile)
         {
             Boolean north = row > 0;
@@ -416,12 +424,18 @@ namespace KingDomino
                 CheckDirection(row, col + 1, tile);
             }
         }
+
         private void CheckDirection(int row, int col, Tile tile)
         {
             if (CurrentBoard.PlayBoard[row][col] == null)
             {
                 CurrentBoard.PlayBoard[row][col] = placeholderTile;
             }
+        }
+
+        private void CheckValidMove()
+        {
+
         }
     }
 }
