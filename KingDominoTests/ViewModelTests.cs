@@ -173,35 +173,5 @@ namespace KingDomino.Tests
             testVM.SwitchBoardView(1);
             Assert.AreEqual(testVM.CurrentBoard, testVM.PlayerList[1].Board);
         }
-
-        [TestMethod()]
-        public void SetBoardTileVisiblityTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void UpdateScoresTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void SetCurrentDominosFromNextDominosTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void CreateBackFacingDominosTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void ShowOptionsTest()
-        {
-            Assert.Fail();
-        }
     }
 }

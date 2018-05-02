@@ -27,6 +27,38 @@ namespace KingDomino.Tests
             testBoard.PlayBoard[1][1] = testTile;
             Assert.AreEqual(4, testBoard.CalculateScore());
         }
+        [TestMethod()]
+        public void CheckConnectedLandscapeNorth()
+        {
+            Board testBoard = new Board("green");
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 1);
+            testBoard.PlayBoard[1][2] = testTile;
+            Assert.AreEqual(1, testBoard.CalculateScore());
+        }
+        [TestMethod()]
+        public void CheckConnectedLandscapeEast()
+        {
+            Board testBoard = new Board("green");
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 1);
+            testBoard.PlayBoard[2][3] = testTile;
+            Assert.AreEqual(1, testBoard.CalculateScore());
+        }
+        [TestMethod()]
+        public void CheckConnectedLandscapeSouth()
+        {
+            Board testBoard = new Board("green");
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 1);
+            testBoard.PlayBoard[3][2] = testTile;
+            Assert.AreEqual(1, testBoard.CalculateScore());
+        }
+        [TestMethod()]
+        public void CheckConnectedLandscapeWest()
+        {
+            Board testBoard = new Board("green");
+            Tile testTile = new Tile("Resources/Misc/logo.png", TileType.Null, 1);
+            testBoard.PlayBoard[2][1] = testTile;
+            Assert.AreEqual(1, testBoard.CalculateScore());
+        }
 
         [TestMethod()]
         public void GetOriginTest()
